@@ -29,7 +29,7 @@ Créer le css avec Sass
 
 Mettre en oeuvre la maquette en HTML CSS
 
-
+Cryptage des données avec bcrypt
 
 #Téchnologies Utilisée : 
 - React 
@@ -38,6 +38,11 @@ Mettre en oeuvre la maquette en HTML CSS
 - php
 - html css
 
+
+
+
+#Idée de mise à jour : 
+- intégration 3d avec Spline
 
 
 
