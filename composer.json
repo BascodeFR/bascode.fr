@@ -1,0 +1,23 @@
+{
+    "name": "cavernos/bascode.fr",
+    "description": "Site internet de Bascode",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Cavernos\\BascodeFR\\": "src/php_class/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Cavernos",
+            "email": "louisdescavernes@gmail.com"
+        }
+    ],
+    "require": {
+        "altorouter/altorouter": "^2.0"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^4.2.3",
+        "phpunit/phpunit": "^9"
+    }
+}

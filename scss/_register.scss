@@ -1,0 +1,67 @@
+.register{
+    .pane{
+        box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+        background-color: #6C6C6C;
+        width: 650px;
+        height: 715px;
+        border-radius: 10px;
+        margin: auto auto;
+    }
+    hr{
+        color: rgba($color: white, $alpha: 75%);
+    }
+    form{
+        position: relative;
+        height: 660px;
+    }
+    h2{
+        margin: 0 26px;
+        padding-top: 5px;
+        font-weight: bolder;
+        font-size: 24px;
+        line-height: 34px;
+    }
+    position: relative;
+    z-index: 300;
+    margin-bottom: -715px;
+    .fields{
+        input{
+            height: 42px;
+            font-size: 22px;
+            color:  rgba($color: white, $alpha: 75%);
+        }
+        label{
+            margin-left: 22px;
+            position: absolute;
+            font-size: 24px;
+            color: rgba($color: white, $alpha: 75%);
+            line-height: 42px;
+        }
+    }
+    .check{
+        margin-left: 60px;
+        input{
+            width: 22px;
+            height: 22px;
+            margin: 0;
+        }
+        label{
+            display: inline-block;
+            margin-left: 10px;
+            font-size: 24px;
+            color: rgba($color: white, $alpha: 75%);
+        }
+    }
+    .btn{
+        position: absolute;
+        width: 410px;
+        height: 50px;
+        bottom: 26px;
+        left: 120px;
+        border: 0;
+        cursor: pointer;
+    }
+    
+    
+   
+}
