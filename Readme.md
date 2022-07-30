@@ -1,25 +1,18 @@
 L'objectif est de créer le site internet de Bascode.
 
-1 ère objectif : 
+## 1 ère objectif : 
 
 Créer la maquette à partir du logiciel Figma
 
 Dans cette maquette nous avons besoin des pages suivantes :
 
-- Forum
-- Messages Privées 
-- Système de comptes 
-- Système d'articles
-- Système de Tutoriels
+1. Forum
+2. Messages Privées 
+3. Système de comptes 
+4. Système d'articles
+5. Système de Tutoriels
 
-2 è objectif : 
-
-Créer le logo de Bascode
-
-Ajouter npm
-
-
-3 è objectif : 
+## 2 è objectif : 
 
 Créer des composants react pour les différents éléments html
 
@@ -31,17 +24,35 @@ Mettre en oeuvre la maquette en HTML CSS
 
 Cryptage des données avec bcrypt
 
-#Téchnologies Utilisée : 
+# Téchnologies Utilisée : 
 - React 
 - Sass
 - vite
 - php
 - html css
+- vitest
 
 
+### Pour lancer les tests : 
+` npx vitest `
 
+### Pour installer les dépendances : 
 
-#Idée de mise à jour : 
+` pnpm i`
+
+### Pour lancer un serveur de développement : 
+
+` pnpm run dev `
+
+ou
+
+` yarn run dev `
+
+ou 
+
+` npm run dev `
+
+# Idée de mise à jour : 
 - intégration 3d avec Spline
 
 
