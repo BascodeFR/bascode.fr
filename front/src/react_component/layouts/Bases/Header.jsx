@@ -1,7 +1,7 @@
 import React from 'react'
 
 export function Header({connecte}){
-        if(connecte === "true"){
+        if(connecte === "false"){
             return <header className="topbar">
                     <div className="logo">
                         <a href="/"><img src="/Maquette/logo/bascode.png" alt=""/></a>

@@ -1,4 +1,4 @@
-L'objectif est de créer le site internet de Bascode.
+# L'objectif est de créer le site internet de Bascode.
 
 ## 1 ère objectif : 
 

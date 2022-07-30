@@ -1,3 +1,4 @@
+import React from 'react'
 import {CardContainer} from '../layouts/Bases/CardContainer'
 import {ForumTopics} from '../layouts/Topics/ForumTopics'
 import {Actu} from '../layouts/Actu/Actu'
