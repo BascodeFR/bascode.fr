@@ -1,7 +1,7 @@
 import React from "react";
 
-class Actu extends React.Component{
-    render(){
+export function Actu(){
+
         return <div className="actu-items">
                 <img src="https://via.placeholder.com/106x106" alt="" />
                 <a href="#" className="actu-name active">Réunion sur la Base de donnée</a>
@@ -9,6 +9,4 @@ class Actu extends React.Component{
                 <p>Il y a 10 minutes</p>
             </div>
             
-    }
 }
-export default Actu;

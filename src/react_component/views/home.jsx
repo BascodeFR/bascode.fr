@@ -1,39 +1,39 @@
-import ReactDOM from 'react-dom/client'
-import CardContainer from '../layouts/card_container'
-import ForumTopics from '../layouts/topics/forum'
-import Actu from '../layouts/actu'
-import Container from '../layouts/container'
-import ActuContainer from '../layouts/actu_container'
-import Layout from './layout'
+import {CardContainer} from '../layouts/Bases/CardContainer'
+import {ForumTopics} from '../layouts/Topics/ForumTopics'
+import {Actu} from '../layouts/Actu/Actu'
+import {Container} from '../layouts/Bases/Container'
+import {ActuContainer} from '../layouts/Actu/ActuContainer'
+import {Layout} from './Layout'
 
+export function Home(){
+    return <Layout>
+                <Container view={['Accueil']}>
+                    <CardContainer CssClass="last-topics" name='Derniers Topics'>
+                        <ForumTopics lastInfo='true' />
+                        <ForumTopics lastInfo='true' />
+                        <ForumTopics lastInfo='true' />
+                        <ForumTopics lastInfo='true' />
+                        <ForumTopics lastInfo='true' />
+                    </CardContainer>
+                    <CardContainer CssClass="last-actu" name='Dernières Actualités'>
+                        <ActuContainer>
+                            <Actu />
+                            <Actu />
+                            <Actu />
+                            <Actu />
+                            <Actu />
+                            <Actu />
+                            <Actu />
+                            <Actu />
+                            <Actu />
+                            <Actu />
+                        </ActuContainer>
+                    </CardContainer>
+                    <CardContainer CssClass="last-topics" name='Derniers Tutoriels'>
+                        <ForumTopics lastInfo='false' />
+                    </CardContainer>
+                </Container>
+            </Layout>
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-    <Layout>
-        <Container view='Accueil'>
-            <CardContainer className="last-topics" name='Derniers Topics'>
-                <ForumTopics lastInfo='true' />
-                <ForumTopics lastInfo='true' />
-                <ForumTopics lastInfo='true' />
-                <ForumTopics lastInfo='true' />
-                <ForumTopics lastInfo='true' />
-            </CardContainer>
-            <CardContainer className="last-actu" name='Dernières Actualités'>
-                <ActuContainer>
-                    <Actu />
-                    <Actu />
-                    <Actu />
-                    <Actu />
-                    <Actu />
-                    <Actu />
-                    <Actu />
-                    <Actu />
-                    <Actu />
-                    <Actu />
-                </ActuContainer>
-            </CardContainer>
-            <CardContainer className="last-topics" name='Derniers Tutoriels'>
-                <ForumTopics lastInfo='false' />
-            </CardContainer>
-        </Container>
-    </Layout>
-)
+}
+    

@@ -1,8 +1,6 @@
 import React from 'react'
-class Login extends React.Component{
-    render()
-    {
-        return <div className={"login-pane " + this.props.display}>
+export function Login({display}) {
+        return <div className={"login-pane " + display}>
             <div className="pane">
                 <header className="head"></header>
                 <h2>Se Connecter</h2>
@@ -25,9 +23,7 @@ class Login extends React.Component{
             </div>
         </div>
     }
-}
 
-export default Login;
 
 
 

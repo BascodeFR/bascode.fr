@@ -1,8 +1,6 @@
 import React from 'react'
-class Register extends React.Component{
-    render()
-    {
-        return <div className={"register " + this.props.display}>
+export function Register({display}){
+        return <div className={"register " + display}>
             <div className="pane">
                 <header className="head"></header>
                 <h2>S'inscrire</h2>
@@ -37,7 +35,4 @@ class Register extends React.Component{
                 </form>
             </div>
         </div>
-    }
 }
-
-export default Register;

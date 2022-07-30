@@ -1,10 +1,10 @@
 import React from 'react'
-class NavBar extends React.Component{
-    render()
-    {
+
+
+export function NavBar() {
         return <nav className="topbar-nav">
                     <div className="nav-content">
-                        <a href="#"  className="nav-items">Forums</a>
+                        <a href="/forum"  className="nav-items">Forum</a>
                         <a href="#" className="nav-items active">Actualités</a>
                         <a href="#" className="nav-items">Tutoriels</a>
                         <a href="#" className="nav-items">Minecraft</a>
@@ -13,7 +13,4 @@ class NavBar extends React.Component{
                         
                     </div>
                 </nav>
-    }
-    
 }
-export default NavBar; 

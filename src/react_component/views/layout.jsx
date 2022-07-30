@@ -1,20 +1,18 @@
 import React from 'react'
-import Footer from '../layouts/footer';
-import Header from '../layouts/header';
-import Login from '../layouts/login';
-import NavBar from '../layouts/navbar';
-import Register from '../layouts/register';
+import {Footer} from '../layouts/Bases/Footer';
+import {Header} from '../layouts/Bases/Header';
+import {Login} from '../layouts/Bases/Login';
+import {Register} from '../layouts/Bases/Register';
+import {NavBar} from '../layouts/Bases/NavBar';
 
 
-class Layout extends React.Component{
-    render(){
-        return <><Header connecte=""/> 
+
+export function Layout(props) {
+        return <><Header connecte="true"/> 
         <Login display="hidden"/>
         <Register display="hidden"/>
         <NavBar/>
-        {this.props.children}
+        {props.children}
         <Footer/>
         </>          
-    }
 }
-export default Layout;

@@ -1,8 +1,7 @@
 import React from 'react'
 
-class Footer extends React.Component{
-    render()
-    {
+export function Footer() {
+ 
         return <footer className="footer">
         <div className="copyright">
             Copyright 2022
@@ -12,7 +11,6 @@ class Footer extends React.Component{
             <a href="#" className ="discord"></a>
         </div>
     </footer>
-    }
+    
 }
 
-export default Footer;

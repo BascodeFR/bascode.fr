@@ -1,12 +1,10 @@
 import React from 'react'
 
-class Header extends React.Component{
-    render()
-    {
-        if(this.props.connecte === "true"){
+export function Header({connecte}){
+        if(connecte === "true"){
             return <header className="topbar">
                     <div className="logo">
-                        <a href="#"><img src="Maquette/logo/bascode.png" alt=""/></a>
+                        <a href="/"><img src="/Maquette/logo/bascode.png" alt=""/></a>
                     </div>
                     <div className="connection">
                         <a href="#" className="connect">Utilisateur existant ? Se connecter</a>
@@ -17,7 +15,7 @@ class Header extends React.Component{
         } else {
             return <header className="topbar">
                     <div className="logo">
-                        <a href="#"><img src="Maquette/logo/bascode.png" alt=""/></a>
+                        <a href="/"><img src="Maquette/logo/bascode.png" alt=""/></a>
                     </div>
                     <div className="account">
                         <div className="msg"></div>
@@ -27,7 +25,4 @@ class Header extends React.Component{
                 </header>;
         }
         
-    }
 }
-
-export default Header;
