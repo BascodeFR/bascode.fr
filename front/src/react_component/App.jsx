@@ -10,7 +10,7 @@ function App(){
     return <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path='/forum' element={<Forum/>}/>
-        <Route path='/forum/base-de-donnee-1' element={<TopicView/>}/>
+        <Route path='/forum/:slug-:id' element={<TopicView/>}/>
     </Routes>
 }
 

@@ -322,4 +322,24 @@ body{
     }
     
 }
+
+.loading{
+    position: relative;
+    width: inherit;
+    height: inherit;
+    margin: auto auto;
+    display: flex;
+    img{
+        display: block;
+        width: 200px;
+        margin: auto auto;
+        animation: rotate 2s infinite;
+        
+    }
+    @keyframes rotate {
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+}
 @include media();

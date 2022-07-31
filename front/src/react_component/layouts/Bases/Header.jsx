@@ -4,7 +4,7 @@ export function Header({connecte}){
         if(connecte === "false"){
             return <header className="topbar">
                     <div className="logo">
-                        <a href="/"><img src="/Maquette/logo/bascode.png" alt=""/></a>
+                        <a href="/"><img src="/src/assets/img/bascode.png" alt=""/></a>
                     </div>
                     <div className="connection">
                         <a href="#" className="connect">Utilisateur existant ? Se connecter</a>
@@ -15,7 +15,7 @@ export function Header({connecte}){
         } else {
             return <header className="topbar">
                     <div className="logo">
-                        <a href="/"><img src="Maquette/logo/bascode.png" alt=""/></a>
+                        <a href="/"><img src="/src/assets/img/bascode.png" alt=""/></a>
                     </div>
                     <div className="account">
                         <div className="msg"></div>

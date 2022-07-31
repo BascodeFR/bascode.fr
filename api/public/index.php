@@ -8,6 +8,5 @@ $router = new Router(dirname(__DIR__));
 
 $router->get('/', '/index', 'home')
         ->get('/post', '/views/post', 'posts')
-        ->get('/post/[*:id]', '/views/post', 'post')
         ->run();
 

@@ -10,11 +10,7 @@ export function Home(){
     return <Layout>
                 <Container view={['Accueil']}>
                     <CardContainer CssClass="last-topics" name='Derniers Topics'>
-                        <ForumTopics lastInfo='true' />
-                        <ForumTopics lastInfo='true' />
-                        <ForumTopics lastInfo='true' />
-                        <ForumTopics lastInfo='true' />
-                        <ForumTopics lastInfo='true' />
+                        <ForumTopics limit='5'/>
                     </CardContainer>
                     <CardContainer CssClass="last-actu" name='Dernières Actualités'>
                         <ActuContainer>
@@ -31,7 +27,6 @@ export function Home(){
                         </ActuContainer>
                     </CardContainer>
                     <CardContainer CssClass="last-topics" name='Derniers Tutoriels'>
-                        <ForumTopics lastInfo='false' />
                     </CardContainer>
                 </Container>
             </Layout>

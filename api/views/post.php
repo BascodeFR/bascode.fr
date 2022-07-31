@@ -8,22 +8,57 @@ use cavernos\bascode_api\Helpers\QueryBuilder;
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
 ]);
 
-header('Content-Type: application/json'); 
-$api = new API($pdo, new QueryBuilder());
-if (array_key_exists("id", $params)) { 
-    $p = explode('/', $params['id']);
-    if($p[0] === 'desc' ||  $p[0] === 'asc'){
-        echo $api->getPostsWithOrderBy($p[0]);
-    }
-    if($p[1]){
-        $p[0] == "";
-        echo $api->getPostsWithLimit($p[1]);
-    }
-    /*if($p[0]){
-        echo $api->getPost($p[0]);
-    }*/
-} else {
-   echo $api->getPosts();
+$builder = new QueryBuilder();
+
+
+header('Access-Control-Allow-Origin: *');
+$request_method = $_SERVER['REQUEST_METHOD'];
+$api = new API($pdo, $builder);
+
+switch($request_method)
+{
+    case 'GET':
+        if(!empty($_GET['id']) && empty($_GET['slug']))
+        {
+            $id = intval($_GET['id']);
+            header('Content-Type: application/json'); 
+            echo $api->getPost($id);
+        } else if(!empty($_GET['id']) && !empty($_GET['slug'] && intval($_GET['slug']) === 1))
+        {
+            $id = intval($_GET['id']);
+            header('Content-Type: application/json'); 
+            echo $api->getSlug($id);
+            
+        }
+        else if(!empty($_GET['limit']) && empty($_GET['field']) && empty($_GET['order']))
+        {
+            $limit = intval($_GET['limit']);
+            header('Content-Type: application/json'); 
+            echo $api->getPostsWithLimit($limit);
+            
+        }
+        else if(!empty($_GET['field']) && !empty($_GET['order']) && empty($_GET['limit']) ){
+            $field = htmlentities($_GET['field']);
+            $order = htmlentities($_GET['order']);
+            header('Content-Type: application/json'); 
+            echo $api->getPostsWithOrderBy( $field , $order);
+        }
+        else if(!empty($_GET['field']) && !empty($_GET['order']) && !empty($_GET['limit'])){
+            $field = htmlentities($_GET['field']);
+            $order = htmlentities($_GET['order']);
+            $limit = intval($_GET['limit']);
+            header('Content-Type: application/json'); 
+            echo $api->getPostWithParams($limit,  $order, $field );
+        }
+        else {
+            header('Content-Type: application/json'); 
+            echo $api->getPosts();
+        }
+        break;
+        default:
+          // Requête invalide
+          header("HTTP/1.0 405 Method Not Allowed");
+          break;
 }
     
 ?>

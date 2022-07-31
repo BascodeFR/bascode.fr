@@ -64,8 +64,16 @@ class API {
 
     }
 
-    public function getPostsWithOrderBy($value){
-        $query = $this->sql->from('post')->orderBy("id", $value)->toSQL();
+    public function getPostWithParams(int $limit, string $order, string $field){
+        $query = $this->sql->from('post')->orderBy($field, $order)->limit($limit)->toSQL();
+        $result = $this->pdo->query($query);
+        $json  = $result->fetchAll(PDO::FETCH_OBJ);
+        return Bases::toJSON($json);
+    }
+
+
+    public function getPostsWithOrderBy(string $field, $value){
+        $query = $this->sql->from('post')->orderBy($field, $value)->toSQL();
         $result = $this->pdo->query($query);
         $json  = $result->fetchAll(PDO::FETCH_OBJ);
         return Bases::toJSON($json);
@@ -78,11 +86,15 @@ class API {
         return Bases::toJSON($json);
     }
 
-    public function getPostsWithLimitandOrderby(int $limit, string $order){
-        $query = $this->sql->from('post')->orderBy("id",$order)->limit($limit)->toSQL();
-        $result = $this->pdo->query($query);
-        $json  = $result->fetchAll(PDO::FETCH_OBJ);
-        return Bases::toJSON($json);
+    public function getSlug(int $id): string{
+            $result = $this->sql
+            ->from('post')
+            ->setParam('id', $id)
+            ->where('id = :id')
+            ->fetch($this->pdo, 'slug');
+            $json  = $result;
+            return Bases::toJSON($json);
+
     }
 
 }
