@@ -2,7 +2,7 @@ import React  from 'react'
 import{Layout} from './Layout'
 import {Container} from '../layouts/Bases/Container'
 import {CardContainer} from '../layouts/Bases/CardContainer'
-import {ForumTopics, useFetchApi} from '../layouts/Topics/ForumTopics'
+import {ForumTopics} from '../layouts/Topics/ForumTopics'
 
 export function Forum(){
     const limit = 10

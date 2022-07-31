@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
+import { useFetchApi } from '../../../class/api';
 
 const month = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
   "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Décembre"
@@ -10,30 +11,7 @@ function sqlToJsDate(sqlDate){
     return new Date(sqlDate);
 }
 
-export function useFetchApi (url, limit = 0){
-    const [error, setError] = useState(null);
-    const [IsLoaded, setIsLoaded] = useState(false);
-    const [items, setItems] = useState([]);
-    url = limit > 0 ? url + Object.values({limit}): url
-    useEffect(() => {
-        ( async function(){
-            fetch(url)
-            .then(res => res.json() )
-            .then((items) =>{
-                setIsLoaded(true);
-                setItems(items);
-            }, (error) => {
-                setIsLoaded(true);
-                setError(error);
-            }
-        )
-    }
-)()
-        
-    }, [url]) 
-    const resp = {items, error ,IsLoaded}
-    return resp
-}
+
 
 
 function getDate(item){
