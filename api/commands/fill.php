@@ -7,7 +7,7 @@ require dirname(__DIR__) . '/vendor/autoload.php';
 
 $faker = Faker\Factory::create('fr_FR');
 
-$pdo = PDOHelpers::getPDO('Bascode', '192.168.0.6', 'minecraft', 'mak2Mak!', [
+$pdo = PDOHelpers::getPDO('Bascode', '192.168.0.6', 'bascode', 'ELECKBOINMAK', [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
 ]);
 

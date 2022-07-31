@@ -4,7 +4,7 @@ use cavernos\bascode_api\API;
 use cavernos\bascode_api\Helpers\PDOHelpers;
 use cavernos\bascode_api\Helpers\QueryBuilder;
 
- $pdo = PDOHelpers::getPDO('Bascode', '192.168.0.6', 'minecraft', 'mak2Mak!', [
+ $pdo = PDOHelpers::getPDO('Bascode', '192.168.0.6', 'bascode', 'ELECKBOINMAK', [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
 ]);
 

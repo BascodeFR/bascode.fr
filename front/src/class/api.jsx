@@ -27,6 +27,6 @@ export function useFetchApi (url, limit = 0){
 }
 
 export function getName(id){
-    const {items, error ,IsLoaded} = useFetchApi('http://localhost:8000/post?id='+ id);
+    const {items} = useFetchApi('http://localhost:8000/post?id='+ id);
     return items.name
 }
