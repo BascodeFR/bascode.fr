@@ -1,0 +1,27 @@
+CREATE TABLE post (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    name VARCHAR (255) NOT NULL,
+    slug VARCHAR(255) NOT NULL,
+    created_by VARCHAR(255) NOT NULL,
+    created_at DATETIME NOT NULL,
+    total_messages INT NOT NULL,
+    PRIMARY KEY (id)
+)
+
+CREATE TABLE actu (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    theme_image VARCHAR(255) NOT NULL, 
+    created_by VARCHAR(255) NOT NULL,
+    created_at DATETIME NOT NULL,
+    PRIMARY KEY (id)
+)
+
+CREATE TABLE user (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    username VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id)
+)

@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-export function ForumTopics(lastInfo){
+export function ForumTopics({lastInfo}){
         if (lastInfo == 'true') {
             return <div className="topics">
                 <div className="topics-create-info">

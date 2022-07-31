@@ -1,0 +1,88 @@
+<?php
+
+namespace cavernos\bascode_api;
+
+use cavernos\bascode_api\Helpers\Bases;
+use cavernos\bascode_api\Helpers\QueryBuilder;
+use PDO;
+
+class API {
+    
+    /**
+     * pdo
+     *
+     * @var PDO
+     */
+    private $pdo;
+    
+    /**
+     * sql
+     *
+     * @var QueryBuilder
+     */
+    private $sql;
+    
+    /**
+     * __construct
+     *
+     * @param  PDO $pdo
+     * @param  QueryBuilder $sql
+     * @return void
+     */
+    public function __construct(PDO $pdo, QueryBuilder $sql)
+    {
+        $this->pdo = $pdo;
+        $this->sql = $sql;
+    }
+    
+    /**
+     * getPosts Récupère tout les postes dans la base de données
+     *
+     * @return string
+     */
+    public function getPosts() : string
+    {
+        $query = $this->sql->from('post')->toSQL();
+        $result = $this->pdo->query($query);
+        $json = $result->fetchAll(PDO::FETCH_OBJ);
+        return Bases::toJSON($json);
+        
+    }
+    
+    /**
+     * getPost Récupère un post en fonction de l'id
+     *
+     * @param  string $id
+     * @return string 
+     */
+    public function getPost(string $id) : string
+    {
+        $query = $this->sql->from('post')->where('id = '.$id)->toSQL();
+        $result = $this->pdo->query($query);
+        $json  = $result->fetch(PDO::FETCH_OBJ);
+        return Bases::toJSON($json);
+
+    }
+
+    public function getPostsWithOrderBy($value){
+        $query = $this->sql->from('post')->orderBy("id", $value)->toSQL();
+        $result = $this->pdo->query($query);
+        $json  = $result->fetchAll(PDO::FETCH_OBJ);
+        return Bases::toJSON($json);
+    }
+
+    public function getPostsWithLimit($value){
+        $query = $this->sql->from('post')->limit($value)->toSQL();
+        $result = $this->pdo->query($query);
+        $json  = $result->fetchAll(PDO::FETCH_OBJ);
+        return Bases::toJSON($json);
+    }
+
+    public function getPostsWithLimitandOrderby(int $limit, string $order){
+        $query = $this->sql->from('post')->orderBy("id",$order)->limit($limit)->toSQL();
+        $result = $this->pdo->query($query);
+        $json  = $result->fetchAll(PDO::FETCH_OBJ);
+        return Bases::toJSON($json);
+    }
+
+}
