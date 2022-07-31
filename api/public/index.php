@@ -4,9 +4,10 @@ require __DIR__.'/../vendor/autoload.php';
 use cavernos\bascode_api\Router;
 
 
-$router = new Router(dirname(__DIR__));
+$router = new Router(dirname(__DIR__). '/views');
 
-$router->get('/', '/index', 'home')
-        ->get('/post', '/views/post', 'posts')
+$router->get('/', '../index', 'home')
+        ->get('/post', 'post', 'posts')
+        ->get('/message', 'messages', 'messages')
         ->run();
 

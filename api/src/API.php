@@ -97,4 +97,17 @@ class API {
 
     }
 
+    public function getMessages(int $postId): string{
+        $query = $this->pdo->prepare('SELECT *
+        FROM post_messages pm
+        JOIN messages m on pm.message_id = m.id
+        WHERE pm.post_id = :id
+        ');
+        $query->execute(['id' => $postId]);
+        $result = $query->fetchAll();
+        $json  = $result;
+        return Bases::toJSON($json);
+
+    }
+
 }
