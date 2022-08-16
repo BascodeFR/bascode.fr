@@ -19,10 +19,6 @@
   text-decoration: none;
 }
 
-.hidden {
-  display: none;
-}
-
 .fields {
   display: flex;
   flex-direction: column-reverse;
@@ -198,7 +194,7 @@
 .login-pane {
   position: relative;
   z-index: 300;
-  margin: -25px 131px -272px auto;
+  margin: -25px 131px -257px auto;
   width: 272px;
   height: 282px;
 }
@@ -240,6 +236,17 @@
   background: url("../svg/triangle.svg") center center/contain no-repeat;
   top: -35px;
   left: 106px;
+}
+
+.hidden {
+  transition: opacity 0.3s;
+  opacity: 0%;
+  display: none;
+}
+
+.visible {
+  transition: opacity 0.3s;
+  opacity: 100%;
 }
 
 .register {
@@ -339,6 +346,7 @@ body {
 .connection .connect {
   font-size: 15px;
   font-weight: bold;
+  cursor: pointer;
 }
 .connection .connect::after {
   content: "";

@@ -2,11 +2,13 @@ import React from 'react'
 import { useParams } from 'react-router-dom';
 import { useFetchApi } from '../../../class/api';
 import {DateFormater} from '../../../class/DateFormater'
+import { UrlBuilder } from '../../../class/UrlBuilder';
 
 
 
 export function ForumTopics({limit}){
-    const {items, error ,IsLoaded} = useFetchApi('http://localhost:8000/post?order=desc&field=created_at&limit=', limit)
+    const url = new UrlBuilder('http://localhost:8000', 'post').order("created_at", "desc").limit(limit).toUrl()
+    const {items, error ,IsLoaded} = useFetchApi(url)
     const params = useParams();
     function getSlug(){
         for(let i = 0; i < limit; i++){

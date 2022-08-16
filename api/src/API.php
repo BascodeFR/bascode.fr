@@ -5,6 +5,15 @@ namespace cavernos\bascode_api;
 use cavernos\bascode_api\Helpers\Bases;
 use cavernos\bascode_api\Helpers\QueryBuilder;
 use PDO;
+/**
+ * API est la class qui permet de faire fonctionner l'API
+ * 
+ * @package cavernos\bascode_api\Helpers
+ * @author Cavernos <louisdescavernes@gmail.com>
+ * @version 1.0
+ * @access private
+ * 
+ */
 
 class API {
     
@@ -63,29 +72,56 @@ class API {
         return Bases::toJSON($json);
 
     }
-
-    public function getPostWithParams(int $limit, string $order, string $field){
+    
+    /**
+     * getPostWithParams
+     *
+     * @param  int $limit
+     * @param  string $order
+     * @param  string $field
+     * @return string
+     */
+    public function getPostWithParams(int $limit, string $order, string $field): string{
         $query = $this->sql->from('post')->orderBy($field, $order)->limit($limit)->toSQL();
         $result = $this->pdo->query($query);
         $json  = $result->fetchAll(PDO::FETCH_OBJ);
         return Bases::toJSON($json);
     }
 
-
-    public function getPostsWithOrderBy(string $field, $value){
+    
+    /**
+     * getPostsWithOrderBy
+     *
+     * @param  string $field
+     * @param  string $value
+     * @return string
+     */
+    public function getPostsWithOrderBy(string $field, $value): string{
         $query = $this->sql->from('post')->orderBy($field, $value)->toSQL();
         $result = $this->pdo->query($query);
         $json  = $result->fetchAll(PDO::FETCH_OBJ);
         return Bases::toJSON($json);
     }
-
-    public function getPostsWithLimit($value){
+    
+    /**
+     * getPostsWithLimit
+     *
+     * @param  int $value
+     * @return void
+     */
+    public function getPostsWithLimit(int $value): string{
         $query = $this->sql->from('post')->limit($value)->toSQL();
         $result = $this->pdo->query($query);
         $json  = $result->fetchAll(PDO::FETCH_OBJ);
         return Bases::toJSON($json);
     }
-
+    
+    /**
+     * getSlug
+     *
+     * @param  int $id
+     * @return string
+     */
     public function getSlug(int $id): string{
             $result = $this->sql
             ->from('post')
@@ -96,7 +132,16 @@ class API {
             return Bases::toJSON($json);
 
     }
-
+    
+    /**
+     * getMessages
+     *
+     * @param  int $postId
+     * @param  string $field
+     * @param  string $order
+     * @param  int $limit
+     * @return string
+     */
     public function getMessages(int $postId, string $field, string $order, int $limit): string{
         $query = $this->pdo->prepare("SELECT *
         FROM post_messages pm

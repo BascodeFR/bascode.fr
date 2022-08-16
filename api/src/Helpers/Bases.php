@@ -3,7 +3,15 @@
 namespace cavernos\bascode_api\Helpers;
 
 use PHPUnit\Util\Json;
-
+/**
+ * Bases est un mélanges de fonction static qui permetent quelques conversions
+ * 
+ * @package cavernos\bascode_api\Helpers
+ * @author Cavernos <louisdescavernes@gmail.com>
+ * @version 1.0
+ * @access private
+ * 
+ */
 class Bases {    
     /**
      * toJSON Convert params in JSON

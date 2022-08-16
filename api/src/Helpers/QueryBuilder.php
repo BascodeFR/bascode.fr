@@ -171,7 +171,12 @@ class QueryBuilder {
         }
         return $this;
     }
-
+    
+    /**
+     * toSQL génère la requête SQL finale
+     *
+     * @return string
+     */
     public function toSQL(): string{
         $fields = implode(', ', $this->fields);
         $sql = "SELECT $fields FROM {$this->from}";

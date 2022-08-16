@@ -1,7 +1,7 @@
 .login-pane{
     position: relative;
     z-index: 300;
-    margin: -25px 131px -272px auto;
+    margin: -25px 131px -257px auto;
     width: 272px;
     height: 282px;
     .pane{
@@ -40,6 +40,14 @@
         @include icon-loader("../svg/triangle.svg", 60px, 60px);
         top: -35px;
         left: 106px;
-    }
-    
+    }  
+}
+.hidden{
+    transition: opacity .3s;
+    opacity: 0%;
+    display: none;
+}
+.visible {
+    transition: opacity .3s;
+    opacity: 100%;
 }

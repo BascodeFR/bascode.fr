@@ -2,6 +2,7 @@ CREATE TABLE post (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     name VARCHAR (255) NOT NULL,
     slug VARCHAR(255) NOT NULL,
+    author BOOLEAN NOT NULL,
     created_by VARCHAR(255) NOT NULL,
     created_at DATETIME NOT NULL,
     total_messages INT NOT NULL,
@@ -11,7 +12,6 @@ CREATE TABLE post (
 CREATE TABLE messages (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     name VARCHAR (255) NOT NULL,
-    author BOOLEAN,
     content TEXT(65000) NOT NULL,
     created_by VARCHAR(255) NOT NULL,
     created_at DATETIME NOT NULL,

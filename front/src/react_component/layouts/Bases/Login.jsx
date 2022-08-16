@@ -1,6 +1,7 @@
 import React from 'react'
-export function Login({display}) {
-        return <div className={"login-pane " + display}>
+export function Login({opacity}) {
+    
+        return <div className={opacity === "1" ? "login-pane visible" : "login-pane hidden disp"}>
             <div className="pane">
                 <header className="head"></header>
                 <h2>Se Connecter</h2>

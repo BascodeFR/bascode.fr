@@ -39,6 +39,7 @@ body{
     .connect{
         font-size: 15px;
         font-weight: bold;
+        cursor: pointer;
     }
     .connect::after{
         @include icon-loader("../svg/arrow.svg", 23px, 23px);

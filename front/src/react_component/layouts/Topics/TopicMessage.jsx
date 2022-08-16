@@ -2,11 +2,13 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { getMessage, useFetchApi } from "../../../class/Api";
 import {DateFormater} from '../../../class/DateFormater'
+import { UrlBuilder } from "../../../class/UrlBuilder";
 import {TopicResponse} from './TopicResponse'
 
 export function TopicMessage({limit}){
     const params = useParams()
-    const {items, error, IsLoaded} = useFetchApi('http://localhost:8000/message?id=' + params.id + '&order=asc&field=created_at&limit=' + limit)
+    const url = new UrlBuilder('http://localhost:8000', 'message').id(params.id).order("created_at", "asc").limit(limit).toUrl()
+    const {items, error, IsLoaded} = useFetchApi(url)
 
 
 

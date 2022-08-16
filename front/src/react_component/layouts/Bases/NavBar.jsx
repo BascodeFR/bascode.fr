@@ -1,6 +1,5 @@
-import React, { useContext } from 'react'
-import { useState, Dispatch, SetStateAction } from 'react'
-import {NavLink, useLocation} from 'react-router-dom'
+import React from 'react'
+import {NavLink} from 'react-router-dom'
 
 
 export function NavBar() {

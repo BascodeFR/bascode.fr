@@ -9,7 +9,6 @@ import {NavBar} from '../layouts/Bases/NavBar';
 
 export function Layout(props) {
         return <><Header connecte="false"/> 
-        <Login display="hidden"/>
         <Register display="hidden"/>
         <NavBar/>
         {props.children}
