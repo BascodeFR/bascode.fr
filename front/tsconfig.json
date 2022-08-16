@@ -1,10 +1,11 @@
 {
     "compilerOptions": {
       "allowSyntheticDefaultImports": true,
-      "module": "ES6",
-      "checkJs": true,
-      "moduleResolution": "node",
-      "jsx": "preserve"
+      "module": "ES2015",
+      "moduleResolution": "Node",
+      "noEmitOnError": true,
+      "strict": true,
+      "lib": ["ES2015", "DOM"]
     },
     "exclude": ["dist/", "node_modules/*"],
 }

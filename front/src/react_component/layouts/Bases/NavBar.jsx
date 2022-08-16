@@ -1,16 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { useState, Dispatch, SetStateAction } from 'react'
+import {NavLink, useLocation} from 'react-router-dom'
 
 
 export function NavBar() {
         return <nav className="topbar-nav">
                     <div className="nav-content">
-                        <a href="/forum"  className="nav-items">Forum</a>
-                        <a href="#" className="nav-items active">Actualités</a>
-                        <a href="#" className="nav-items">Tutoriels</a>
-                        <a href="#" className="nav-items">Minecraft</a>
+                        <NavLink to="/forum"  activeClassName="active" className="nav-items">Forum</NavLink>
+                        <NavLink to="/actu" activeClassName="active" className="nav-items">Actualités</NavLink>
+                        <NavLink to="/tuto" activeClassName="active" className="nav-items">Tutoriels</NavLink>
+                        <NavLink to="/minecraft" activeClassName="active" className="nav-items">Minecraft</NavLink>
                     </div>
                     <div className="research">
-                        
                     </div>
                 </nav>
 }

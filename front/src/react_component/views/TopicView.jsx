@@ -4,7 +4,7 @@ import {CardContainer} from '../layouts/Bases/CardContainer'
 import {Container} from '../layouts/Bases/Container'
 import {TopicMessage} from '../layouts/Topics/TopicMessage'
 import {TopicResponse} from '../layouts/Topics/TopicResponse'
-import { getName } from '../../class/api'
+import { getName } from '../../class/Api'
 import { useParams } from 'react-router-dom'
 
 
