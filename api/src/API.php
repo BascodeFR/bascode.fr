@@ -97,12 +97,12 @@ class API {
 
     }
 
-    public function getMessages(int $postId): string{
-        $query = $this->pdo->prepare('SELECT *
+    public function getMessages(int $postId, string $field, string $order, int $limit): string{
+        $query = $this->pdo->prepare("SELECT *
         FROM post_messages pm
         JOIN messages m on pm.message_id = m.id
-        WHERE pm.post_id = :id
-        ');
+        WHERE pm.post_id = :id ORDER BY $field $order LIMIT $limit
+        ");
         $query->execute(['id' => $postId]);
         $result = $query->fetchAll();
         $json  = $result;

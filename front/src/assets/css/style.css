@@ -444,7 +444,7 @@ body {
   height: 722px;
 }
 .container .topic-message {
-  height: auto;
+  height: 100%;
 }
 .container .topics {
   background-color: #6C6C6C;
@@ -468,7 +468,7 @@ body {
   margin: 4.5px 10px;
   color: rgba(255, 255, 255, 0.75);
 }
-.container .topics .topics-create-info .topics-name.active, .container .topics .topics-create-info .topics-name:hover {
+.container .topics .topics-create-info .topics-name:hover {
   text-shadow: -2px -2px 0 #97651A, 0 -2px 0 #97651A, 2px -2px 0 #97651A, 2px 0 0 #97651A, 2px 2px 0 #97651A, 0 2px 0 #97651A, -2px 2px 0 #97651A, -2px 0 0 #97651A;
 }
 .container .topics .topics-last-info {
@@ -546,7 +546,7 @@ body {
   text-decoration: none;
   transition: text-shadow 0.3s;
 }
-.container .last-actu .actus .actu-items .actu-name.active, .container .last-actu .actus .actu-items .actu-name:hover {
+.container .last-actu .actus .actu-items .actu-name:hover {
   text-shadow: -2px -2px 0 black, 0 -2px 0 black, 2px -2px 0 black, 2px 0 0 black, 2px 2px 0 black, 0 2px 0 black, -2px 2px 0 black, -2px 0 0 black;
 }
 .container .last-actu .actus .actu-items p {

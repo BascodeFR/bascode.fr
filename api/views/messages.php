@@ -19,12 +19,15 @@ $api = new API($pdo, $builder);
 switch($request_method)
 {
     case 'GET':
-        if(!empty($_GET['id']))
+        if(!empty($_GET['id']) && !empty($_GET['field']) && !empty($_GET['order']) && !empty($_GET['limit']))
         {
             $id = intval($_GET['id']);
+            $field = htmlentities($_GET['field']);
+            $order = htmlentities($_GET['order']);
+            $limit = intval($_GET['limit']);
             header('Content-Type: application/json'); 
-            echo $api->getMessages($id);
-        } 
+            echo $api->getMessages($id, $field, $order, $limit);
+        }
         else {
             header('Content-Type: application/json'); 
             echo $api->getPosts();

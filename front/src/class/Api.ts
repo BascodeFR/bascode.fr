@@ -28,3 +28,8 @@ export function getName(id: number){
     const {items} = useFetchApi('http://localhost:8000/post?id='+ id);
     return items.name
 }
+
+export function getMessage(id: number){
+    const {items} = useFetchApi('http://localhost:8000/message?id=' + id)
+    return items
+}

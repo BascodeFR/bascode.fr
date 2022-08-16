@@ -15,11 +15,7 @@ export function TopicView(){
         return <Layout>
                     <Container view={['Accueil ', '> Forum ', ' > ' + name]}>
                         <CardContainer CssClass="topic-message" name={name}>
-                            <TopicMessage/>
-                            <TopicMessage/>
-                            <TopicMessage/>
-                            <TopicMessage/>
-                            <TopicResponse/>
+                            <TopicMessage limit="10"/>
                         </CardContainer>
                     </Container>
             </Layout>          

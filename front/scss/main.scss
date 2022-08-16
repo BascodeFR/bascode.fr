@@ -124,7 +124,7 @@ body{
         height: 722px;
     }
     .topic-message{
-        height: auto;
+        height: 100%;
     }
     .topics{
         background-color: $header-color;
@@ -149,7 +149,7 @@ body{
                 margin: 4.5px 10px;
                 color: rgba(255, 255,255, 75%);
             }
-            .topics-name.active, .topics-name:hover{
+            .topics-name:hover{
                 @include stroke($yellow-hover, 2px);
             }
         }
@@ -226,7 +226,7 @@ body{
                     text-decoration: none;
                     transition: text-shadow .3s;
                 }
-                .actu-name.active, .actu-name:hover{
+                .actu-name:hover{
                     @include stroke(black, 2px);
                 }
                 p{

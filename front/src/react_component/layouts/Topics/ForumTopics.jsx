@@ -1,26 +1,8 @@
 import React from 'react'
 import { useParams } from 'react-router-dom';
 import { useFetchApi } from '../../../class/api';
+import {DateFormater} from '../../../class/DateFormater'
 
-const month = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
-  "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Décembre"
-];
-
-
-function sqlToJsDate(sqlDate){
-    return new Date(sqlDate);
-}
-
-
-
-
-function getDate(item){
-    const date =new Date();
-    if (date.getFullYear() === sqlToJsDate(item).getFullYear()){
-        return sqlToJsDate(item).getDate() + ' ' + month[sqlToJsDate(item).getMonth()]
-    }
-    return sqlToJsDate(item).getDate() + ' ' + month[sqlToJsDate(item).getMonth()] + ' ' + sqlToJsDate(item).getFullYear()
-}
 
 
 export function ForumTopics({limit}){
@@ -46,7 +28,7 @@ export function ForumTopics({limit}){
                     <div className="topics-create-info">
                         <a href={"forum/" + item.slug + '-' + item.id } className="topics-name active">{item.name}</a>
                         <p>Crée par {item.created_by}</p>
-                        <p>Commencé le {getDate(item.created_at)}</p>
+                        <p>Commencé le {new DateFormater(item.created_at).getDate()}</p>
                     </div>
                     <div className="topics-last-info">
                         <div className="total-posts">{item.total_messages} <br />Posts</div>
