@@ -5,7 +5,8 @@
       "moduleResolution": "Node",
       "noEmitOnError": true,
       "strict": true,
-      "lib": ["ES2015", "DOM"]
+      "lib": ["ES2015", "DOM"],
+      "suppressImplicitAnyIndexErrors": true
     },
     "exclude": ["dist/", "node_modules/*"],
 }

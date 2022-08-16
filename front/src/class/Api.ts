@@ -37,7 +37,7 @@ export function useFetchApi (url: RequestInfo, limit = 0){
 export function getName(id: number): Article[]{
     const url = new UrlBuilder('http://localhost:8000', 'post').id(id).toUrl()
     const {items}= useFetchApi(url);
-    return items.name
+    return items['name']
 }
 /**
  * @param  {number} id

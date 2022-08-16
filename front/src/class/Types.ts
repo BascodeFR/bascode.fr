@@ -5,7 +5,8 @@ export interface Article {
     name: String,
     created_by: String,
     created_at: Date,
-    totalMessage: Number
+    totalMessage: Number,
+    [key: string]: any
 }
 
 export interface Message {
