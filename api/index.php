@@ -32,9 +32,10 @@
     <h1>Hello World !</h1>
     <main>
         <div>
+            <h2>Method GET</h2>
             <table>
                 <thead>
-                    <h2>Method GET</h2>
+                    <h2>Post</h2>
                 </thead>
                 <tbody>
                     <tr>
@@ -58,6 +59,18 @@
                     <tr>
                         <td>Posts slugs</td>
                         <td><code>http://localhost:8000/post?id=3&slug=1</code></td>
+                    </tr>
+                </tbody>  
+            </table>
+
+            <table>
+                <thead>
+                    <h2>Message</h2>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Message from Post</td>
+                        <td><code>http://localhost:8000/message?id=7&order=asc&field=created_at&limit=5</code></td>
                     </tr>
                 </tbody>  
             </table>

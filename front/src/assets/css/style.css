@@ -312,6 +312,29 @@
   cursor: pointer;
 }
 
+.pagination {
+  width: max-content;
+  height: 30px;
+  margin: 8px auto;
+  display: flex;
+  gap: 15px;
+}
+.pagination .pages {
+  border: 0;
+  cursor: pointer;
+  outline: 0;
+  background-color: #6C6C6C;
+  width: 30px;
+  height: 30px;
+  border-radius: 1px;
+  text-align: center;
+  line-height: 5px;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 0;
+}
+
 *, *::after, *::before {
   box-sizing: border-box;
 }
@@ -446,13 +469,15 @@ body {
   color: #333333;
 }
 .container .last-topics {
-  height: 382px;
+  height: auto;
 }
 .container .forum {
-  height: 722px;
+  height: auto;
+  padding-bottom: 8px;
 }
 .container .topic-message {
-  height: 100%;
+  height: auto;
+  padding-bottom: 8px;
 }
 .container .topics {
   background-color: #6C6C6C;
@@ -670,6 +695,13 @@ body {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.errors {
+  color: red;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
 }
 
 @media screen and (max-width: 1405px) {

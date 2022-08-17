@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { getMessage, useFetchApi } from "../../../class/Api";
 import {DateFormater} from '../../../class/DateFormater'
 import { UrlBuilder } from "../../../class/UrlBuilder";
+import { Paginations } from "./Pagination";
 import {TopicResponse} from './TopicResponse'
 
 export function TopicMessage({limit}){

@@ -48,3 +48,9 @@ export function getMessage(id: number): Message[] {
     const {items} = useFetchApi(url)
     return items
 }
+
+export function getItemsForPages(){
+    const url = new UrlBuilder('http://localhost:8000', 'post').order("created_at", "desc").toUrl()
+    const {items} = useFetchApi(url)
+    return items
+}

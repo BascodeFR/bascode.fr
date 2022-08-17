@@ -7,6 +7,7 @@
 @import 'resp.scss';
 @import 'login.scss';
 @import 'register.scss';
+@import 'pages.scss';
 
 *, *::after, *::before{
     box-sizing: border-box;
@@ -119,13 +120,15 @@ body{
         }
     }
     .last-topics{
-        height: 382px;
+        height: auto;
     }
     .forum{
-        height: 722px;
+        height: auto;
+        padding-bottom: 8px;
     }
     .topic-message{
-        height: 100%;
+        height: auto;
+        padding-bottom: 8px;
     }
     .topics{
         background-color: $header-color;
@@ -342,5 +345,13 @@ body{
             transform: rotate(360deg);
         }
     }
+}
+
+.errors{
+    color: red;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+
 }
 @include media();

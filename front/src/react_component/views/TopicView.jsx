@@ -6,6 +6,7 @@ import {TopicMessage} from '../layouts/Topics/TopicMessage'
 import {TopicResponse} from '../layouts/Topics/TopicResponse'
 import { getName } from '../../class/Api'
 import { useParams } from 'react-router-dom'
+import { Paginations } from '../layouts/Topics/Pagination'
 
 
 
