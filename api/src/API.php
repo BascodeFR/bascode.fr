@@ -155,12 +155,12 @@ class API {
 
     }
 
-    public function getUser(string $name, string $password){
+    public function getUser(string $name, string $pass){
         $query = $this->pdo->prepare("SELECT * FROM user WHERE username = :name");
         $query->execute(['name' => $name]);
         $query->setFetchMode(PDO::FETCH_OBJ);
-        $result =$query->fetch();
-        if(password_verify($password, $result->password)){
+        $result = $query->fetch();
+        if(password_verify($pass, $result->password)){
             return Bases::toJSON($result);
         } else {
             return Bases::toJSON(["error", "Le password n'est pas correct"]);

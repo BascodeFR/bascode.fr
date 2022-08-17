@@ -5,11 +5,13 @@ import React from 'react'
 export function TopicResponse(){
         return  <div className="resp">
                     <h2>Rejoindre la conversation</h2>
-                    <div className='resp-content'>
+                    <form className='resp-content'>
                         <img src="https://via.placeholder.com/55x55" alt="" />
-                        <input type="text" id='resp'/>
-                        <label htmlFor="resp">Répondre à ce topic</label>
-                    </div>
+                            <textarea type="text" id='resp'></textarea>
+                            <label htmlFor="resp">Répondre à ce topic</label>
+                            <button type='submit' className='btn'>Répondre</button>
+                        
+                    </form>
                 </div>
 }
 export default TopicResponse;

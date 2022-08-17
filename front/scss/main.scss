@@ -60,7 +60,7 @@ body{
 .account{
     display: flex;
     align-items: center;
-    padding: 0 104px;
+    padding: 0 50px;
     .username{
         display: inline-block;
         font-size: 12px;
@@ -128,7 +128,7 @@ body{
     }
     .topic-message{
         height: auto;
-        padding-bottom: 8px;
+        padding-bottom: 6px;
     }
     .topics{
         background-color: $header-color;

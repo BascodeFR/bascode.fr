@@ -18,7 +18,7 @@ $api = new API($pdo, $builder);
 switch($request_method)
 {
     case 'POST':
-        if(!empty($_GET['name']) && !empty($_GET['password']))
+        if(!empty($_GET['name']) && isset($_GET["password"]) && !empty($_GET["password"]))
         {
             $name = htmlentities($_GET['name']);
             $password = htmlentities($_GET['password']);

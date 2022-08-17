@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {Login } from './Login';
 
 export function Header({connecte}){
@@ -17,7 +18,7 @@ export function Header({connecte}){
                         <a href="/"><img src="/src/assets/img/bascode.png" alt=""/></a>
                     </div>
                     {window.sessionStorage.getItem("connecte") === "true"  ? <div className="account">
-                            <div className="msg"></div>
+                            <Link to="/msg" className="msg"></Link>
                                 <img src="https://via.placeholder.com/40x40" alt="" />
                             <div className="username">{user.username}</div>
                         </div> : 

@@ -21,7 +21,7 @@ export function Forum(){
                 <Container view={['Accueil ', '> Forum']}>
                     <CardContainer CssClass="forum" name='Forum'>
                         <ForumTopics currentTable={currentTableData}/>
-                        <Paginations currentPage={currentPage} totalCount={items.length} pageSize={PageSize} onPageChange={page => setCurrentPage(page)}/>
+                        <Paginations currentPage={currentPage} totalCount={items.length / PageSize} pageSize={PageSize} onPageChange={page => setCurrentPage(page)}/>
                     </CardContainer>
                 </Container>
             </Layout>

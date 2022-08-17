@@ -22,7 +22,7 @@ $pdo->exec('SET FOREIGN_KEY_CHECKS = 1');
 $posts =[];
 $messages =[];
 
-for($i = 0; $i < 1000; $i++){
+for($i = 0; $i < 50; $i++){
     $pdo->exec("INSERT INTO post SET name ='{$faker->sentence()}', slug='{$faker->slug}', created_at='{$faker->date} {$faker->time}', author = false, created_by='Cavernos', total_messages='{$faker->randomDigitNotNull}'");
     $posts[] = $pdo->lastInsertId();
 }
@@ -36,4 +36,6 @@ foreach($messages as $m){
     $post = $faker->randomElement($posts, rand(0, count($posts)));
     $pdo->exec("INSERT INTO post_messages SET post_id = $post, message_id = $m");
 }
+$password = password_hash('test', PASSWORD_BCRYPT);
+$pdo->exec("INSERT INTO user SET name = 'Louis', username ='Test', email = 'louisdescavernes@gmail.com', password='{$password}'");
     

@@ -42,7 +42,7 @@ Cryptage des données avec bcrypt
 
 
 ### Pour lancer les tests : 
-` npx vitest `
+` pnpm run test `
 
 ### Pour installer les dépendances : 
 

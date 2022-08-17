@@ -132,7 +132,6 @@
   height: 120px;
   margin: 0 auto;
   border-radius: 10px;
-  margin-bottom: 6px;
 }
 .resp .resp-content {
   display: flex;
@@ -162,7 +161,8 @@
   margin-top: -1px;
   margin-right: 5px;
 }
-.resp .resp-content input {
+.resp .resp-content textarea {
+  resize: none;
   position: relative;
   z-index: 2;
   display: inline;
@@ -175,11 +175,19 @@
   height: 55px;
   margin-left: 30px;
 }
-.resp .resp-content input:focus {
+.resp .resp-content textarea:focus {
   outline: 0;
 }
-.resp .resp-content input:focus + label {
+.resp .resp-content textarea:focus + label {
   opacity: 0;
+}
+.resp .resp-content .btn {
+  border: 0;
+  height: 55px;
+  padding: 12px 15px;
+  margin-left: 12px;
+  cursor: pointer;
+  display: inline-block;
 }
 .resp h2 {
   margin: 0;
@@ -426,7 +434,7 @@ body {
 .account {
   display: flex;
   align-items: center;
-  padding: 0 104px;
+  padding: 0 50px;
 }
 .account .username {
   display: inline-block;
@@ -511,7 +519,7 @@ body {
 }
 .container .topic-message {
   height: auto;
-  padding-bottom: 8px;
+  padding-bottom: 6px;
 }
 .container .topics {
   background-color: #6C6C6C;

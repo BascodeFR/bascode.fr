@@ -8,8 +8,7 @@ import {useNavigate} from "react-router-dom"
 export function Login({opacity}) {
     const navigate  = useNavigate()
     const{ register, handleSubmit} = useForm();
-    const onSubmit = (data, e) => {
-        e.preventDefault()
+    const onSubmit = (data) => {
         if(data.l_password != undefined){
                     fetch('http://localhost:8000/user?name=' + data.l_username + "&password=" + data.l_password, {method: 'POST'}).then((resp) => {
                     if(!resp.ok){
@@ -34,7 +33,7 @@ export function Login({opacity}) {
             <div className="pane">
                 <header className="head"></header>
                 <h2>Se Connecter</h2>
-                <form action="" onSubmit={handleSubmit(onSubmit)} method="post">
+                <form  onSubmit={handleSubmit(onSubmit)}>
                     <div className="fields">
                         <input {...register("l_username")} type="text" name="l_username" id="l_username" required/>
                         <label htmlFor="username">Username ou Email</label>
