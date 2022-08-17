@@ -283,10 +283,9 @@ body{
     font-weight: bold;
     display: flex;
     justify-content: space-between;
-    position: relative;
     .copyright{
-        position: absolute;
-        bottom: 6px;
+        padding-top: calc(137px - 24px);
+        padding-left: 10px;
     }
     .copyright::before{
         vertical-align: middle;

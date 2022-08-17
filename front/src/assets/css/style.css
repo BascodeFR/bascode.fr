@@ -674,11 +674,10 @@ body {
   font-weight: bold;
   display: flex;
   justify-content: space-between;
-  position: relative;
 }
 .footer .copyright {
-  position: absolute;
-  bottom: 6px;
+  padding-top: 113px;
+  padding-left: 10px;
 }
 .footer .copyright::before {
   vertical-align: middle;
