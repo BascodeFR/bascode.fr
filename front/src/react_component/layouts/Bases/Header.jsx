@@ -1,20 +1,25 @@
 import React from 'react'
 import { useState } from 'react';
-import { Login } from './Login';
+import {Login } from './Login';
 
 export function Header({connecte}){
     const [isActive, setActive] = useState(false)
     const toggleLogin = () =>{
         setActive(!isActive)
     }
+    let user = null
+    if (sessionStorage.user != undefined){
+        user = JSON.parse(sessionStorage.user)
+    }
+    
             return (<><header className="topbar">
                     <div className="logo">
                         <a href="/"><img src="/src/assets/img/bascode.png" alt=""/></a>
                     </div>
-                    {connecte === "true" ? <div className="account">
+                    {window.sessionStorage.getItem("connecte") === "true"  ? <div className="account">
                             <div className="msg"></div>
                                 <img src="https://via.placeholder.com/40x40" alt="" />
-                            <div className="username">Cavernos</div>
+                            <div className="username">{user.username}</div>
                         </div> : 
                 
                     <div className="connection">
@@ -23,6 +28,7 @@ export function Header({connecte}){
                     </div>}
                     
                 </header>
+                
                 <Login opacity={isActive ? "1" : "0"}/></>);
         
 }

@@ -9,5 +9,6 @@ $router = new Router(dirname(__DIR__). '/views');
 $router->get('/', '../index', 'home')
         ->get('/post', 'post', 'posts')
         ->get('/message', 'messages', 'messages')
+        ->post('/user', 'user', 'user')
         ->run();
 

@@ -38,7 +38,7 @@ class Router{
     }
       
     /**
-     * get va rechercher l'url demandé en fonction de la route
+     * get va rechercher l'url demandé en fonction de la route en méthode GET
      *
      * @param  string $url
      * @param  string $view
@@ -47,6 +47,20 @@ class Router{
      */
     public function get(string $url, string $view, ?string $name = null): self{
         $this->routeur->map('GET', $url,  $view, $name);
+        return $this;
+
+    } 
+
+    /**
+     * post va rechercher l'url demandé en fonction de la route en méthode POST
+     *
+     * @param  string $url
+     * @param  string $view
+     * @param  ?string $name = null
+     * @return self
+     */
+    public function post(string $url, string $view, ?string $name = null): self{
+        $this->routeur->map('POST', $url,  $view, $name);
         return $this;
 
     }

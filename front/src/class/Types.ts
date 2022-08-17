@@ -16,3 +16,11 @@ export interface Message {
     created_by: String,
     created_at: Date
 }
+
+export interface User {
+    id: number,
+    name: string,
+    username: string,
+    email: string,
+    password: string
+}

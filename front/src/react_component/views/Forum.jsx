@@ -1,4 +1,4 @@
-import React, { useMemo, useState }  from 'react'
+import React, { useEffect, useMemo, useState }  from 'react'
 import{Layout} from './Layout'
 import {Container} from '../layouts/Bases/Container'
 import {CardContainer} from '../layouts/Bases/CardContainer'
@@ -8,9 +8,9 @@ import { getItemsForPages } from '../../class/Api'
 import { UrlBuilder } from '../../class/UrlBuilder'
 
 export function Forum(){
+    const items = getItemsForPages();
     const PageSize = 10;
     const [currentPage, setCurrentPage] = useState(1);
-    const items = getItemsForPages()
     const currentTableData = useMemo(() => {
         const firstPageIndex = (currentPage - 1) * PageSize;
         const lastPageIndex = firstPageIndex + PageSize;
