@@ -1,4 +1,5 @@
 import { usePagination, DOTS } from '../../../class/usePagination'
+//import classnames from 'classNames'
 
 export function Paginations(props){
 
@@ -31,15 +32,15 @@ export function Paginations(props){
 
       let lastPage = paginationRange[paginationRange.length - 1];
     return <div className="pagination">
-        
+        <button onClick={onPrevious} key="prev" className={currentPage === 1 ? "pages prev disabled" : "pages prev"}></button>
         {
         paginationRange.map(pageNumber =>{
             if (pageNumber === DOTS) {
-                return <button key={DOTS} className="pages">&#8230;</button>;
+                return <button key={DOTS} className="pages">{DOTS}</button>;
               }
 
             return <button key={pageNumber} className="pages" onClick={() => onPageChange(pageNumber)}>{pageNumber}</button>
          })}
-        
+        <button onClick={onNext} key="next" className={currentPage === lastPage ? "pages next disabled" : "pages next"} ></button>
     </div>
 }

@@ -22,13 +22,13 @@ $pdo->exec('SET FOREIGN_KEY_CHECKS = 1');
 $posts =[];
 $messages =[];
 
-for($i = 0; $i < 50; $i++){
-    $pdo->exec("INSERT INTO post SET name ='{$faker->sentence()}', slug='{$faker->slug}', created_at='{$faker->date} {$faker->time}', created_by='Cavernos', total_messages='{$faker->randomDigitNotNull}'");
+for($i = 0; $i < 1000; $i++){
+    $pdo->exec("INSERT INTO post SET name ='{$faker->sentence()}', slug='{$faker->slug}', created_at='{$faker->date} {$faker->time}', author = false, created_by='Cavernos', total_messages='{$faker->randomDigitNotNull}'");
     $posts[] = $pdo->lastInsertId();
 }
 
 for($i = 0; $i < 200; $i++){
-    $pdo->exec("INSERT INTO messages SET name ='{$faker->sentence()}', created_at='{$faker->date} {$faker->time}', created_by='Cavernos', author = false, content ='{$faker->paragraphs(rand(3, 15), true)}'");
+    $pdo->exec("INSERT INTO messages SET name ='{$faker->sentence()}', created_at='{$faker->date} {$faker->time}', created_by='Cavernos', content ='{$faker->paragraphs(rand(3, 15), true)}'");
     $messages[] = $pdo->lastInsertId();
 }
 

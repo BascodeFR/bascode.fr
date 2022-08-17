@@ -15,7 +15,7 @@ export function useFetchApi (url: RequestInfo, limit = 0){
     const [items, setItems]: [never[], Dispatch<SetStateAction<never[]>>] = useState([]);
     url = limit > 0 ? url.toString() + limit.toString() : url
     useEffect(() => {
-        fetch(url)
+        fetch(url,{method: 'GET'})
             .then(res => res.json())
             .then((items: SetStateAction<never[]>) => {
                 setIsLoaded(true)
@@ -49,7 +49,7 @@ export function getMessage(id: number): Message[] {
     return items
 }
 
-export function getItemsForPages(){
+export function getItemsForPages(): Article[]{
     const url = new UrlBuilder('http://localhost:8000', 'post').order("created_at", "desc").toUrl()
     const {items} = useFetchApi(url)
     return items

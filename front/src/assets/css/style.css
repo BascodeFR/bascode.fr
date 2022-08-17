@@ -334,6 +334,25 @@
   font-weight: bold;
   padding: 12px 0;
 }
+.pagination .pages.disabled {
+  pointer-events: none;
+}
+.pagination .next::after {
+  content: "";
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background: url("../svg/arrow.svg") center center/contain no-repeat;
+  transform: translateY(-12px) rotate(-90deg);
+}
+.pagination .prev::after {
+  content: "";
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background: url("../svg/arrow.svg") center center/contain no-repeat;
+  transform: translateY(-12px) rotate(90deg);
+}
 
 *, *::after, *::before {
   box-sizing: border-box;

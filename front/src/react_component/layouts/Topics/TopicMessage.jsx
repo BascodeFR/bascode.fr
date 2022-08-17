@@ -16,7 +16,7 @@ export function TopicMessage({limit}){
 
 
         return <> {items.map(item => (
-            <div className="messages-content">
+            <div key={item.id} className="messages-content">
             <h2>{item.created_by}</h2>
             <div className="user-info">
                 <img src="https://via.placeholder.com/55x55" alt="" />

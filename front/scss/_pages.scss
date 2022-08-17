@@ -18,5 +18,16 @@
         font-size: 12px;
         font-weight: bold;
         padding: 12px 0;
+        &.disabled{
+            pointer-events: none;
+        }
+    }
+    .next::after{
+        @include icon-loader("../svg/arrow.svg", 30px, 30px);
+        transform: translateY(-12px) rotate(-90deg);
+    }
+    .prev::after{
+        @include icon-loader("../svg/arrow.svg", 30px, 30px);
+        transform: translateY(-12px) rotate(90deg);
     }
 }
