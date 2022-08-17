@@ -19,10 +19,18 @@ Créer des composants react pour les différents éléments html
 Créer le css avec Sass
 
 
-
-Mettre en oeuvre la maquette en HTML CSS
-
 Cryptage des données avec bcrypt
+
+
+
+## Mise en Page Forum
+
+1. Pagination
+
+
+## Système de Compte
+
+1. Connexion et Inscription
 
 # Téchnologies Utilisée : 
 - React 
