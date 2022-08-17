@@ -60,6 +60,12 @@ ou
 
 ` npm run dev `
 
+
+## API
+
+` cd api/`
+` php -S localhost:8000 -t public`
+
 # Idée de mise à jour : 
 - intégration 3d avec Spline
 
