@@ -2,11 +2,16 @@ import React from 'react'
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {Login } from './Login';
+import {Register } from './Register';
 
-export function Header({connecte}){
-    const [isActive, setActive] = useState(false)
+export function Header(){
+    const [logIsActive, setLogActive] = useState(false)
     const toggleLogin = () =>{
-        setActive(!isActive)
+        setLogActive(!logIsActive)
+    }
+    const [regIsActive, setRegActive] = useState(false)
+    const Registertoggle = () =>{
+        setRegActive(!regIsActive)
     }
     let user = null
     if (sessionStorage.user != undefined){
@@ -25,11 +30,12 @@ export function Header({connecte}){
                 
                     <div className="connection">
                         <a onClick={toggleLogin} className="connect">Utilisateur existant ? Se connecter</a>
-                        <a href="#" className="btn">S'inscrire</a>
+                        <a onClick={Registertoggle} className="btn">S'inscrire</a>
                     </div>}
                     
                 </header>
                 
-                <Login opacity={isActive ? "1" : "0"}/></>);
+                <Login opacity={logIsActive ? "1" : "0"}/>
+                <Register opacity={regIsActive ? "1" : "0"}/></>);
         
 }

@@ -1,6 +1,6 @@
 import React from 'react'
-export function Register({display}){
-        return <div className={"register " + display}>
+export function Register({opacity}){
+        return <div className={opacity === "1" ? "register visible" : "register hidden disp"}>
             <div className="pane">
                 <header className="head"></header>
                 <h2>S'inscrire</h2>
