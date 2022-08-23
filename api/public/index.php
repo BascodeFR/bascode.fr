@@ -1,14 +1,15 @@
 <?php
+
+use cavernos\bascode_api\API\API;
+use cavernos\bascode_api\API\Post\PostModule;
+use GuzzleHttp\Psr7\ServerRequest;
+
+use function Http\Response\send;
+
 require __DIR__.'/../vendor/autoload.php';
 
-use cavernos\bascode_api\Router;
-
-
-$router = new Router(dirname(__DIR__). '/views');
-
-$router->get('/', '../index', 'home')
-        ->get('/post', 'post', 'posts')
-        ->get('/message', 'messages', 'messages')
-        ->post('/user', 'user', 'user')
-        ->run();
-
+$api = new API([
+    PostModule::class
+]);
+$response = $api->run(ServerRequest::fromGlobals());
+send($response);

@@ -66,6 +66,11 @@ ou
 ` cd api/`
 ` php -S localhost:8000 -t public`
 
+### Avant de Commit
+
+`  .\vendor\bin\phpcs`
+`  .\vendor\bin\phpcbf`
+` .\vendor\bin\phpunit`   
 # Idée de mise à jour : 
 - intégration 3d avec Spline
 

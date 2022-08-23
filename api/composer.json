@@ -1,15 +1,20 @@
 {
     "autoload": {
         "psr-4": {
-            "cavernos\\bascode_api\\": "src/"
+            "cavernos\\bascode_api\\": "src/",
+            "Tests\\": "tests/"
         }
     },
     "require": {
-        "altorouter/altorouter": "^2.0",
-        "fzaninotto/faker": "^1.9.2"
+        "fzaninotto/faker": "^1.9.2",
+        "guzzlehttp/guzzle": "7.0",
+        "zendframework/zend-expressive-fastroute": "1.2.0",
+        "http-interop/response-sender": "^1.0"
     },
     "require-dev": {
         "symfony/var-dumper": "^6.1",
-        "phpunit/phpunit": "^9"
+        "phpunit/phpunit": "^9",
+        "robmorgan/phinx": "^0.12.12",
+        "squizlabs/php_codesniffer": "^3.7"
     }
 }

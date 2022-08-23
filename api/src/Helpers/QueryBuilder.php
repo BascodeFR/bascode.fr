@@ -5,14 +5,15 @@ use PDO;
 
 /**
  * QueryBuilder est une classe qui permet de générer des requête SQL
- * 
+ *
  * @package cavernos\bascode_api\Helpers
  * @author Cavernos <louisdescavernes@gmail.com>
  * @version 1.0
  * @access private
- * 
+ *
  */
-class QueryBuilder {
+class QueryBuilder
+{
 
     
     /**
@@ -20,7 +21,7 @@ class QueryBuilder {
      *
      * @var string
      */
-    private $from;    
+    private $from;
     /**
      * order
      *
@@ -71,7 +72,8 @@ class QueryBuilder {
      * @param  string $alias
      * @return self
      */
-    public function from (string $table, string $alias = null) : self {
+    public function from(string $table, string $alias = null) : self
+    {
         $this->from = $alias === null ? $table : "$table $alias";
         return $this;
     }
@@ -83,15 +85,15 @@ class QueryBuilder {
      * @param  string $direction
      * @return self
      */
-    public function orderBy(string  $key, string $direction): self{
+    public function orderBy(string  $key, string $direction): self
+    {
         $direction =strtoupper($direction);
-        if (!in_array($direction, ['ASC', 'DESC'])){
+        if (!in_array($direction, ['ASC', 'DESC'])) {
             $this->order[] = $key;
-        } else{
+        } else {
             $this->order[] = "$key $direction";
         }
         return $this;
-        
     }
     
     /**
@@ -100,11 +102,11 @@ class QueryBuilder {
      * @param  int $limit
      * @return self
      */
-    public function limit( int $limit): self{
+    public function limit(int $limit): self
+    {
         $this->limit = $limit;
 
         return $this;
-
     }
 
     /**
@@ -113,7 +115,8 @@ class QueryBuilder {
      * @param  int $limit
      * @return self
      */
-    public function offset( int $offset): self{
+    public function offset(int $offset): self
+    {
         $this->offset = $offset;
         return $this;
     }
@@ -124,9 +127,9 @@ class QueryBuilder {
      * @param  int $page
      * @return self
      */
-    public function page( int $page): self{
+    public function page(int $page): self
+    {
         return $this->offset($this->limit * ($page - 1));
-
     }
     
     /**
@@ -135,10 +138,10 @@ class QueryBuilder {
      * @param  string $where
      * @return self
      */
-    public function where(string $where): self{
+    public function where(string $where): self
+    {
         $this->where = $where;
         return $this;
-
     }
     
     /**
@@ -148,10 +151,10 @@ class QueryBuilder {
      * @param  mixed $value
      * @return self
      */
-    public function setParam(string $key, $value): self{
+    public function setParam(string $key, $value): self
+    {
         $this->params[$key] = $value;
         return $this;
-
     }
     
     /**
@@ -160,11 +163,12 @@ class QueryBuilder {
      * @param  mixed $fields
      * @return self
      */
-    public function select(...$fields): self{
-        if(is_array($fields[0])){
+    public function select(...$fields): self
+    {
+        if (is_array($fields[0])) {
             $fields = $fields[0];
         }
-        if($this->fields === ["*"]){
+        if ($this->fields === ["*"]) {
             $this->fields = $fields;
         } else {
             $this->fields = array_merge($this->fields, $fields);
@@ -177,20 +181,21 @@ class QueryBuilder {
      *
      * @return string
      */
-    public function toSQL(): string{
+    public function toSQL(): string
+    {
         $fields = implode(', ', $this->fields);
         $sql = "SELECT $fields FROM {$this->from}";
-        if($this->where){
-            $sql .= " WHERE " .$this->where; 
+        if ($this->where) {
+            $sql .= " WHERE " .$this->where;
         }
-        if (!empty($this->order)){
+        if (!empty($this->order)) {
             $sql .= " ORDER BY " . implode(', ', $this->order);
         }
-        if($this->limit > 0){
-            $sql .= " LIMIT " .$this->limit; 
+        if ($this->limit > 0) {
+            $sql .= " LIMIT " .$this->limit;
         }
-        if($this->offset !== null){
-            $sql .= " OFFSET " .$this->offset; 
+        if ($this->offset !== null) {
+            $sql .= " OFFSET " .$this->offset;
         }
         return $sql;
     }
@@ -202,11 +207,12 @@ class QueryBuilder {
      * @param  string $field
      * @return ?string
      */
-    public function fetch(PDO $pdo, string $field): ?string{
+    public function fetch(PDO $pdo, string $field): ?string
+    {
         $query = $pdo->prepare($this->toSQL());
         $query->execute($this->params);
         $result = $query->fetch();
-        if($result === false){
+        if ($result === false) {
             return null;
         }
         return $result[$field] ?? null;
@@ -218,8 +224,10 @@ class QueryBuilder {
      * @param  PDO $pdo
      * @return int
      */
-    public function count(PDO $pdo): int{
+    public function count(PDO $pdo): int
+    {
         $query = clone $this;
-        return (int)$query->select('COUNT(id) count')->fetch($pdo, 'count');;
+        return (int)$query->select('COUNT(id) count')->fetch($pdo, 'count');
+        ;
     }
 }
