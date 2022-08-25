@@ -4,6 +4,7 @@ namespace cavernos\bascode_api\API;
 use cavernos\bascode_api\Framework\Router;
 use Exception;
 use GuzzleHttp\Psr7\Response;
+use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -12,11 +13,11 @@ class API
 
     
     /**
-     * router
+     * container
      *
-     * @var Router
+     * @var ContainerInterface
      */
-    private $router;
+    private $container;
     
     
     /**
@@ -25,12 +26,19 @@ class API
      * @var array
      */
     private $modules = [];
-    
-    public function __construct(array $modules = [])
+        
+    /**
+     * __construct
+     *
+     * @param  ContainerInterface $container
+     * @param  array $modules
+     * @return void
+     */
+    public function __construct(ContainerInterface $container, array $modules = [])
     {
-        $this->router = new Router();
+        $this->container = $container;
         foreach ($modules as $module) {
-            $this->modules[] = new $module($this->router);
+            $this->modules[] = $container->get($module);
         }
     }
     
@@ -43,7 +51,7 @@ class API
     public function run(ServerRequestInterface $request): ResponseInterface
     {
         $uri = $request->getUri()->getPath();
-        $route = $this->router->match($request);
+        $route = $this->container->get(Router::class)->match($request);
         if (is_null($route)) {
             $response = new Response(404, [], '<h1>Erreur 404</h1>');
             return $response;
@@ -53,9 +61,14 @@ class API
         $request = array_reduce(array_keys($params), function ($request, $key) use ($params) {
             return $request->withAttribute($key, $params[$key]);
         }, $request);
-        $response = call_user_func_array($route->getCallback(), [$request]);
+        $callback = $route->getCallback();
+        if (is_string($callback)) {
+            $callback = $this->container->get($callback);
+        }
+        $response = call_user_func_array($callback, [$request]);
         if (is_string($response)) {
-            return new Response(200, ['Content' => 'application/json'], $response);
+            # return new Response(200, ['Content' => 'application/json'], $response);
+            return new Response(200, [], $response);
         } elseif ($response instanceof ResponseInterface) {
             return $response;
         } else {

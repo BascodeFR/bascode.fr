@@ -9,6 +9,7 @@
         "fzaninotto/faker": "^1.9.2",
         "guzzlehttp/guzzle": "7.0",
         "zendframework/zend-expressive-fastroute": "1.2.0",
+        "php-di/php-di": "^6.4",
         "http-interop/response-sender": "^1.0"
     },
     "require-dev": {

@@ -11,7 +11,7 @@
 </head>
 <body>
     <h1>
-        Post 1
+        Post <?= $id ?> 
     </h1>
 </body>
 </html>

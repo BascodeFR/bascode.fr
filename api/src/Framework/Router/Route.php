@@ -33,8 +33,16 @@ class Route
      * @var string[]
      */
     protected $params;
-
-    public function __construct(string $name, callable $callback, array $params)
+    
+    /**
+     * __construct
+     *
+     * @param  string $name
+     * @param  callable|string $callback
+     * @param  array $params
+     * @return void
+     */
+    public function __construct(string $name, callable|string $callback, array $params)
     {
         
         $this->name = $name;
@@ -57,9 +65,9 @@ class Route
     /**
      * getCallback renvoie le callback de la route
      *
-     * @return callable
+     * @return callable|string
      */
-    public function getCallback(): callable
+    public function getCallback(): callable|string
     {
         return $this->callback;
     }

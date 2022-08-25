@@ -1,13 +1,18 @@
 <?php
 namespace cavernos\bascode_api\API\Post;
 
+use cavernos\bascode_api\API\Post\Actions\PostAction;
+use cavernos\bascode_api\Framework\Module;
 use cavernos\bascode_api\Framework\Renderer;
+use cavernos\bascode_api\Framework\Renderer\RendererInterface;
 use cavernos\bascode_api\Framework\Router;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-class PostModule
+class PostModule extends Module
 {
+
+    const DEFINITIONS = __DIR__ . '/config.php';
     
     /**
      * renderer
@@ -16,34 +21,12 @@ class PostModule
      */
     private $renderer;
 
-    public function __construct(Router $router)
+    public function __construct(string $prefix, Router $router, RendererInterface $renderer)
     {
-        $this->renderer = new Renderer();
+        $this->renderer = $renderer;
         $this->renderer->addPath('post', __DIR__ . '/views');
 
-        $router->get('/post', [$this, 'posts'], 'post.index');
-        $router->get('/post/{id}', [$this, 'post'], 'post.first');
-    }
-    
-    /**
-     * posts
-     *
-     * @param  ServerRequestInterface $request
-     * @return string
-     */
-    public function posts(ServerRequestInterface $request): string
-    {
-        return $this->renderer->render('@post/index');
-    }
-    
-    /**
-     * post
-     *
-     * @param  ServerRequestInterface $request
-     * @return string
-     */
-    public function post(ServerRequestInterface $request): string
-    {
-        return $this->renderer->render('@post/show', ['id' => $request->getAttribute('id')]);
+        $router->get($prefix, PostAction::class, 'post.index');
+        $router->get($prefix . '/{id}', PostAction::class, 'post.first');
     }
 }

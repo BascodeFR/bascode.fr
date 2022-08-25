@@ -1,3 +1,5 @@
 # PHP dep
 api/vendor
+api/.phpunit.result.cache
+api/config.php
 
