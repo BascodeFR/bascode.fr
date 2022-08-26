@@ -4,7 +4,7 @@ declare(strict_types=1);
 use Phinx\Db\Adapter\MysqlAdapter;
 use Phinx\Migration\AbstractMigration;
 
-final class MsgTable extends AbstractMigration
+final class CreateMsgTable extends AbstractMigration
 {
     /**
      * Change Method.
@@ -19,11 +19,12 @@ final class MsgTable extends AbstractMigration
      */
     public function change(): void
     {
-        $table = $this->table('messages');
-        $table->addColumn('name', 'string')
-            ->addColumn('content', 'text', ['limit' => MysqlAdapter::TEXT_LONG])
-            ->addColumn('created_by', 'string')
-            ->addColumn('created_at', 'datetime')
-            ->create();
+        $this->table('messages')
+        ->addColumn('name', 'string')
+        ->addColumn('content', 'text', ['limit' => MysqlAdapter::TEXT_LONG])
+        ->addColumn('created_by', 'string')
+        ->addColumn('created_at', 'datetime')
+        ->create();
+
     }
 }

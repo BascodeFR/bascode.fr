@@ -16,14 +16,17 @@ $modules = [
 $builder = new ContainerBuilder();
 $builder->addDefinitions(dirname(__DIR__) . '/config/config.php');
 $builder->addDefinitions(dirname(__DIR__) . '/config.php');
-foreach($modules as $module){
-    if($module::DEFINITIONS){
+foreach ($modules as $module) {
+    if ($module::DEFINITIONS) {
         $builder->addDefinitions($module::DEFINITIONS);
-
     }
 }
 $container = $builder->build();
 
 $api = new API($container, $modules);
-$response = $api->run(ServerRequest::fromGlobals());
-send($response);
+
+
+if (php_sapi_name() !== 'cli') {
+    $response = $api->run(ServerRequest::fromGlobals());
+    send($response);
+}

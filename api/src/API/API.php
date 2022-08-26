@@ -75,4 +75,14 @@ class API
             throw new Exception("La réponse est ni une string ni une instance de la ResponseInterface");
         }
     }
+    
+    /**
+     * getContainer
+     *
+     * @return ContainerInterface
+     */
+    public function getContainer(): ContainerInterface
+    {
+        return $this->container;
+    }
 }

@@ -1,41 +1,39 @@
 <?php
+include 'public/index.php';
+
+$migrations = [];
+$seeds = [];
+
+foreach ($modules as $module) {
+    if($module::MIGRATIONS){
+        $migrations[] = $module::MIGRATIONS;
+    }
+}
+
+foreach ($modules as $module) {
+    if($module::SEEDS){
+        $seeds[] = $module::SEEDS;
+    }
+}
 
 return
 [
     'paths' => [
-        'migrations' => '%%PHINX_CONFIG_DIR%%/db/migrations',
-        'seeds' => '%%PHINX_CONFIG_DIR%%/db/seeds'
+        'migrations' => $migrations,
+        'seeds' => $seeds
     ],
     'environments' => [
         'default_migration_table' => 'phinxlog',
         'default_environment' => 'development',
-        'production' => [
-            'adapter' => 'mysql',
-            'host' => 'localhost',
-            'name' => 'production_db',
-            'user' => 'root',
-            'pass' => '',
-            'port' => '3306',
-            'charset' => 'utf8',
-        ],
         'development' => [
             'adapter' => 'mysql',
-            'host' => '192.168.0.6',
-            'name' => 'Bascode',
-            'user' => 'bascode',
-            'pass' => 'ELECKBOINMAK',
+            'host' => $api->getContainer()->get('database.host'),
+            'name' => $api->getContainer()->get('database.name'),
+            'user' => $api->getContainer()->get('database.username'),
+            'pass' => $api->getContainer()->get('database.password'),
             'port' => '3306',
             'charset' => 'utf8',
         ],
-        'testing' => [
-            'adapter' => 'mysql',
-            'host' => 'localhost',
-            'name' => 'testing_db',
-            'user' => 'root',
-            'pass' => '',
-            'port' => '3306',
-            'charset' => 'utf8',
-        ]
     ],
     'version_order' => 'creation'
 ];
