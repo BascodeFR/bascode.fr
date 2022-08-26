@@ -1,0 +1,52 @@
+{% extends 'layout.twig' %}
+
+{% block title "Forum"%}
+
+{% block body %}
+<header class="topbar">
+        <div class="logo">
+            <a href="/"><img src="/img/bascode.png" alt=""/></a>
+        </div>
+        <div class="connection">
+            <a class="connect">Utilisateur existant ? Se connecter</a>
+            <a class="btn">S'inscrire</a>
+        </div>          
+</header>
+<nav class="topbar-nav">
+<div class="nav-content">
+    <a href="/forum" class="nav-items active">Forum</a>
+    <a href="/actu" class="nav-items">Actualités</a>
+    <a href="/tuto" class="nav-items">Tutoriels</a>
+    <a href="/minecraft" class="nav-items" >Minecraft</a>
+</div>
+<div class="research"></div>
+</nav>
+<main class="container">
+    <a href="/">Accueil ></a>
+    <a href="/forum">Forum</a>
+    <div class="cards forum"> 
+        <header class="cards-head">
+            Forum
+        </header>
+    {% for post in posts %}
+        <div class="topics">
+            <div class="topics-create-info">
+                <a href={{path('post.show', {slug: post.slug, id: post.id})}} class="topics-name">{{ post.name }}</a>
+                <p>Crée par {{ post.created_by }}</p>
+                <p>Commencé le {{ post.created_at }}</p>
+            </div>
+            <div class="topics-last-info">
+                <div class="total-posts">{{ post.total_messages }} <br />Posts</div>
+                <div class="last-post">
+                    <div class="last-post-text">
+                        Dernier Post :
+                    </div>
+                    <img src="https://via.placeholder.com/55x55" alt="" />
+                    <p>Cavernos</p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+</main>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'layout.twig' %}
+
+{% block title post.name %}
+
+
+{% block body %}
+<header class="topbar">
+        <div class="logo">
+            <a href="/"><img src="/img/bascode.png" alt=""/></a>
+        </div>
+        <div class="connection">
+            <a class="connect">Utilisateur existant ? Se connecter</a>
+            <a class="btn">S'inscrire</a>
+        </div>          
+</header>
+<nav class="topbar-nav">
+<div class="nav-content">
+    <a href="/forum" class="nav-items active">Forum</a>
+    <a href="/actu" class="nav-items active">Actualités</a>
+    <a href="/tuto" class="nav-items active">Tutoriels</a>
+    <a href="/minecraft" class="nav-items active" >Minecraft</a>
+</div>
+<div class="research"></div>
+</nav>
+<main class="container">
+    <a href="/">Accueil ></a>
+    <a href="/forum">Forum ></a>
+    <a href="/forum">{{post.name}}</a>
+    <div class="cards topic-message"> 
+        <header class="cards-head">
+            {{post.name}}
+        </header>
+        <div class="messages-content">
+            <h2>{{post.created_by}}</h2>
+            <div class="user-info">
+                <img src="https://via.placeholder.com/55x55" alt="" />
+                <p>Admin</p>
+            </div>
+            <div class="msg-head"><p>Posté le {{post.created_at}}</p><div class="author"><p>Auteur</p></div></div>
+            <div class="content">{{post.name}} | nl2br</div>
+        </div>
+    </div>
+</main>
+{% endblock %}

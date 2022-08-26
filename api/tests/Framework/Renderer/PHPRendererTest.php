@@ -2,6 +2,7 @@
 namespace Tests\Framework;
 
 use cavernos\bascode_api\Framework\Renderer;
+use cavernos\bascode_api\Framework\Renderer\PHPRenderer;
 use PHPUnit\Framework\TestCase;
 
 class RendererTest extends TestCase {
@@ -9,14 +10,14 @@ class RendererTest extends TestCase {
     /**
      * renderer
      *
-     * @var Renderer
+     * @var PHPRenderer
      */
     private $renderer;
 
 
     protected function setUp(): void
     {
-        $this->renderer = new Renderer(); 
+        $this->renderer = new PHPRenderer(); 
         $this->renderer->addPath( __DIR__ . '/views');
     }
 

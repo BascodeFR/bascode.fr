@@ -6,6 +6,6 @@ use function DI\autowire;
 use function DI\get;
 
 return [
-    'post.prefix' => '/post',
+    'post.prefix' => '/forum',
     PostModule::class => autowire()->constructorParameter('prefix', get('post.prefix'))
 ];

@@ -3,10 +3,12 @@
 use cavernos\bascode_api\Framework\Renderer\RendererInterface;
 use cavernos\bascode_api\Framework\RendererFactory;
 use cavernos\bascode_api\Framework\Router;
+use cavernos\bascode_api\Framework\Router\RouterTwigExtension;
 use Psr\Container\ContainerInterface;
 
 use function DI\create;
 use function DI\factory;
+use function DI\get;
 
 return[
     'database.host' => '192.168.0.6',
@@ -16,6 +18,9 @@ return[
 
 
     'view.path' => dirname(__DIR__) . '/views',
+    'twig.extensions' => [
+        get(RouterTwigExtension::class)
+    ],
     Router::class => create(),
     RendererInterface::class => factory(RendererFactory::class),
     PDO::class => function (ContainerInterface $c){

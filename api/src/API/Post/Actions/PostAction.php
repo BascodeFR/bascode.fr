@@ -2,8 +2,11 @@
 namespace cavernos\bascode_api\API\Post\Actions;
 
 use cavernos\bascode_api\API\Post\Table\PostTable;
+use cavernos\bascode_api\Framework\Actions\RouterAwareAction;
 use cavernos\bascode_api\Framework\Renderer\RendererInterface;
+use cavernos\bascode_api\Framework\Router;
 use PDO;
+use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 class PostAction
@@ -22,9 +25,19 @@ class PostAction
      * @var PostTable
      */
     private $postTable;
+    
+    /**
+     * router
+     *
+     * @var Router
+     */
+    private $router;
 
-    public function __construct(RendererInterface $renderer, PostTable $postTable)
+    use RouterAwareAction;
+
+    public function __construct(RendererInterface $renderer, PostTable $postTable, Router $router)
     {
+        $this->router = $router;
         $this->renderer = $renderer;
         $this->postTable = $postTable;
     }
@@ -32,9 +45,9 @@ class PostAction
     public function __invoke(ServerRequestInterface $request)
     {
         if ($request->getAttribute('id')) {
-            return $this->post($request);
+            return $this->show($request);
         }
-        return $this->posts();
+        return $this->index($request);
     }
 
     /**
@@ -42,22 +55,27 @@ class PostAction
      *
      * @return string
      */
-    public function posts(): string
+    public function index(ServerRequestInterface $request): string
     {
-        $posts = $this->postTable->findPaginated();
+        $params = $request->getQueryParams();
+        $posts = $this->postTable->findPaginated(10, $params['p'] ?? 1);
 
         return $this->renderer->render('@post/index', compact('posts'));
     }
     
     /**
-     * post
+     * show
      *
      * @param  ServerRequestInterface $request
      * @return string
      */
-    public function post(ServerRequestInterface $request): string
+    public function show(ServerRequestInterface $request): string
     {
+        $slug = $request->getAttribute('slug');
+
         $post = $this->postTable->find($request->getAttribute('id'));
+        if ($post->slug !== $slug) {
+        }
         return $this->renderer->render('@post/show', compact('post'));
     }
 }

@@ -1,9 +1,9 @@
 <?php
-namespace cavernos\bascode_api\Framework;
+namespace cavernos\bascode_api\Framework\Renderer;
 
 use cavernos\bascode_api\Framework\Renderer\RendererInterface;
 
-class Renderer implements RendererInterface
+class PHPRenderer implements RendererInterface
 {
 
 

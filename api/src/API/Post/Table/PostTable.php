@@ -1,6 +1,8 @@
 <?php
 namespace cavernos\bascode_api\API\Post\Table;
 
+use cavernos\bascode_api\Framework\Database\PaginatedQuery;
+use Pagerfanta\Pagerfanta;
 use PDO;
 use stdClass;
 
@@ -18,17 +20,23 @@ class PostTable
     {
         $this->pdo = $pdo;
     }
-    
+       
     /**
      * findPaginated Pagine les articles
      *
-     * @return stdClass[]
+     * @param  int $perPage
+     * @return Pagerfanta
      */
-    public function findPaginated(): array
+    public function findPaginated(int $perPage, int $currentPage): Pagerfanta
     {
-        return $this->pdo
-                ->query("SELECT * FROM posts ORDER BY created_at DESC LIMIT 10")
-                ->fetchAll();
+        $query = new PaginatedQuery(
+            $this->pdo,
+            'SELECT * FROM posts',
+            'SELECT COUNT(id) FROM posts'
+        );
+        return (new Pagerfanta($query))
+        ->setMaxPerPage($perPage)
+        ->setCurrentPage($currentPage);
     }
     
     /**

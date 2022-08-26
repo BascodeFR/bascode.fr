@@ -1,6 +1,7 @@
 <?php
 
 use cavernos\bascode_api\API\API;
+use cavernos\bascode_api\API\Home\HomeModule;
 use cavernos\bascode_api\API\Post\PostModule;
 use \DI\ContainerBuilder;
 use GuzzleHttp\Psr7\ServerRequest;
@@ -10,6 +11,7 @@ use function Http\Response\send;
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 $modules = [
+    HomeModule::class,
     PostModule::class
 ];
 
