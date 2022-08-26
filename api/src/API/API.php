@@ -67,8 +67,8 @@ class API
         }
         $response = call_user_func_array($callback, [$request]);
         if (is_string($response)) {
-            # return new Response(200, ['Content' => 'application/json'], $response);
-            return new Response(200, [], $response);
+            return new Response(200, ['Content-Type' => 'application/json'], $response);
+            # return new Response(200, [], $response);
         } elseif ($response instanceof ResponseInterface) {
             return $response;
         } else {

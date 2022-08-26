@@ -1,7 +1,9 @@
 <?php
 namespace cavernos\bascode_api\API\Post\Actions;
 
+use cavernos\bascode_api\API\Post\Table\PostTable;
 use cavernos\bascode_api\Framework\Renderer\RendererInterface;
+use PDO;
 use Psr\Http\Message\ServerRequestInterface;
 
 class PostAction
@@ -14,16 +16,23 @@ class PostAction
      */
     private $renderer;
 
-    public function __construct(RendererInterface $renderer)
+    /**
+     * postTable
+     *
+     * @var PostTable
+     */
+    private $postTable;
+
+    public function __construct(RendererInterface $renderer, PostTable $postTable)
     {
         $this->renderer = $renderer;
+        $this->postTable = $postTable;
     }
 
     public function __invoke(ServerRequestInterface $request)
     {
-        $id  = $request->getAttribute('id');
-        if ($id) {
-            return $this->post($id);
+        if ($request->getAttribute('id')) {
+            return $this->post($request);
         }
         return $this->posts();
     }
@@ -35,7 +44,9 @@ class PostAction
      */
     public function posts(): string
     {
-        return $this->renderer->render('@post/index');
+        $posts = $this->postTable->findPaginated();
+
+        return $this->renderer->render('@post/index', compact('posts'));
     }
     
     /**
@@ -44,9 +55,9 @@ class PostAction
      * @param  ServerRequestInterface $request
      * @return string
      */
-    public function post(string $id): string
+    public function post(ServerRequestInterface $request): string
     {
-        $this->renderer->addGlobal('id', $id);
-        return $this->renderer->render('@post/show', ['id' => $id]);
+        $post = $this->postTable->find($request->getAttribute('id'));
+        return $this->renderer->render('@post/show', compact('post'));
     }
 }
