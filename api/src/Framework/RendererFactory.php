@@ -27,6 +27,6 @@ class RendererFactory
             }
         }
         
-        return new TwigRenderer($loader, $twig);
+        return new TwigRenderer($twig);
     }
 }
