@@ -1,0 +1,30 @@
+{% extends '@admin/layout.twig' %}
+
+{% block title "Edition du Topic #{item.id}" %}
+
+{% block body %}
+<main class="container">
+    <a class="container-link" href="/">Accueil ></a>
+    <a class="container-link" href="/forum">Forum ></a>
+     <a class="container-link" href="/admin">Administration</a>
+    <div class="cards forum"> 
+        <header class="cards-head">
+            Edition du Topic {{item.name}}
+        </header>
+        <form class="topic-edit" action="{{ path('admin.forum.edit', {id: item.id}) }}" method="post">
+            {% include "@forum/admin/form.twig" %}
+            <div class="messages-content">
+            <h2>{{item.created_by}}</h2>
+            <div class="user-info">
+                <img src="https://via.placeholder.com/55x55" alt="" />
+                <p>Admin</p>
+            </div>
+            <div class="msg-head"><p>Posté le {{item.created_at | ago}}</p><div class="admin-message"><a class="btn">Editer</a> <a class="btn btn-danger">Supprimer</a></div></div>
+            <div class="content">{{item.name | nl2br }}</div>
+        </div>
+            <button class="btn"> Editer</button>
+        </form>
+        
+
+</main>
+{% endblock %}

@@ -13,7 +13,7 @@ final class CreatePostsTable extends AbstractMigration
             ->addColumn('created_by', 'string')
             ->addColumn('created_at', 'datetime')
             ->addColumn('updated_at', 'datetime')
-            ->addColumn('total_messages', 'integer')
+            ->addColumn('total_messages', 'integer', ['default' => 0])
             ->create();
     }
 }

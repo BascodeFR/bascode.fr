@@ -1,0 +1,35 @@
+{% extends '@admin/layout.twig' %}
+
+{% block title "Edition des Articles"%}
+
+{% block body %}
+<main class="container">
+    <a class="container-link" href="/">Accueil ></a>
+    <a class="container-link" href="/forum">Forum ></a>
+     <a class="container-link" href="/admin/posts">Administration</a>
+    <div class="cards forum"> 
+        <header class="cards-head">
+            Administration du Forum
+        </header>
+    {% for item in items %}
+        <div class="topics">
+            <div class="topics-create-info">
+                <a href={{path('forum.show', {slug: item.slug, id: item.id})}} class="topics-name">{{ item.name }}</a>
+                <p>Crée par {{ item.created_by }}</p>
+                <p>Commencé le {{ item.created_at.format('d/m/Y')}} à {{ item.created_at.format('H:i')}}</p>
+            </div>
+            <div class="topics-last-info">
+                <a href="{{ path('admin.forum.edit', {id: item.id})}}" class="btn">Editer le Post</a>
+                <form action="{{path('admin.forum.delete', {id: item.id })}}" method="POST">
+                    <input type="hidden" name="_METHOD" value="DELETE"/>
+                    <button class="btn btn-danger">Supprimer</button>
+                </form>
+            </div>
+        </div>
+    {% endfor %}
+    {{ paginate(items, 'admin.forum.index')}}
+    
+    <p class="text-center"><a href="{{ path('admin.forum.create') }}" class="btn" > Créer un Topic</a></p>
+    </div>
+</main>
+{% endblock %}

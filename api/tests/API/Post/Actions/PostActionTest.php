@@ -1,23 +1,21 @@
 <?php
 namespace Tests\API\Post\Actions;
 
-use cavernos\bascode_api\API\Post\Actions\PostAction;
-use cavernos\bascode_api\API\Post\Entity\Post;
-use cavernos\bascode_api\API\Post\Table\PostTable;
+use cavernos\bascode_api\API\Forum\Actions\ForumAction;
+use cavernos\bascode_api\API\Forum\Entity\Post;
+use cavernos\bascode_api\API\Forum\Table\PostTable;
 use cavernos\bascode_api\Framework\Renderer\RendererInterface;
 use cavernos\bascode_api\Framework\Router;
 use GuzzleHttp\Psr7\ServerRequest;
 use PHPUnit\Framework\TestCase;
-use Prophecy\Argument;
 use Prophecy\Prophet;
-use stdClass;
 
-class PostActionTest extends TestCase{
+class ForumActionTest extends TestCase{
         
     /**
      * action
      *
-     * @var PostAction
+     * @var ForumAction
      */
     private $action;
     private $prophet;
@@ -33,7 +31,7 @@ class PostActionTest extends TestCase{
 
         $this->postTable = $this->prophet->prophesize(PostTable::class);
         $this->router = $this->prophet->prophesize(Router::class);
-        $this->action = new PostAction($this->renderer->reveal(), $this->postTable->reveal(), $this->router->reveal());
+        $this->action = new ForumAction($this->renderer->reveal(), $this->postTable->reveal(), $this->router->reveal());
          
     }
 
@@ -47,7 +45,7 @@ class PostActionTest extends TestCase{
 
     public function testShowRedirect(){
         $post = $this->makePost(9, 'gqgqqsdgqg-vqsdg');
-        $this->router->generateUri('post.show', ['id' =>  $post->id, 'slug' =>  $post->slug])->willReturn('/demo2');
+        $this->router->generateUri('forum.show', ['id' =>  $post->id, 'slug' =>  $post->slug])->willReturn('/demo2');
         $this->postTable->find($post->id)->willReturn($post);
         $request = (new ServerRequest('GET', '/'))->withAttribute('id', $post->id)->withAttribute('slug', 'demo');
         $response = call_user_func_array($this->action, [$request]);
@@ -61,7 +59,7 @@ class PostActionTest extends TestCase{
 
 
         $request = (new ServerRequest('GET', '/'))->withAttribute('id', $post->id)->withAttribute('slug', $post->slug);
-        $this->renderer->render('@post/index', ['post' => $post])->willReturn('');
+        $this->renderer->render('@forum/index', ['post' => $post])->willReturn('');
         $response = call_user_func_array($this->action, [$request]);
         $this->assertEquals('true', 'true');
     }

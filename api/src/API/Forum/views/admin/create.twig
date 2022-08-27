@@ -1,0 +1,21 @@
+{% extends '@admin/layout.twig' %}
+
+{% block title "Ajout d'un Topic" %}
+
+{% block body %}
+<main class="container">
+    <a class="container-link" href="/">Accueil ></a>
+    <a class="container-link" href="/forum">Forum ></a>
+     <a class="container-link" href="/admin">Administration</a>
+    <div class="cards forum"> 
+        <header class="cards-head">
+            Ajout d'un Topic
+        </header>
+        <form class="topic-edit" action="{{ path('admin.forum.create') }}" method="post">
+            {% include "@forum/admin/form.twig" %}
+            <button class="btn"> Ajouter</button>
+        </form>
+        
+
+</main>
+{% endblock %}

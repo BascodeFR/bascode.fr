@@ -1,7 +1,7 @@
 <?php
 namespace cavernos\bascode_api\API\Home\Actions;
 
-use cavernos\bascode_api\API\Post\Table\PostTable;
+use cavernos\bascode_api\API\Forum\Table\PostTable;
 use cavernos\bascode_api\Framework\Renderer\RendererInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

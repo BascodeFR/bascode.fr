@@ -51,6 +51,10 @@ class API
     public function run(ServerRequestInterface $request): ResponseInterface
     {
         $uri = $request->getUri()->getPath();
+        $parsedBody = $request->getParsedBody();
+        if (array_key_exists('_METHOD', $parsedBody) && in_array($parsedBody["_METHOD"], ['DELETE', 'PUT'])) {
+            $request = $request->withMethod($parsedBody["_METHOD"]);
+        }
         if (!empty($uri) && $uri[-1] === '/' && $uri !== '/') {
             return (new Response())
                     ->withStatus(301)

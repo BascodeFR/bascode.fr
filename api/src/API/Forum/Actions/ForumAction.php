@@ -1,15 +1,13 @@
 <?php
-namespace cavernos\bascode_api\API\Post\Actions;
+namespace cavernos\bascode_api\API\Forum\Actions;
 
-use cavernos\bascode_api\API\Post\Table\PostTable;
+use cavernos\bascode_api\API\Forum\Table\PostTable;
 use cavernos\bascode_api\Framework\Actions\RouterAwareAction;
 use cavernos\bascode_api\Framework\Renderer\RendererInterface;
 use cavernos\bascode_api\Framework\Router;
-use PDO;
-use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-class PostAction
+class ForumAction
 {
     
     /**
@@ -60,7 +58,7 @@ class PostAction
         $params = $request->getQueryParams();
         $posts = $this->postTable->findPaginated(10, $params['p'] ?? 1);
 
-        return $this->renderer->render('@post/index', compact('posts'));
+        return $this->renderer->render('@forum/index', compact('posts'));
     }
     
     /**
@@ -76,6 +74,6 @@ class PostAction
         $post = $this->postTable->find($request->getAttribute('id'));
         if ($post->slug !== $slug) {
         }
-        return $this->renderer->render('@post/show', compact('post'));
+        return $this->renderer->render('@forum/show', compact('post'));
     }
 }

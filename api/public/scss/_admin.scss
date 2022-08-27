@@ -1,0 +1,33 @@
+.admin-message {
+    margin-right: 10px;
+    margin-top: 20px;
+    display: inline-flex;
+    gap: 10px;
+}
+
+.topic-edit {
+    .btn {
+        margin: 10px auto;
+        display: block;
+    }
+}
+
+.fields.admin {
+    margin: auto;
+    width: 500px;
+    label{
+        color:  black;
+        line-height: 35px;
+        font-size: 15px;
+        font-weight: bold;
+    }
+    input{
+        font-size: 20px;
+    }
+    border-bottom: 1px solid $header-color;
+    
+}
+
+.text-center {
+    text-align: center;
+}

@@ -8,6 +8,7 @@
 @import 'login.scss';
 @import 'register.scss';
 @import 'pages.scss';
+@import 'admin.scss';
 
 *, *::after, *::before{
     box-sizing: border-box;
@@ -159,6 +160,9 @@ body{
         .topics-last-info{
             display: flex;
             justify-content: space-between;
+            .btn {
+                margin: 17px 5px;
+            }
             .total-posts{
                 width: 70px;
                 height: 68px;

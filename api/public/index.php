@@ -1,8 +1,9 @@
 <?php
 
+use cavernos\bascode_api\API\Admin\AdminModule;
 use cavernos\bascode_api\API\API;
+use cavernos\bascode_api\API\Forum\ForumModule;
 use cavernos\bascode_api\API\Home\HomeModule;
-use cavernos\bascode_api\API\Post\PostModule;
 use \DI\ContainerBuilder;
 use GuzzleHttp\Psr7\ServerRequest;
 
@@ -12,7 +13,8 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 $modules = [
     HomeModule::class,
-    PostModule::class
+    AdminModule::class,
+    ForumModule::class
 ];
 
 $builder = new ContainerBuilder();

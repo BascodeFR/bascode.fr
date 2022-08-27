@@ -1,5 +1,5 @@
 <?php
-namespace cavernos\bascode_api\API\Post\Entity;
+namespace cavernos\bascode_api\API\Forum\Entity;
 
 use DateTime;
 

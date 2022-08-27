@@ -2,6 +2,7 @@
     display: inline-block;
     text-align: center;
     width: auto;
+    border: 0;
     line-height: 35px;
     background: $green-color;
     border-radius: 10px;
@@ -13,4 +14,7 @@
     color: white;
     font-weight: bold;
     text-decoration: none;
+}
+.btn-danger{
+    background-color: rgb(218, 42, 42);
 }
