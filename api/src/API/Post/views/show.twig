@@ -23,9 +23,9 @@
 <div class="research"></div>
 </nav>
 <main class="container">
-    <a href="/">Accueil ></a>
-    <a href="/forum">Forum ></a>
-    <a href="/forum">{{post.name}}</a>
+    <a  class="container-link" href="/">Accueil ></a>
+    <a class="container-link" href="/forum">Forum ></a>
+    <a  class="container-link" href={{path('post.show', {slug: post.slug, id: post.id})}}>{{post.name}}</a>
     <div class="cards topic-message"> 
         <header class="cards-head">
             {{post.name}}
@@ -36,8 +36,8 @@
                 <img src="https://via.placeholder.com/55x55" alt="" />
                 <p>Admin</p>
             </div>
-            <div class="msg-head"><p>Posté le {{post.created_at}}</p><div class="author"><p>Auteur</p></div></div>
-            <div class="content">{{post.name}} | nl2br</div>
+            <div class="msg-head"><p>Posté le {{post.created_at | ago}}</p><div class="author"><p>Auteur</p></div></div>
+            <div class="content">{{post.name | nl2br }}</div>
         </div>
     </div>
 </main>

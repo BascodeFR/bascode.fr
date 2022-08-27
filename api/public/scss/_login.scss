@@ -1,0 +1,61 @@
+.login-pane{
+    position: relative;
+    z-index: 300;
+    margin: -25px 131px -257px auto;
+    width: 272px;
+    height: 282px;
+    .pane{
+        background-color: #928F8F;
+        border-radius: 10px;
+        width: 272px;
+        height: 100%;
+        form{
+            height: calc(100% - 36px);
+        }
+        h2{
+            margin: 0 14px;
+            padding-top: 12px;
+            font-weight: bolder;
+            font-size: 15px;
+            line-height: 24px;
+        }
+        .fields{
+            input{
+                font-size: 13px;
+                color: rgba(white, 75%);
+            }
+            label{
+                font-size: 13px;
+                line-height: 20px;
+            }
+        }
+        .btn{
+            margin: 30px 70px;
+            border: 0;
+            cursor: pointer;
+        }
+    }
+    .head{
+        position: absolute;
+        @include icon-loader("../svg/triangle.svg", 60px, 60px);
+        top: -35px;
+        left: 106px;
+    }  
+}
+.hidden{
+    animation: fadeOut .5s;
+    display: none;
+}
+.visible {
+    animation: fadeIn .5s;
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+      to { opacity: 1; }
+}
+@keyframes fadeOut {
+    from { opacity: 1; }
+      to { opacity: 0; }
+}

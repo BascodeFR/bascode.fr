@@ -22,8 +22,8 @@
 <div class="research"></div>
 </nav>
 <main class="container">
-    <a href="/">Accueil ></a>
-    <a href="/forum">Forum</a>
+    <a class="container-link" href="/">Accueil ></a>
+    <a class="container-link" href="/forum">Forum</a>
     <div class="cards forum"> 
         <header class="cards-head">
             Forum
@@ -33,7 +33,7 @@
             <div class="topics-create-info">
                 <a href={{path('post.show', {slug: post.slug, id: post.id})}} class="topics-name">{{ post.name }}</a>
                 <p>Crée par {{ post.created_by }}</p>
-                <p>Commencé le {{ post.created_at }}</p>
+                <p>Commencé {{ post.created_at | ago }}</p>
             </div>
             <div class="topics-last-info">
                 <div class="total-posts">{{ post.total_messages }} <br />Posts</div>
@@ -47,6 +47,7 @@
             </div>
         </div>
     {% endfor %}
+    {{ paginate(posts, 'post.index')}}
     </div>
 </main>
 {% endblock %}

@@ -22,7 +22,6 @@ class PostSeeder extends AbstractSeed
             $data[] =[
             'name' => $faker->catchPhrase,
             'slug' => $faker->slug,
-            'author' => 0,
             'created_at' => date('Y-m-d H:i:s', $date),
             'created_by' => 'admin',
             'updated_at' => date('Y-m-d H:i:s', $date),

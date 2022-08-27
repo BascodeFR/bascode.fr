@@ -10,7 +10,6 @@ final class CreatePostsTable extends AbstractMigration
         $this->table('posts')
             ->addColumn('name', 'string')
             ->addColumn('slug', 'string')
-            ->addColumn('author', 'boolean')
             ->addColumn('created_by', 'string')
             ->addColumn('created_at', 'datetime')
             ->addColumn('updated_at', 'datetime')

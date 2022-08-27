@@ -359,6 +359,7 @@ nav{
 .pagination .pages {
   border: 0;
   cursor: pointer;
+  text-decoration: none;
   outline: 0;
   background-color: #6C6C6C;
   width: 30px;
@@ -370,9 +371,16 @@ nav{
   font-size: 12px;
   font-weight: bold;
   padding: 12px 0;
+  transition: transform 0.5s;
 }
 .pagination .pages.disabled {
   pointer-events: none;
+}
+.pagination .pages.active {
+  transform: scale(1.25, 1.25);
+}
+.pagination .pages:hover {
+  transform: scale(1.25, 1.25);
 }
 .pagination .next::after {
   content: "";
@@ -516,12 +524,12 @@ body {
   max-width: 1400px;
   margin: 6px auto;
 }
-.container a {
+.container .container-link {
   text-decoration: none;
   color: black;
   transition: color 0.3s;
 }
-.container a:hover {
+.container .container-link:hover {
   color: #333333;
 }
 .container .last-topics {

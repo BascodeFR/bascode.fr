@@ -61,6 +61,13 @@ class RouterTest extends TestCase {
         $this->assertEquals('/post/article-18', $uri);
     }
 
+    public function testGenerateURIWithQueryParams(){
+        $this->router->get('/post', function (){ return 'hdf';},'posts');
+        $this->router->get('/post/{slug:[a-z0-9\-]+}-{id:\d+}', function (){ return 'hello';},'post.show');
+        $uri = $this->router->generateUri('post.show', ['slug' => 'article', 'id' => 18], ['p'=> 2]);
+        $this->assertEquals('/post/article-18?p=2', $uri);
+    }
+
     
 
 }

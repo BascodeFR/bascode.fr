@@ -2,6 +2,7 @@
 namespace Tests\API\Post\Actions;
 
 use cavernos\bascode_api\API\Post\Actions\PostAction;
+use cavernos\bascode_api\API\Post\Entity\Post;
 use cavernos\bascode_api\API\Post\Table\PostTable;
 use cavernos\bascode_api\Framework\Renderer\RendererInterface;
 use cavernos\bascode_api\Framework\Router;
@@ -36,8 +37,8 @@ class PostActionTest extends TestCase{
          
     }
 
-    public function makePost(int $id, string $slug): stdClass{
-        $post = new stdClass();
+    public function makePost(int $id, string $slug): Post{
+        $post = new Post();
         $post->id = $id;
         $post->slug = $slug;
         return $post;
