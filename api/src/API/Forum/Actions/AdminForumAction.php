@@ -8,6 +8,7 @@ use cavernos\bascode_api\Framework\Renderer\RendererInterface;
 use cavernos\bascode_api\Framework\Router;
 use cavernos\bascode_api\Framework\Session\FlashService;
 use cavernos\bascode_api\Framework\Session\SessionInterface;
+use cavernos\bascode_api\Framework\Validator;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -95,11 +96,19 @@ class AdminForumAction
         if ($request->getMethod() === 'POST') {
             $params = $this->getParams($request);
             $params['updated_at'] = date('Y-m-d H:i:s');
-            $this->postTable->update($item->id, $params);
-            $this->flash->success('Le topic a bien été modifié');
-            return $this->redirect('admin.forum.index');
+           
+            $validator = $this->getValidator($request);
+            if (!empty($validator->isValid())) {
+                $this->postTable->update($item->id, $params);
+                $this->flash->success('Le topic a bien été modifié');
+                return $this->redirect('admin.forum.index');
+            }
+            $item->slug = $params['slug'];
+            $item->name = $params['name'];
+            $item->created_by = $params['created_by'];
+            $errors = $validator->getErrors();
         }
-        return $this->renderer->render('@forum/admin/edit', compact('item'));
+        return $this->renderer->render('@forum/admin/edit', compact('item', 'errors'));
     }
     
     /**
@@ -114,14 +123,21 @@ class AdminForumAction
             $params = $this->getParams($request);
             $params = array_merge($params, [
                 'updated_at' => date('Y-m-d H:i:s'),
-                'created_at' => date('Y-m-d H:i:s')
+                'created_at' => date('Y-m-d H:i:s'),
+                'total_messages' => 1,
             ]);
-            $this->postTable->insert($params);
-            $this->flash->success('Le Topic a bien été créé');
-            return $this->redirect('admin.forum.index');
+            
+            $validator = $this->getValidator($request);
+            if (!empty($validator->isValid())) {
+                $this->postTable->insert($params);
+                $this->flash->success('Le Topic a bien été créé');
+                return $this->redirect('admin.forum.index');
+            }
+            $item = $params;
+            $errors = $validator->getErrors();
         }
 
-        return $this->renderer->render('@forum/admin/create', compact('item'));
+        return $this->renderer->render('@forum/admin/create', compact('item', 'errors'));
     }
     
     /**
@@ -147,5 +163,14 @@ class AdminForumAction
         return array_filter($request->getParsedBody(), function ($key) {
             return in_array($key, ['name', 'slug', 'created_by']);
         }, ARRAY_FILTER_USE_KEY);
+    }
+
+    private function getValidator(ServerRequestInterface $request)
+    {
+        return (new Validator($request->getParsedBody()))
+            ->required('name', 'slug')
+            ->length('name', 2, 250)
+            ->length('name', 2, 50)
+            ->slug('slug');
     }
 }

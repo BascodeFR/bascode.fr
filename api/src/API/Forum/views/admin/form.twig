@@ -1,13 +1,14 @@
 
     <div class="fields admin">
-        <input type="text" name="name" id="name" value="{{ item.name }}"required/>
+        <input type="text" name="name" id="name" value="{{ item.name }}" />
         <label for="name">Nom du Topic</label>
     </div>
+    {{dump(errors)}}
             <div class="fields admin">
-                        <input type="text" name="slug" id="slug" value="{{ item.slug }}" required/>
+                        <input type="text" name="slug" id="slug" value="{{ item.name | lower | replace({' ': '-',  'á':'a',  'à':'a', 'é':'e', 'í':'i', 'ó':'o', 'ú':'u'})}}" />
                         <label for="slug">Slug du Topic</label>
             </div>
             <div class="fields admin">
-                        <input type="text" name="created_by" id="created_by" value="{{ item.created_by }}" required/>
+                        <input type="text" name="created_by" id="created_by" value="{{ item.created_by }}"  />
                         <label for="created_by">Autheur du Topic</label>
             </div>

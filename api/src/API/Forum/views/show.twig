@@ -7,7 +7,7 @@
 <main class="container">
     <a  class="container-link" href="/">Accueil ></a>
     <a class="container-link" href="/forum">Forum ></a>
-    <a  class="container-link" href={{path('post.show', {slug: post.slug, id: post.id})}}>{{post.name}}</a>
+    <a  class="container-link" href={{path('forum.show', {slug: post.slug, id: post.id})}}>{{post.name}}</a>
     <div class="cards topic-message"> 
         <header class="cards-head">
             {{post.name}}
