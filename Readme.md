@@ -70,7 +70,16 @@ ou
 
 `  .\vendor\bin\phpcs`
 `  .\vendor\bin\phpcbf`
-` .\vendor\bin\phpunit`   
+` .\vendor\bin\phpunit`  
+
+Tips pour les logs git
+` git log --all --decorate --oneline --graph `
+
+### pour le contenu des actualités
+
+
+{{ content | nl2br | excerpt}}
+
 # Idée de mise à jour : 
 - intégration 3d avec Spline
 
