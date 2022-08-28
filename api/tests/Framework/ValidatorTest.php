@@ -46,9 +46,11 @@ class ValidatorTest extends TestCase
     public function testSlugIfSuccess(){
 
         $errors = $this->makeValidator([
-            'slug' => 'joe-ios34'
+            'slug' => 'joe-ios34',
+            'slug2' => 'joe'
         ])
             ->slug('slug')
+            ->slug('slug2')
             ->getErrors();
         $this->assertCount(0, $errors);
     }
@@ -58,14 +60,15 @@ class ValidatorTest extends TestCase
         $errors = $this->makeValidator([
             'slug' => 'joe-Ios34',
             'slug2' => 'joe-i_os34',
-            'slug3' => 'joe--ios34'
+            'slug3' => 'joe--ios34',
+            'slug4' => 'joe-ios34-'
         ])
             ->slug('slug')
             ->slug('slug2')
             ->slug('slug3')
             ->slug('slug4')
             ->getErrors();
-        $this->assertCount(3, $errors);
+        $this->assertCount(4, $errors);
     }
 
     public function testLength(){

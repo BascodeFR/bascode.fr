@@ -7,6 +7,7 @@ use cavernos\bascode_api\Framework\Router\RouterTwigExtension;
 use cavernos\bascode_api\Framework\Session\PHPSession;
 use cavernos\bascode_api\Framework\Session\SessionInterface;
 use cavernos\bascode_api\Framework\Twig\FlashExtension;
+use cavernos\bascode_api\Framework\Twig\FormExtension;
 use cavernos\bascode_api\Framework\Twig\PagerFantaExtension;
 use cavernos\bascode_api\Framework\Twig\TextExtension;
 use cavernos\bascode_api\Framework\Twig\TimeExtension;
@@ -30,7 +31,8 @@ return[
         get(PagerFantaExtension::class),
         get(TextExtension::class),
         get(TimeExtension::class),
-        get(FlashExtension::class)
+        get(FlashExtension::class),
+        get(FormExtension::class)
     ],
     SessionInterface::class => autowire(PHPSession::class),
     Router::class => create(),

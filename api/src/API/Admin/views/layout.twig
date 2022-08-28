@@ -24,7 +24,7 @@
     <a href="/actu" class="nav-items">Actualités</a>
     <a href="/tuto" class="nav-items">Tutoriels</a>
     <a href="/minecraft" class="nav-items" >Minecraft</a>
-    <a href="/admin/posts" class="nav-items" >Administration</a>
+    <a href="{{ path('admin.forum.index')}}" class="nav-items" >Administration</a>
 </div>
 <div class="research"></div>
 </nav>
@@ -46,4 +46,17 @@
             <a href="#" class ="discord"></a>
         </div>
 </footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.js"></script>
+<script src="https://npmcdn.com/flatpickr/dist/l10n/fr.js"></script>
+<script>
+
+    flatpickr('.datepicker', {
+        enableTime: true,
+        altInput: true,
+        altFormat: 'j F Y, H:i',
+        dateFormat: 'Y-m-d H:i:S',
+        locale: "fr"
+    })
+
+</script>
 </html>

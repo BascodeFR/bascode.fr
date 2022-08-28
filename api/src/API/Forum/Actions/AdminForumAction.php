@@ -2,6 +2,7 @@
 
 namespace cavernos\bascode_api\API\Forum\Actions;
 
+use cavernos\bascode_api\API\Forum\Entity\Post;
 use cavernos\bascode_api\API\Forum\Table\PostTable;
 use cavernos\bascode_api\Framework\Actions\RouterAwareAction;
 use cavernos\bascode_api\Framework\Renderer\RendererInterface;
@@ -9,6 +10,7 @@ use cavernos\bascode_api\Framework\Router;
 use cavernos\bascode_api\Framework\Session\FlashService;
 use cavernos\bascode_api\Framework\Session\SessionInterface;
 use cavernos\bascode_api\Framework\Validator;
+use DateTime;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -92,7 +94,6 @@ class AdminForumAction
     public function edit(ServerRequestInterface $request): mixed
     {
         $item = $this->postTable->find($request->getAttribute('id'));
-
         if ($request->getMethod() === 'POST') {
             $params = $this->getParams($request);
             $params['updated_at'] = date('Y-m-d H:i:s');
@@ -121,12 +122,6 @@ class AdminForumAction
     {
         if ($request->getMethod() === 'POST') {
             $params = $this->getParams($request);
-            $params = array_merge($params, [
-                'updated_at' => date('Y-m-d H:i:s'),
-                'created_at' => date('Y-m-d H:i:s'),
-                'total_messages' => 1,
-            ]);
-            
             $validator = $this->getValidator($request);
             if (!empty($validator->isValid())) {
                 $this->postTable->insert($params);
@@ -136,6 +131,8 @@ class AdminForumAction
             $item = $params;
             $errors = $validator->getErrors();
         }
+        $item = new Post();
+        $item->created_at = new DateTime();
 
         return $this->renderer->render('@forum/admin/create', compact('item', 'errors'));
     }
@@ -160,17 +157,26 @@ class AdminForumAction
      */
     private function getParams(ServerRequestInterface $request): array
     {
-        return array_filter($request->getParsedBody(), function ($key) {
-            return in_array($key, ['name', 'slug', 'created_by']);
+        $params = array_filter($request->getParsedBody(), function ($key) {
+            return in_array($key, ['name', 'slug', 'created_by', 'created_at']);
         }, ARRAY_FILTER_USE_KEY);
+        return array_merge($params, [
+            'updated_at' => date('Y-m-d H:i:s'),
+            'slug' => str_replace(
+                [' ' ,  'á' ,  'à', 'é', 'í', 'ó', 'ú'],
+                ['-', 'a', 'a', 'e', 'i', 'o', 'u'],
+                strtolower($params['name'])
+            ),
+            'total_messages' => 1,
+        ]);
     }
 
     private function getValidator(ServerRequestInterface $request)
     {
         return (new Validator($request->getParsedBody()))
-            ->required('name', 'slug')
+            ->required('name', 'created_by', 'created_at')
             ->length('name', 2, 250)
-            ->length('name', 2, 50)
-            ->slug('slug');
+            ->length('created_by', 2, 250)
+            ->datetime('created_at');
     }
 }

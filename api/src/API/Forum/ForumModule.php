@@ -31,7 +31,7 @@ class ForumModule extends Module
 
         if ($container->has('admin.prefix')) {
             $prefix = $container->get('admin.prefix');
-            $router->crud("$prefix/posts", AdminForumAction::class, 'admin.forum');
+            $router->crud("$prefix/forum", AdminForumAction::class, 'admin.forum');
         }
     }
 }

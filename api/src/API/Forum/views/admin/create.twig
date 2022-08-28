@@ -6,7 +6,8 @@
 <main class="container">
     <a class="container-link" href="/">Accueil ></a>
     <a class="container-link" href="/forum">Forum ></a>
-     <a class="container-link" href="/admin">Administration</a>
+     <a class="container-link" href="{{ path('admin.forum.index')}}">Administration ></a>
+     <a class="container-link" href="{{ path('admin.forum.create')}}">Nouveau Topic</a>
     <div class="cards forum"> 
         <header class="cards-head">
             Ajout d'un Topic
