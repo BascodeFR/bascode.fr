@@ -6,6 +6,8 @@ use cavernos\bascode_api\API\Forum\Table\PostTable;
 use cavernos\bascode_api\Framework\Actions\RouterAwareAction;
 use cavernos\bascode_api\Framework\Renderer\RendererInterface;
 use cavernos\bascode_api\Framework\Router;
+use cavernos\bascode_api\Framework\Session\FlashService;
+use cavernos\bascode_api\Framework\Session\SessionInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -32,11 +34,23 @@ class AdminForumAction
      * @var Router
      */
     private $router;
+    
+    /**
+     * session
+     *
+     * @var FlashService
+     */
+    private $flash;
 
     use RouterAwareAction;
 
-    public function __construct(RendererInterface $renderer, PostTable $postTable, Router $router)
-    {
+    public function __construct(
+        RendererInterface $renderer,
+        PostTable $postTable,
+        Router $router,
+        FlashService $flash
+    ) {
+        $this->flash = $flash;
         $this->router = $router;
         $this->renderer = $renderer;
         $this->postTable = $postTable;
@@ -65,7 +79,6 @@ class AdminForumAction
     {
         $params = $request->getQueryParams();
         $items = $this->postTable->findPaginated(10, $params['p'] ?? 1);
-
         return $this->renderer->render('@forum/admin/index', compact('items'));
     }
     
@@ -83,6 +96,7 @@ class AdminForumAction
             $params = $this->getParams($request);
             $params['updated_at'] = date('Y-m-d H:i:s');
             $this->postTable->update($item->id, $params);
+            $this->flash->success('Le topic a bien été modifié');
             return $this->redirect('admin.forum.index');
         }
         return $this->renderer->render('@forum/admin/edit', compact('item'));
@@ -103,6 +117,7 @@ class AdminForumAction
                 'created_at' => date('Y-m-d H:i:s')
             ]);
             $this->postTable->insert($params);
+            $this->flash->success('Le Topic a bien été créé');
             return $this->redirect('admin.forum.index');
         }
 

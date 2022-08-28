@@ -4,10 +4,15 @@ use cavernos\bascode_api\Framework\Renderer\RendererInterface;
 use cavernos\bascode_api\Framework\RendererFactory;
 use cavernos\bascode_api\Framework\Router;
 use cavernos\bascode_api\Framework\Router\RouterTwigExtension;
+use cavernos\bascode_api\Framework\Session\PHPSession;
+use cavernos\bascode_api\Framework\Session\SessionInterface;
+use cavernos\bascode_api\Framework\Twig\FlashExtension;
 use cavernos\bascode_api\Framework\Twig\PagerFantaExtension;
 use cavernos\bascode_api\Framework\Twig\TextExtension;
 use cavernos\bascode_api\Framework\Twig\TimeExtension;
 use Psr\Container\ContainerInterface;
+
+use function DI\autowire;
 use function DI\create;
 use function DI\factory;
 use function DI\get;
@@ -24,8 +29,10 @@ return[
         get(RouterTwigExtension::class),
         get(PagerFantaExtension::class),
         get(TextExtension::class),
-        get(TimeExtension::class)
+        get(TimeExtension::class),
+        get(FlashExtension::class)
     ],
+    SessionInterface::class => autowire(PHPSession::class),
     Router::class => create(),
     RendererInterface::class => factory(RendererFactory::class),
     PDO::class => function (ContainerInterface $c){
