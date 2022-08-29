@@ -18,7 +18,7 @@
                 <img src="https://via.placeholder.com/55x55" alt="" />
                 <p>Admin</p>
             </div>
-            <div class="msg-head"><p>Posté le {{post.created_at | ago}}</p><div class="author"><p>Auteur</p></div></div>
+            <div class="msg-head"><p>Posté {{post.created_at | ago}}</p><div class="author"><p>Auteur</p></div></div>
             <div class="content">{{post.name | nl2br }}</div>
         </div>
     </div>

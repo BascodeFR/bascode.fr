@@ -1,10 +1,10 @@
 <?php
 namespace cavernos\bascode_api\API\Forum;
 
-use cavernos\bascode_api\API\Forum\Actions\AdminForumAction;
 use cavernos\bascode_api\API\Forum\Actions\ForumAction;
+use cavernos\bascode_api\API\Forum\Actions\MessagesCrudAction;
+use cavernos\bascode_api\API\Forum\Actions\PostCrudAction;
 use cavernos\bascode_api\Framework\Module;
-use cavernos\bascode_api\Framework\Renderer;
 use cavernos\bascode_api\Framework\Renderer\RendererInterface;
 use cavernos\bascode_api\Framework\Router;
 use Psr\Container\ContainerInterface;
@@ -31,7 +31,8 @@ class ForumModule extends Module
 
         if ($container->has('admin.prefix')) {
             $prefix = $container->get('admin.prefix');
-            $router->crud("$prefix/forum", AdminForumAction::class, 'admin.forum');
+            $router->crud("$prefix/forum", PostCrudAction::class, 'admin.forum');
+            $router->crud("$prefix/forum/messages", MessagesCrudAction::class, 'admin.forum.messages');
         }
     }
 }

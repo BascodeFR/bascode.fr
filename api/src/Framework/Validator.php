@@ -2,8 +2,10 @@
 
 namespace cavernos\bascode_api\Framework;
 
+use cavernos\bascode_api\Framework\Database\Table;
 use cavernos\bascode_api\Framework\Validator\ValidationError;
 use DateTime;
+use PDO;
 
 class Validator
 {
@@ -119,6 +121,26 @@ class Validator
         };
         
         
+        return $this;
+    }
+
+      /**
+     * exists
+     *
+     * @param string $key
+     * @param  int $id
+     * @param  Table $table
+     * @return self
+     */
+    public function exists(string $key, string $table, PDO $pdo): self
+    {
+        $value = $this->getValue($key);
+        $statement = $pdo->prepare("SELECT id FROM $table WHERE id = ?");
+        $statement->execute([$value]);
+        if ($statement->fetchColumn() === false) {
+            $this->addError($key, 'exists', [$table]);
+            return $this;
+        };
         return $this;
     }
 

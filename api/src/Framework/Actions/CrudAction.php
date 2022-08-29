@@ -1,20 +1,17 @@
 <?php
 
-namespace cavernos\bascode_api\API\Forum\Actions;
+namespace cavernos\bascode_api\Framework\Actions;
 
-use cavernos\bascode_api\API\Forum\Entity\Post;
-use cavernos\bascode_api\API\Forum\Table\PostTable;
-use cavernos\bascode_api\Framework\Actions\RouterAwareAction;
+use cavernos\bascode_api\Framework\Database\Table;
 use cavernos\bascode_api\Framework\Renderer\RendererInterface;
 use cavernos\bascode_api\Framework\Router;
 use cavernos\bascode_api\Framework\Session\FlashService;
-use cavernos\bascode_api\Framework\Session\SessionInterface;
 use cavernos\bascode_api\Framework\Validator;
 use DateTime;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-class AdminForumAction
+class CrudAction
 {
     
     /**
@@ -25,11 +22,11 @@ class AdminForumAction
     private $renderer;
 
     /**
-     * postTable
+     * table
      *
-     * @var PostTable
+     * @var Table
      */
-    private $postTable;
+    private $table;
     
     /**
      * router
@@ -44,23 +41,49 @@ class AdminForumAction
      * @var FlashService
      */
     private $flash;
+    
+    /**
+     * viewPath
+     *
+     * @var string
+     */
+    protected $viewPath;
+    
+    /**
+     * routePrefix
+     *
+     * @var string
+     */
+    protected $routePrefix;
+    
+    /**
+     * flashMessages
+     *
+     * @var array
+     */
+    protected $flashMessages = [
+        'create' => "L'élément a bien été créé",
+        'edit' => "L'élément a bien été modifé"
+    ];
 
     use RouterAwareAction;
 
     public function __construct(
         RendererInterface $renderer,
-        PostTable $postTable,
+        Table $table,
         Router $router,
         FlashService $flash
     ) {
         $this->flash = $flash;
         $this->router = $router;
         $this->renderer = $renderer;
-        $this->postTable = $postTable;
+        $this->table = $table;
     }
 
     public function __invoke(ServerRequestInterface $request)
     {
+        $this->renderer->addGlobal('viewPath', $this->viewPath);
+        $this->renderer->addGlobal('routePrefix', $this->routePrefix);
         if ($request->getMethod() === 'DELETE') {
             return $this->delete($request);
         }
@@ -81,8 +104,8 @@ class AdminForumAction
     public function index(ServerRequestInterface $request): string
     {
         $params = $request->getQueryParams();
-        $items = $this->postTable->findPaginated(10, $params['p'] ?? 1);
-        return $this->renderer->render('@forum/admin/index', compact('items'));
+        $items = $this->table->findPaginated(10, $params['p'] ?? 1);
+        return $this->renderer->render("$this->viewPath/index", compact('items'));
     }
     
     /**
@@ -93,23 +116,25 @@ class AdminForumAction
      */
     public function edit(ServerRequestInterface $request): mixed
     {
-        $item = $this->postTable->find($request->getAttribute('id'));
+        $item = $this->table->find($request->getAttribute('id'));
         if ($request->getMethod() === 'POST') {
             $params = $this->getParams($request);
             $params['updated_at'] = date('Y-m-d H:i:s');
            
             $validator = $this->getValidator($request);
             if (!empty($validator->isValid())) {
-                $this->postTable->update($item->id, $params);
-                $this->flash->success('Le topic a bien été modifié');
-                return $this->redirect('admin.forum.index');
+                $this->table->update($item->id, $params);
+                $this->flash->success($this->flashMessages['edit']);
+                return $this->redirect($this->routePrefix . '.index');
             }
             $item->slug = $params['slug'];
             $item->name = $params['name'];
             $item->created_by = $params['created_by'];
             $errors = $validator->getErrors();
         }
-        return $this->renderer->render('@forum/admin/edit', compact('item', 'errors'));
+        $params = $this->formParams(compact('item', 'errors'));
+
+        return $this->renderer->render("$this->viewPath/edit", $params);
     }
     
     /**
@@ -120,21 +145,22 @@ class AdminForumAction
      */
     public function create(ServerRequestInterface $request): mixed
     {
+        $errors = null;
+        $item = $this->getNewEntity();
         if ($request->getMethod() === 'POST') {
             $params = $this->getParams($request);
             $validator = $this->getValidator($request);
             if (!empty($validator->isValid())) {
-                $this->postTable->insert($params);
-                $this->flash->success('Le Topic a bien été créé');
-                return $this->redirect('admin.forum.index');
+                $this->table->insert($params);
+                $this->flash->success($this->flashMessages['create']);
+                return $this->redirect($this->routePrefix . '.index');
             }
             $item = $params;
             $errors = $validator->getErrors();
         }
-        $item = new Post();
-        $item->created_at = new DateTime();
+        $params = $this->formParams(compact('item', 'errors'));
 
-        return $this->renderer->render('@forum/admin/create', compact('item', 'errors'));
+        return $this->renderer->render("$this->viewPath/create", $params);
     }
     
     /**
@@ -145,8 +171,8 @@ class AdminForumAction
      */
     public function delete(ServerRequestInterface $request): ResponseInterface
     {
-        $this->postTable->delete($request->getAttribute('id'));
-        return $this->redirect('admin.forum.index');
+        $this->table->delete($request->getAttribute('id'));
+        return $this->redirect($this->routePrefix . '.index');
     }
     
     /**
@@ -155,28 +181,31 @@ class AdminForumAction
      * @param  mixed $request
      * @return array
      */
-    private function getParams(ServerRequestInterface $request): array
+    protected function getParams(ServerRequestInterface $request): array
     {
-        $params = array_filter($request->getParsedBody(), function ($key) {
-            return in_array($key, ['name', 'slug', 'created_by', 'created_at']);
+        return array_filter($request->getParsedBody(), function ($key) {
+            return in_array($key, []);
         }, ARRAY_FILTER_USE_KEY);
-        return array_merge($params, [
-            'updated_at' => date('Y-m-d H:i:s'),
-            'slug' => str_replace(
-                [' ' ,  'á' ,  'à', 'é', 'í', 'ó', 'ú'],
-                ['-', 'a', 'a', 'e', 'i', 'o', 'u'],
-                strtolower($params['name'])
-            ),
-            'total_messages' => 1,
-        ]);
     }
 
-    private function getValidator(ServerRequestInterface $request)
+    protected function getValidator(ServerRequestInterface $request): Validator
     {
-        return (new Validator($request->getParsedBody()))
-            ->required('name', 'created_by', 'created_at')
-            ->length('name', 2, 250)
-            ->length('created_by', 2, 250)
-            ->datetime('created_at');
+        return new Validator($request->getParsedBody());
+    }
+
+    protected function getNewEntity()
+    {
+        return [];
+    }
+    
+    /**
+     * formParams
+     *
+     * @param  array $params
+     * @return array
+     */
+    protected function formParams(array $params): array
+    {
+        return $params;
     }
 }

@@ -75,6 +75,22 @@ class FormExtensionTest extends TestCase  {
             <input type=\"text\" class=\"demo\" name=\"name\" id=\"name\" value=\"demo\" />
         </div>", $html);
     }
+
+    public function testSelect() {
+        $html = $this->formExtension->field([], 
+        'name', 
+         2, 
+        'titre',
+        ['options' => [1 => 'Demo', '2' => 'Demo2']]);
+
+        $this->assertSimilar('<div class="fields admin">
+        <label for="name">titre</label>
+        <select class="" name="name" id="name" />
+        <option value="1">Demo</option>
+        <option value="2" selected>Demo2</option>
+        </select>
+    </div>', $html);
+    }
     
 
   

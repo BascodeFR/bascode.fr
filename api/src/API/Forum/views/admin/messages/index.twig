@@ -1,0 +1,36 @@
+{% extends '@admin/layout.twig' %}
+
+{% block title "Edition des Messages"%}
+
+{% block body %}
+<main class="container">
+    <a class="container-link" href="/">Accueil ></a>
+    <a class="container-link" href="/forum">Forum ></a>
+     <a class="container-link" href="{{ path(routePrefix ~ '.index')}}">Administration</a>
+    <div class="cards forum"> 
+        <header class="cards-head">
+            Administration du Forum
+        </header>
+    {% for item in items %}
+       <div class="messages-content">
+            <h2>{{item.created_by}}</h2>
+            <div class="user-info">
+                <img src="https://via.placeholder.com/55x55" alt="" />
+                <p>Admin</p>
+            </div>
+            <div class="msg-head"><p>Posté {{item.created_at | ago}}</p><div class="admin-message"><a  href="{{ path(routePrefix ~ '.edit', {id: item.id}) }}" class="btn">Editer</a> 
+                 <form action="{{path(routePrefix ~ '.delete', {id: item.id })}}" method="POST">
+                    <input type="hidden" name="_METHOD" value="DELETE"/>
+                    <button class="btn btn-danger">Supprimer</button>
+                </form>
+                </div>
+            </div>
+            <div class="content">{{item.content | nl2br}}</div>
+        </div>
+    {% endfor %}
+    {{ paginate(items, routePrefix ~ '.index')}}
+    
+    <p class="text-center"><a href="{{ path(routePrefix ~ '.create') }}" class="btn" > Créer un Message</a></p>
+    </div>
+</main>
+{% endblock %}

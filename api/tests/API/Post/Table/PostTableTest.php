@@ -16,14 +16,15 @@ class PostTableTest extends DatabaseTestCase {
 
     public function setUp(): void
     {
-        parent::setUp();
-        $this->postTable = new PostTable($this->pdo);
+        $pdo = $this->getPdo();
+        $this->migrateDb($pdo);
+        $this->postTable = new PostTable($pdo);
         
     }
     
 
     public function testFind() {
-        $this->seedDb();
+        $this->seedDb($this->postTable->getPdo());
         
         $post = $this->postTable->find(1);
         $this->assertInstanceOf(Post::class, $post);
@@ -36,7 +37,7 @@ class PostTableTest extends DatabaseTestCase {
     }
 
     public function testUpdate(){
-        $this->seedDb();
+        $this->seedDb($this->postTable->getPdo());
         $this->postTable->update(1, ['name' => 'Salut', 'slug' => 'demo']);
         $post = $this->postTable->find(1);
         $this->assertInstanceOf(Post::class, $post);
@@ -54,10 +55,10 @@ class PostTableTest extends DatabaseTestCase {
     public function testDelete(){
         $this->postTable->insert(['name' => 'Salut', 'slug' => 'demo', 'created_by' => 'afkgku', 'created_at' => "2015-06-05 10:20",'updated_at' => "2015-06-05 10:20"]);
         $this->postTable->insert(['name' => 'Salut', 'slug' => 'demo', 'created_by' => 'afkgku', 'created_at' => "2015-06-05 10:20",'updated_at' => "2015-06-05 10:20"]);
-        $count = $this->pdo->query('SELECT COUNT(id) FROM posts')->fetchColumn();
+        $count =  $this->postTable->getPdo()->query('SELECT COUNT(id) FROM posts')->fetchColumn();
         $this->assertEquals(2, (int)$count);
-        $this->postTable->delete($this->pdo->lastInsertId());
-        $count = $this->pdo->query('SELECT COUNT(id) FROM posts')->fetchColumn();
+        $this->postTable->delete($this->postTable->getPdo()->lastInsertId());
+        $count = $this->postTable->getPdo()->query('SELECT COUNT(id) FROM posts')->fetchColumn();
         $this->assertEquals(1, (int)$count);
 
     }

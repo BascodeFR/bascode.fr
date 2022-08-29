@@ -5,8 +5,9 @@ namespace Tests\Framework;
 
 use cavernos\bascode_api\Framework\Validator;
 use PHPUnit\Framework\TestCase;
+use Tests\DatabaseTestCase;
 
-class ValidatorTest extends TestCase 
+class ValidatorTest extends DatabaseTestCase 
 {
 
     private function makeValidator(array $params) {
@@ -92,6 +93,16 @@ class ValidatorTest extends TestCase
         $this->assertCount(0, $this->makeValidator(['date' => '2012-12-12 00:00:00'])->dateTime('date')->getErrors());
         $this->assertCount(1, $this->makeValidator(['date' => '2012-21-12'])->dateTime('date')->getErrors());
         $this->assertCount(1, $this->makeValidator(['date' => '2013-02-29 11:12:13'])->dateTime('date')->getErrors());
+    }
+
+    public function testExists() {
+        $pdo = $this->getPdo();
+        $pdo->exec('CREATE TABLE test (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(255))');
+        $pdo->exec('INSERT INTO test (name) VALUES ("a1")');
+        $pdo->exec('INSERT INTO test (name) VALUES ("a2")');
+        $this->assertTrue($this->makeValidator(['category' => 1])->exists('category', 'test', $pdo)->isValid());
+        $this->assertFalse($this->makeValidator(['category' => 14242])->exists('category', 'test', $pdo)->isValid());
+
     }
     
 }
