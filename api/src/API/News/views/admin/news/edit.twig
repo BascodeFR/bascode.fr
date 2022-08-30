@@ -1,0 +1,23 @@
+{% extends '@admin/layout.twig' %}
+
+{% block title "Edition du Topic #{item.id}" %}
+
+{% block body %}
+<main class="container">
+    <a class="container-link" href="/">Accueil ></a>
+    <a class="container-link" href="/forum">Forum ></a>
+     <a class="container-link" href="{{ path(routePrefix ~ '.index')}}">Administration ></a>
+     <a class="container-link" href="{{ path(routePrefix ~ '.edit', {id: item.id})}}">Edition du topic {{item.name}}</a>
+    <div class="cards forum"> 
+        <header class="cards-head">
+            Edition du Topic {{item.name}}
+        </header>
+        <form class="topic-edit" action="{{ path(routePrefix ~ '.edit', {id: item.id}) }}" method="post">
+            {% include viewPath ~ "/form.twig" %}
+            <button class="btn"> Editer</button>
+        </form>
+    </div>
+        
+
+</main>
+{% endblock %}

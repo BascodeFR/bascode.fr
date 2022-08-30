@@ -12,7 +12,8 @@
         "php-di/php-di": "^6.4",
         "http-interop/response-sender": "^1.0",
         "pagerfanta/pagerfanta": "^3.6",
-        "twig/twig": "^3.4"
+        "twig/twig": "^3.4",
+        "michelf/php-markdown": "^1.9"
     },
     "require-dev": {
         "symfony/var-dumper": "^6.1",

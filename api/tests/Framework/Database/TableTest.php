@@ -51,4 +51,13 @@ class TableTest extends TestCase {
         $test = $this->table->findList();
         $this->assertEquals(['1' => 'a1', '2' => "a2"], $test);
     }
+
+    public function testCount() {
+
+        $this->table->getPdo()->exec('INSERT INTO test (name) VALUES ("a1")');
+        $this->table->getPdo()->exec('INSERT INTO test (name) VALUES ("a2")');
+        $this->table->getPdo()->exec('INSERT INTO test (name) VALUES ("a3")');
+        $test = $this->table->count();
+        $this->assertEquals(3, $test);
+    }
 }

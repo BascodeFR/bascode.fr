@@ -46,8 +46,12 @@ class PagerFantaExtension extends AbstractExtension
      * @param  array $queryArgs
      * @return string
      */
-    public function paginate(Pagerfanta $paginatedResults, string $route, array $queryArgs = []): string
-    {
+    public function paginate(
+        Pagerfanta $paginatedResults,
+        string $route,
+        array $routerOptions = [],
+        array $queryArgs = []
+    ): string {
         $view = new DefaultView();
         $options = array('css_disabled_class' => 'disabled',
         'container_template' => '<div class="%s">%%pages%%</div>',
@@ -61,11 +65,11 @@ class PagerFantaExtension extends AbstractExtension
         'css_dots_class' => 'pages',
         'dots_message' => '...',
         'css_active_class' => 'active');
-        return $view->render($paginatedResults, function (int $page) use ($route, $queryArgs) {
+        return $view->render($paginatedResults, function (int $page) use ($route, $queryArgs, $routerOptions) {
             if ($page > 1) {
                 $queryArgs['p'] = $page;
             }
-            return $this->router->generateUri($route, [], $queryArgs);
+            return $this->router->generateUri($route, $routerOptions, $queryArgs);
         }, $options);
     }
 }

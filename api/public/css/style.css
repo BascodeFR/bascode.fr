@@ -63,7 +63,7 @@
 
 .messages-content {
   display: grid;
-  grid-template-columns: 90px 1280px;
+  grid-template-columns: 100px 1280px;
   grid-template-rows: 23px 100%;
   background-color: #6c6c6c;
   width: 1370px;
@@ -423,13 +423,12 @@ nav{
   padding-top: 2rem;
   padding: 0.25rem 0;
   margin: 0 12px 0 2px;
-  resize: none;
   background-color: transparent;
   border: solid 1px #6C6C6C;
   color: #6C6C6C;
   font-size: 19px;
   line-height: 24px;
-  height: 55px;
+  height: 500px;
 }
 .fields.admin textarea:focus, .fields.admin textarea:not(:placeholder-shown) {
   border-bottom: 1px solid #6C6C6C;
@@ -1402,6 +1401,24 @@ span.flatpickr-weekday {
     transform: translate3d(0, 0, 0);
   }
 }
+.news.content {
+  padding: 10px 20px;
+  font-weight: bold;
+}
+
+.cards.last-actu.index {
+  padding-bottom: 10px;
+}
+
+p code {
+  color: white;
+  padding: 0.2em 0.4em;
+  margin: 10px;
+  font-size: 85%;
+  background-color: rgba(158, 167, 178, 0.4);
+  border-radius: 6px;
+}
+
 *, *::after, *::before {
   box-sizing: border-box;
 }
@@ -1615,37 +1632,39 @@ body {
   background-color: #D9D9D9;
 }
 .container .cards .cards-head {
-  height: 42px;
+  height: auto;
   background-color: #51d677;
   border-radius: 10px 10px 0 0;
   color: white;
   font-size: 19px;
   font-weight: bold;
-  padding-top: 8px;
-  padding-left: 20px;
+  padding: 8px 20px;
 }
 .container .last-actu {
-  height: 240px;
+  height: auto;
 }
 .container .last-actu .actus {
   position: relative;
   display: flex;
 }
 .container .last-actu .actus .actu-items {
+  display: flex;
+  flex-direction: column;
   border-right: solid 1px black;
-  width: 140px;
-  height: 198px;
-  padding-top: 13px;
+  width: auto;
+  height: auto;
+  justify-content: center;
+  padding: 16.5px;
   background-color: #6C6C6C;
   text-align: center;
 }
 .container .last-actu .actus .actu-items .actu-name {
   display: inline-block;
-  width: 106px;
   line-height: 23px;
   font-weight: bold;
   font-size: 13px;
   color: white;
+  margin: 0;
   text-decoration: none;
   transition: text-shadow 0.3s;
 }

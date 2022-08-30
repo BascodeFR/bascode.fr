@@ -1,13 +1,14 @@
 <?php
-namespace cavernos\bascode_api\API\Forum\Actions;
+namespace cavernos\bascode_api\API\News\Actions;
 
-use cavernos\bascode_api\API\Forum\Table\PostTable;
+use cavernos\bascode_api\API\News\Table\NewsTable;
 use cavernos\bascode_api\Framework\Actions\RouterAwareAction;
 use cavernos\bascode_api\Framework\Renderer\RendererInterface;
 use cavernos\bascode_api\Framework\Router;
+use Michelf\Markdown;
 use Psr\Http\Message\ServerRequestInterface;
 
-class ForumAction
+class NewsAction
 {
     
     /**
@@ -18,11 +19,11 @@ class ForumAction
     private $renderer;
 
     /**
-     * postTable
+     * newsTable
      *
-     * @var PostTable
+     * @var NewsTable
      */
-    private $postTable;
+    private $newsTable;
     
     /**
      * router
@@ -33,11 +34,11 @@ class ForumAction
 
     use RouterAwareAction;
 
-    public function __construct(RendererInterface $renderer, PostTable $postTable, Router $router)
+    public function __construct(RendererInterface $renderer, NewsTable $newsTable, Router $router)
     {
         $this->router = $router;
         $this->renderer = $renderer;
-        $this->postTable = $postTable;
+        $this->newsTable = $newsTable;
     }
 
     public function __invoke(ServerRequestInterface $request)
@@ -56,9 +57,9 @@ class ForumAction
     public function index(ServerRequestInterface $request): string
     {
         $params = $request->getQueryParams();
-        $posts = $this->postTable->findPaginated(10, $params['p'] ?? 1);
+        $news = $this->newsTable->findPaginated(10, $params['p'] ?? 1);
 
-        return $this->renderer->render('@forum/index', compact('posts'));
+        return $this->renderer->render('@news/index', compact('news'));
     }
     
     /**
@@ -71,10 +72,9 @@ class ForumAction
     {
         $slug = $request->getAttribute('slug');
 
-        $post = $this->postTable->find($request->getAttribute('id'));
-        $messages = $this->postTable->findPaginatedPublic(10, $params['p'] ?? 1);
-        if ($post->slug !== $slug) {
+        $new = $this->newsTable->find($request->getAttribute('id'));
+        if ($new->slug !== $slug) {
         }
-        return $this->renderer->render('@forum/show', compact('post', 'messages'));
+        return $this->renderer->render('@news/show', compact('new'));
     }
 }

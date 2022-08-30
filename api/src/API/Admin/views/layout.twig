@@ -19,13 +19,7 @@
         </div>          
 </header>
 <nav class="topbar-nav">
-<div class="nav-content">
-    <a href="/forum" class="nav-items">Forum</a>
-    <a href="/actu" class="nav-items">Actualités</a>
-    <a href="/tuto" class="nav-items">Tutoriels</a>
-    <a href="/minecraft" class="nav-items" >Minecraft</a>
-    <a href="{{ path('admin.forum.index')}}" class="nav-items" >Administration</a>
-</div>
+{{admin_menu()}}
 <div class="research"></div>
 </nav>
     {% if flash('success') %}

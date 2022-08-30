@@ -8,19 +8,22 @@
     <a  class="container-link" href="/">Accueil ></a>
     <a class="container-link" href="/forum">Forum ></a>
     <a  class="container-link" href={{path('forum.show', {slug: post.slug, id: post.id})}}>{{post.name}}</a>
-    <div class="cards topic-message"> 
+    <div class="cards topic-message">
         <header class="cards-head">
             {{post.name}}
         </header>
+        {% for message in messages %}
         <div class="messages-content">
-            <h2>{{post.created_by}}</h2>
+            <h2>{{message.created_by}}</h2>
             <div class="user-info">
                 <img src="https://via.placeholder.com/55x55" alt="" />
                 <p>Admin</p>
             </div>
-            <div class="msg-head"><p>Posté {{post.created_at | ago}}</p><div class="author"><p>Auteur</p></div></div>
-            <div class="content">{{post.name | nl2br }}</div>
+            <div class="msg-head"><p>Posté {{message.created_at | ago}}</p><div class="author"><p>Auteur</p></div></div>
+            <div class="content">{{message.content | nl2br }}</div>
         </div>
+        {% endfor %}
     </div>
+     {{ paginate(messages, 'forum.show', {slug: post.slug, id: post.id})}}
 </main>
 {% endblock %}

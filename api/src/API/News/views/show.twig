@@ -1,0 +1,22 @@
+{% extends 'layout.twig' %}
+
+{% block title new.name %}
+
+
+{% block body %}
+<main class="container">
+    <a  class="container-link" href="/">Accueil ></a>
+    <a class="container-link" href="/news">Actualités ></a>
+    <a  class="container-link" href={{path('forum.show', {slug: new.slug, id: new.id})}}>{{new.name}}</a>
+    <div class="cards forums">
+       <header class="cards-head">
+            {{new.name}}<br/>
+             Publié {{ new.created_at}}
+        </header>
+        <div class="news content">
+       
+            {{markdown(new.content)  | nl2br}}
+        </div>
+    </div>
+</main>
+{% endblock %}

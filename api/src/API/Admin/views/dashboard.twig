@@ -1,0 +1,20 @@
+{% extends "@admin/layout.twig" %}
+
+{% block title "Administration"%}
+{% block body %}
+   <main class="container">
+    <a class="container-link" href="/">Accueil ></a>
+    <a class="container-link" href="{{ path('admin')}}">Administration</a>
+  
+    <div class="cards last-actu"> 
+        <header class="cards-head">
+            Dashboard
+        </header>
+
+        {{widgets | raw}}
+    </div>
+        
+
+</main>
+
+{% endblock %}

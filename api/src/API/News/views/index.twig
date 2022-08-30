@@ -1,0 +1,26 @@
+{% extends 'layout.twig' %}
+
+{% block title "Actualités"%}
+
+{% block body %}
+<main class="container">
+    <a class="container-link" href="/">Accueil ></a>
+    <a class="container-link" href="/forum">Actualités</a>
+    <div class="cards last-actu index"> 
+        <header class="cards-head">
+            Actualités
+        </header>
+        <div class="actus">
+                {% for new in news %}
+                <div class="actu-items">
+                    <img src="https://via.placeholder.com/106x106" alt="" />
+                    <a href="{{path('news.show', {slug: new.slug, id: new.id})}}" class="actu-name active">{{new.name}}</a>
+                    <p>Par Cavernos</p>
+                    <p>{{new.created_at}}</p>
+                </div>
+                {% endfor %}
+            </div>  
+    {{ paginate(news, 'news.index')}}
+    </div>
+</main>
+{% endblock %}

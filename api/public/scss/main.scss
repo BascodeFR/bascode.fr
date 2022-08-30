@@ -10,6 +10,7 @@
 @import 'pages.scss';
 @import 'admin.scss';
 @import 'externalLib/flatpickr';
+@import 'news';
 
 *, *::after, *::before{
     box-sizing: border-box;
@@ -199,38 +200,40 @@ body{
     }
     .cards{
         .cards-head{
-            height: 42px;
+            height: auto;
             background-color: $green-color;
             border-radius: 10px 10px 0 0;
             color: white;
             font-size: 19px;
             font-weight: bold;
-            padding-top: 8px;
-            padding-left: 20px;
+            padding: 8px 20px;
         }
         margin-top: 6px;
         border-radius: 10px 10px 0 0;
         background-color: $content-color;
     }
     .last-actu{
-        height: 240px;
+        height: auto;
         .actus{
             position: relative;
             display: flex;
             .actu-items{
+                display: flex;
+                flex-direction: column;
                 border-right: solid 1px black;
-                width: 140px;
-                height: 198px;
-                padding-top: 13px;
+                width: auto;
+                height: auto;
+                justify-content: center;
+                padding: 16.5px;
                 background-color: $header-color;
                 text-align: center;
                 .actu-name{
                     display: inline-block;
-                    width: 106px;
                     line-height: 23px;
                     font-weight: bold;
                     font-size: 13px;
                     color: white;
+                    margin: 0;
                     text-decoration: none;
                     transition: text-shadow .3s;
                 }

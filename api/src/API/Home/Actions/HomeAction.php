@@ -2,6 +2,7 @@
 namespace cavernos\bascode_api\API\Home\Actions;
 
 use cavernos\bascode_api\API\Forum\Table\PostTable;
+use cavernos\bascode_api\API\News\Table\NewsTable;
 use cavernos\bascode_api\Framework\Renderer\RendererInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -21,11 +22,19 @@ class HomeAction
      * @var PostTable
      */
     private $postTable;
+    
+    /**
+     * newsTable
+     *
+     * @var NewsTable
+     */
+    private $newsTable;
 
-    public function __construct(RendererInterface $renderer, PostTable $postTable)
+    public function __construct(RendererInterface $renderer, PostTable $postTable, NewsTable $newsTable)
     {
         $this->renderer = $renderer;
         $this->postTable = $postTable;
+        $this->newsTable = $newsTable;
     }
 
     public function __invoke(ServerRequestInterface $request)
@@ -41,6 +50,7 @@ class HomeAction
     public function index(): string
     {
         $posts = $this->postTable->findPaginated(5, 1);
-        return $this->renderer->render('@home/index', compact('posts'));
+        $news = $this->newsTable->findPaginated(10, 1);
+        return $this->renderer->render('@home/index', compact('posts', 'news'));
     }
 }

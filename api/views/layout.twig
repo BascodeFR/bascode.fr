@@ -20,8 +20,8 @@
 </header>
 <nav class="topbar-nav">
 <div class="nav-content">
-    <a href="/forum" class="nav-items">Forum</a>
-    <a href="/actu" class="nav-items">Actualités</a>
+    <a href="{{path('forum.index')}}" class="nav-items {{is_subpath('forum.index') ? 'active'}}">Forum</a>
+    <a href="{{path('news.index')}}" class="nav-items {{is_subpath('news.index') ? 'active'}}">Actualités</a>
     <a href="/tuto" class="nav-items">Tutoriels</a>
     <a href="/minecraft" class="nav-items" >Minecraft</a>
 </div>

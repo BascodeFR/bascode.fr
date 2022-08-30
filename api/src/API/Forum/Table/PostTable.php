@@ -24,7 +24,7 @@ class PostTable extends Table
 
     /**public function findIn2Table(int $id, string $table2, string $joinCol)
     {
-        $query = $this->pdo->prepare("SELECT $table2.* FROM $this->table 
+        $query = $this->pdo->prepare("SELECT $table2.* FROM $this->table
         LEFT JOIN $table2 ON $joinCol = $this->table.id WHERE $this->table.id = :id");
         $query->execute(['id' => $id]);
         if ($this->entity) {
@@ -33,12 +33,15 @@ class PostTable extends Table
         return $query->fetch() ?: null;
     }*/
 
-    public function findPaginatedPublic(int $perPage, int $currentPage): Pagerfanta
+    public function findPaginatedPublic(int $perPage, int $currentPage)
     {
         $query = new PaginatedQuery(
             $this->getPdo(),
-            "",
-            "SELECT COUNT(id) FROM $this->table",
+            "SELECT m.* FROM messages as m JOIN posts ON m.post_id = posts.id WHERE posts.id = 1",
+            "SELECT count(messages.post_id) 
+            from posts 
+            left join messages 
+            on (messages.post_id = posts.id) WHERE posts.id = 1",
             $this->entity
         );
         return (new Pagerfanta($query))

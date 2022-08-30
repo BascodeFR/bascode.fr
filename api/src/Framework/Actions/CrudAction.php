@@ -117,6 +117,7 @@ class CrudAction
     public function edit(ServerRequestInterface $request): mixed
     {
         $item = $this->table->find($request->getAttribute('id'));
+        $errors = null;
         if ($request->getMethod() === 'POST') {
             $params = $this->getParams($request);
             $params['updated_at'] = date('Y-m-d H:i:s');

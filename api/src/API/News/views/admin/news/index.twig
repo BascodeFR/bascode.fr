@@ -1,0 +1,35 @@
+{% extends '@admin/layout.twig' %}
+
+{% block title "Edition des Topics"%}
+
+{% block body %}
+<main class="container">
+    <a class="container-link" href="/">Accueil ></a>
+    <a class="container-link" href="/forum">Actualités ></a>
+     <a class="container-link" href="{{ path(routePrefix ~ '.index')}}">Administration</a>
+    <div class="cards forum"> 
+        <header class="cards-head">
+            Administration des Acutalités
+        </header>
+    {% for item in items %}
+        <div class="topics">
+            <div class="topics-create-info">
+                <a href={{path('news.show', {slug: item.slug, id: item.id})}} class="topics-name">{{ item.name }}</a>
+                <p>Crée par Cavernos</p>
+                <p>Commencé le {{ item.created_at.format('d/m/Y')}} à {{ item.created_at.format('H:i')}}</p>
+            </div>
+            <div class="topics-last-info">
+                <a href="{{ path(routePrefix ~ '.edit', {id: item.id})}}" class="btn">Editer l'Actualité</a>
+                <form action="{{path(routePrefix ~ '.delete', {id: item.id })}}" method="POST">
+                    <input type="hidden" name="_METHOD" value="DELETE"/>
+                    <button class="btn btn-danger">Supprimer</button>
+                </form>
+            </div>
+        </div>
+    {% endfor %}
+    {{ paginate(items, routePrefix ~ '.index')}}
+    
+    <p class="text-center"><a href="{{ path(routePrefix ~ '.create') }}" class="btn" > Créer une Actualité</a></p>
+    </div>
+</main>
+{% endblock %}
