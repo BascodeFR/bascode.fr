@@ -88,17 +88,6 @@ class Table
         }
         return $list;
     }
-
-    public function findIn2Table(int $id, string $table2, string $joinCol)
-    {
-        $query = $this->pdo->prepare("SELECT $this->table.*, $table2.* FROM $this->table 
-        LEFT JOIN $table2 ON $joinCol = $this->table.id WHERE $this->table.id = :id");
-        $query->execute(['id' => $id]);
-        if ($this->entity) {
-            $query->setFetchMode(PDO::FETCH_CLASS, $this->entity);
-        }
-        return $query->fetch() ?: null;
-    }
     
     /**
      * update met à jour un enregistrement dans la db

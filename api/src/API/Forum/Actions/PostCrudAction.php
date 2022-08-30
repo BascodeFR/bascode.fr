@@ -19,12 +19,19 @@ class PostCrudAction extends CrudAction
     protected $viewPath = "@forum/admin/posts";
 
     protected $routePrefix = "admin.forum";
+    
+    /**
+     * messagesTable
+     *
+     * @var MessagesTable
+     */
+    private $messagesTable;
 
     public function __construct(
         RendererInterface $renderer,
         PostTable $table,
         Router $router,
-        FlashService $flash
+        FlashService $flash,
     ) {
         parent::__construct($renderer, $table, $router, $flash);
     }

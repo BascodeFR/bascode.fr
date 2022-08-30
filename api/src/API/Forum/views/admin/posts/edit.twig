@@ -15,14 +15,15 @@
         <form class="topic-edit" action="{{ path(routePrefix ~ '.edit', {id: item.id}) }}" method="post">
             {% include viewPath ~ "/form.twig" %}
             <div class="messages-content">
-            <h2>{{item.created_by}}</h2>
-            <div class="user-info">
-                <img src="https://via.placeholder.com/55x55" alt="" />
-                <p>Admin</p>
+                <h2>{{item.created_by}}</h2>
+                <div class="user-info">
+                    <img src="https://via.placeholder.com/55x55" alt="" />
+                    <p>Admin</p>
+                </div>
+                <div class="msg-head"><p>Posté {{item.created_at | ago}}</p><div class="admin-message"><a class="btn">Editer</a> <a class="btn btn-danger">Supprimer</a></div></div>
+                <div class="content">{{item.content | nl2br }}</div>
             </div>
-            <div class="msg-head"><p>Posté le {{item.created_at | ago}}</p><div class="admin-message"><a class="btn">Editer</a> <a class="btn btn-danger">Supprimer</a></div></div>
-            <div class="content">{{item.name | nl2br }}</div>
-        </div>
+       
             <button class="btn"> Editer</button>
         </form>
         
