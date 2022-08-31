@@ -2,6 +2,8 @@
 namespace cavernos\bascode_api\API;
 
 use DI\ContainerBuilder;
+use Doctrine\Common\Cache\ApcuCache;
+use Doctrine\Common\Cache\FilesystemCache;
 use Exception;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -109,6 +111,11 @@ class API implements RequestHandlerInterface
     {
         if ($this->container === null) {
             $builder = new ContainerBuilder();
+            $env = getenv('ENV') ?: 'production';
+            if ($env === 'production') {
+                $builder->enableDefinitionCache(FilesystemCache::class);
+                $builder->writeProxiesToFile(true, 'tmp/proxies');
+            }
             $builder->addDefinitions($this->definition);
             foreach ($this->modules as $module) {
                 if ($module::DEFINITIONS) {

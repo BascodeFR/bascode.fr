@@ -15,7 +15,9 @@ use GuzzleHttp\Psr7\ServerRequest;
 use Middlewares\Whoops;
 use function Http\Response\send;
 
-require_once dirname(__DIR__) . '/vendor/autoload.php';
+chdir(dirname(__DIR__));
+
+require_once 'vendor/autoload.php';
 
 $modules = [
     HomeModule::class,

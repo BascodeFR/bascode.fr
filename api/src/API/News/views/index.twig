@@ -16,7 +16,7 @@
                     <img src="https://via.placeholder.com/106x106" alt="" />
                     <a href="{{path('news.show', {slug: new.slug, id: new.id})}}" class="actu-name active">{{new.name}}</a>
                     <p>Par Cavernos</p>
-                    <p>{{new.created_at}}</p>
+                    <p>{{new.created_at | ago}}</p>
                 </div>
                 {% endfor %}
             </div>  

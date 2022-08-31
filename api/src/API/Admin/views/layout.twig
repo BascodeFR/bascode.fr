@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="/img/bascode.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/bascode.ico" type="image/x-icon">
     <link rel="stylesheet" href="/css/style.css">
     <title>{% block title %}{% endblock %}</title>
 </head>
@@ -40,5 +40,26 @@
             <a href="#" class ="discord"></a>
         </div>
 </footer>
-<script type="module" crossorigin src="/js/index.009a8dc2.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/l10n/fr.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/2.0.2/timeago.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/2.0.2/timeago.locales.min.js"></script>
+<script>
+
+
+
+flatpickr('.datepicker', {
+  enableTime: true,
+  altInput: true,
+  altFormat: 'j F Y, H:i',
+  dateFormat: 'Y-m-d H:i:s',
+  locale: 'fr'
+})
+
+timeago().render(document.querySelectorAll('.timeago'), 'fr_FR')
+
+</script>
+
+
+
 </html>

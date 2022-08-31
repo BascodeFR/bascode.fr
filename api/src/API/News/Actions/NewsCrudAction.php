@@ -10,6 +10,7 @@ use cavernos\bascode_api\Framework\Router;
 use cavernos\bascode_api\Framework\Session\FlashService;
 use cavernos\bascode_api\Framework\Validator;
 use DateTime;
+use LengthException;
 use Psr\Http\Message\ServerRequestInterface;
 
 class NewsCrudAction extends CrudAction
@@ -42,7 +43,13 @@ class NewsCrudAction extends CrudAction
 
     protected function getValidator(ServerRequestInterface $request): Validator
     {
-        return parent::getValidator($request);
+        return parent::getValidator($request)
+        ->required('name', 'slug', 'created_at', 'content')
+        ->length('name', 3, 255)
+        ->length('slug', 3, 50)
+        ->length('content', 5, 6000)
+        ->slug('slug')
+        ->dateTime('created_at');
     }
 
     protected function getNewEntity()

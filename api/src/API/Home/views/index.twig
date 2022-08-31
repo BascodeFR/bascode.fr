@@ -14,7 +14,7 @@
             <div class="topics-create-info">
                 <a href={{path('forum.show', {slug: post.slug, id: post.id})}} class="topics-name">{{ post.name }}</a>
                 <p>Crée par {{ post.created_by }}</p>
-                <p>Commencé le {{ post.created_at | ago }}</p>
+                <p>Commencé {{ post.created_at | ago }}</p>
             </div>
             <div class="topics-last-info">
                 <div class="total-posts">{{ post.total_messages }} <br />Posts</div>
