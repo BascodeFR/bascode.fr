@@ -1,3 +1,5 @@
+{{ csrf_input() }}
+
 {{ field('name', item.name, "Nom de l'Actualité")}}
 {{ field('slug', item.slug, "Slug de l'Actualité")}}
 {{ field('created_at', item.created_at, "Date de création", {class: 'datepicker'})}}

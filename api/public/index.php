@@ -5,6 +5,7 @@ use cavernos\bascode_api\API\API;
 use cavernos\bascode_api\API\Forum\ForumModule;
 use cavernos\bascode_api\API\Home\HomeModule;
 use cavernos\bascode_api\API\News\NewsModule;
+use cavernos\bascode_api\Framework\Middleware\CsrfMiddleware;
 use cavernos\bascode_api\Framework\Middleware\DispatcherMiddleware;
 use cavernos\bascode_api\Framework\Middleware\MethodMiddleware;
 use cavernos\bascode_api\Framework\Middleware\NotFoundMiddleware;
@@ -16,6 +17,13 @@ use function Http\Response\send;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+$modules = [
+    HomeModule::class,
+    AdminModule::class,
+    ForumModule::class,
+    NewsModule::class
+];
+
 $api = (new API(dirname(__DIR__) . '/config/config.php'))
             ->addModule(HomeModule::class)
             ->addModule(AdminModule::class)
@@ -24,6 +32,7 @@ $api = (new API(dirname(__DIR__) . '/config/config.php'))
             ->pipe(Whoops::class)
             ->pipe(TrailingSlashMidleware::class)
             ->pipe(MethodMiddleware::class)
+            ->pipe(CsrfMiddleware::class)
             ->pipe(RouterMiddleware::class)
             ->pipe(DispatcherMiddleware::class)
             ->pipe(NotFoundMiddleware::class);

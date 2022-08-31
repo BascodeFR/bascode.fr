@@ -11,6 +11,7 @@
         <header class="cards-head">
             Administration des Acutalités
         </header>
+        {% set token_input = csrf_input() %}
     {% for item in items %}
         <div class="topics">
             <div class="topics-create-info">
@@ -23,6 +24,7 @@
                 <form action="{{path(routePrefix ~ '.delete', {id: item.id })}}" method="POST">
                     <input type="hidden" name="_METHOD" value="DELETE"/>
                     <button class="btn btn-danger">Supprimer</button>
+                    {{ token_input | raw}}
                 </form>
             </div>
         </div>

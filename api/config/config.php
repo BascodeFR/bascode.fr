@@ -1,11 +1,13 @@
 <?php
 
+use cavernos\bascode_api\Framework\Middleware\CsrfMiddleware;
 use cavernos\bascode_api\Framework\Renderer\RendererInterface;
 use cavernos\bascode_api\Framework\RendererFactory;
 use cavernos\bascode_api\Framework\Router;
 use cavernos\bascode_api\Framework\Router\RouterTwigExtension;
 use cavernos\bascode_api\Framework\Session\PHPSession;
 use cavernos\bascode_api\Framework\Session\SessionInterface;
+use cavernos\bascode_api\Framework\Twig\CsrfExtension;
 use cavernos\bascode_api\Framework\Twig\FlashExtension;
 use cavernos\bascode_api\Framework\Twig\FormExtension;
 use cavernos\bascode_api\Framework\Twig\IsLoadedExtension;
@@ -34,8 +36,10 @@ return[
         get(TimeExtension::class),
         get(FlashExtension::class),
         get(FormExtension::class),
+        get(CsrfExtension::class)
     ],
     SessionInterface::class => autowire(PHPSession::class),
+    CsrfMiddleware::class => autowire()->constructor(get(SessionInterface::class)),
     Router::class => create(),
     RendererInterface::class => factory(RendererFactory::class),
     PDO::class => function (ContainerInterface $c){

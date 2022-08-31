@@ -1,7 +1,9 @@
 <?php
 namespace cavernos\bascode_api\Framework\Session;
 
-class PHPSession implements SessionInterface
+use ArrayAccess;
+
+class PHPSession implements SessionInterface, ArrayAccess
 {
 
     
@@ -58,5 +60,26 @@ class PHPSession implements SessionInterface
     {
         $this->ensureStarted();
         unset($_SESSION[$key]);
+    }
+
+    public function offsetExists(mixed $offset): bool
+    {
+        $this->ensureStarted();
+        return array_key_exists($offset, $_SESSION);
+    }
+
+    public function offsetGet(mixed $offset): mixed
+    {
+        return $this->get($offset);
+    }
+
+    public function offsetSet(mixed $offset, mixed $value): void
+    {
+        $this->set($offset, $value);
+    }
+
+    public function offsetUnset(mixed $offset): void
+    {
+        $this->delete($offset);
     }
 }
