@@ -51,6 +51,7 @@ class News
      */
     public function getThumb()
     {
-        return '/upload/news/'. $this->avatar;
+        ['filename' => $filename, 'extension' => $extension] =pathinfo($this->avatar);
+        return '/upload/news/'. $filename .'_thumb.' . $extension;
     }
 }

@@ -26,7 +26,7 @@ class CrudAction
      *
      * @var Table
      */
-    private $table;
+    protected $table;
     
     /**
      * router
@@ -63,7 +63,8 @@ class CrudAction
      */
     protected $flashMessages = [
         'create' => "L'élément a bien été créé",
-        'edit' => "L'élément a bien été modifé"
+        'edit' => "L'élément a bien été modifé",
+        'delete' => "L'élément a bien été supprimé"
     ];
 
     use RouterAwareAction;
@@ -169,6 +170,7 @@ class CrudAction
     public function delete(ServerRequestInterface $request): ResponseInterface
     {
         $this->table->delete($request->getAttribute('id'));
+        $this->flash->error($this->flashMessages['delete']);
         return $this->redirect($this->routePrefix . '.index');
     }
     

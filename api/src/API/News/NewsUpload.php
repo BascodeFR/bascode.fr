@@ -7,4 +7,8 @@ class NewsUpload extends Upload
 {
 
     protected $path = 'public/upload/news';
+
+    protected $formats = [
+        'thumb' => [106, 106]
+    ];
 }

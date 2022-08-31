@@ -11,6 +11,7 @@ use cavernos\bascode_api\Framework\Router;
 use cavernos\bascode_api\Framework\Session\FlashService;
 use cavernos\bascode_api\Framework\Validator;
 use DateTime;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 class NewsCrudAction extends CrudAction
@@ -18,7 +19,8 @@ class NewsCrudAction extends CrudAction
 
     protected $flashMessages = [
         'create' => "L'actualité a bien été créé",
-        'edit' => "L'actualité a bien été modifiée"
+        'edit' => "L'actualité a bien été modifiée",
+        'delete' => "L'actualité a bien été suprimée"
     ];
     
     protected $viewPath = "@news/admin/news";
@@ -42,7 +44,12 @@ class NewsCrudAction extends CrudAction
         parent::__construct($renderer, $table, $router, $flash);
         $this->newsUpload = $newsUpload;
     }
-    
+    public function delete(ServerRequestInterface $request): ResponseInterface
+    {
+        $new = $this->table->find($request->getAttribute('id'));
+        $this->newsUpload->delete($new->avatar);
+        return parent::delete($request);
+    }
     /**
      * getParams
      *

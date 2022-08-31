@@ -23,7 +23,7 @@ class NewsSeeder extends AbstractSeed
             'name' => $faker->catchPhrase,
             'slug' => $faker->slug,
             'content' => $faker->paragraph(3, true),
-            'avatar' => 'default.png',
+            'avatar' => 'default_thumb.png',
             'created_at' => date('Y-m-d H:i:s', $date),
             'updated_at' => date('Y-m-d H:i:s', $date)
             ];

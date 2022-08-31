@@ -15,7 +15,8 @@
         "twig/twig": "^3.4",
         "michelf/php-markdown": "^1.9",
         "middlewares/whoops": "^2.0",
-        "doctrine/cache": "~1.4"
+        "doctrine/cache": "~1.4",
+        "intervention/image": "^2.7"
     },
     "require-dev": {
         "symfony/var-dumper": "^6.1",
