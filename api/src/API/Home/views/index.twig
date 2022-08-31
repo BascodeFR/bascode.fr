@@ -29,24 +29,7 @@
         </div>
         {% endfor %}
     </div>
-    <div class="cards last-actu"> 
-        <header class="cards-head">
-            Dernières Actualités
-        </header>
-         
-        <div class="actus">
-            <div class="prev"><a href='#'class="prev-button"></a></div>
-            {% for new in news %}
-            <div class="actu-items">
-                <img src="https://via.placeholder.com/106x106" alt="" />
-                <a href="{{path('news.show', {slug: new.slug, id: new.id})}}" class="actu-name active">{{new.name}}</a>
-                <p>Par Cavernos</p>
-                <p>{{new.created_at}}</p>
-            </div>
-             {% endfor %}
-            <div class="next"><a href='#'class="next-button"></a></div>
-        </div>  
-    </div>     
+    {{renderHome(news)}}
     <div class="cards last-topics"> 
         <header class="cards-head">
             Derniers Tutoriels

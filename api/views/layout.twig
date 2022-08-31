@@ -21,7 +21,7 @@
 <nav class="topbar-nav">
 <div class="nav-content">
     <a href="{{path('forum.index')}}" class="nav-items {{is_subpath('forum.index') ? 'active'}}">Forum</a>
-    <a href="{{path('news.index')}}" class="nav-items {{is_subpath('news.index') ? 'active'}}">Actualités</a>
+     {{ renderNewsLink() }}
     <a href="/tuto" class="nav-items">Tutoriels</a>
     <a href="/minecraft" class="nav-items" >Minecraft</a>
 </div>

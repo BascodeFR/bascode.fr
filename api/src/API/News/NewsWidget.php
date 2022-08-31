@@ -4,8 +4,9 @@ namespace cavernos\bascode_api\API\News;
 use cavernos\bascode_api\API\Admin\AdminWidgetInterface;
 use cavernos\bascode_api\API\News\Table\NewsTable;
 use cavernos\bascode_api\Framework\Renderer\RendererInterface;
+use Pagerfanta\Pagerfanta;
 
-class NewsWidget implements AdminWidgetInterface
+class NewsWidget implements AdminWidgetInterface, NewsWidgetInterface
 {
     
     /**
@@ -37,5 +38,15 @@ class NewsWidget implements AdminWidgetInterface
     public function renderMenu(): string
     {
         return $this->renderer->render('@news/admin/menu');
+    }
+
+    public function renderHome(Pagerfanta $news): string
+    {
+        return $this->renderer->render('@news/home/index', compact('news'));
+    }
+
+    public function renderLink(): string
+    {
+        return $this->renderer->render('@news/home/link');
     }
 }

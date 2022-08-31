@@ -5,6 +5,7 @@ use cavernos\bascode_api\API\News\Actions\NewsCrudAction;
 use cavernos\bascode_api\API\News\Actions\NewsAction;
 use cavernos\bascode_api\Framework\Module;
 use cavernos\bascode_api\Framework\Renderer\RendererInterface;
+use cavernos\bascode_api\Framework\Renderer\TwigRenderer;
 use cavernos\bascode_api\Framework\Router;
 use Psr\Container\ContainerInterface;
 
@@ -18,7 +19,7 @@ class NewsModule extends Module
     const SEEDS = __DIR__ . '/db/seeds';
     
 
-    public function __construct(ContainerInterface $container)
+    public function __construct(ContainerInterface $container, NewsTwigExtension $newsTwigExtension)
     {
         
         $container->get(RendererInterface::class)->addPath('news', __DIR__ . '/views');
@@ -31,6 +32,9 @@ class NewsModule extends Module
         if ($container->has('admin.prefix')) {
             $prefix = $container->get('admin.prefix');
             $router->crud("$prefix/news", NewsCrudAction::class, 'admin.news');
+        }
+        if ($container->get(RendererInterface::class) instanceof TwigRenderer) {
+            $container->get(RendererInterface::class)->getTwig()->addExtension($newsTwigExtension);
         }
     }
 }

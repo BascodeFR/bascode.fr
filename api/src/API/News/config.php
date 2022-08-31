@@ -1,8 +1,10 @@
 <?php
 
+use cavernos\bascode_api\API\News\NewsTwigExtension;
 use cavernos\bascode_api\API\News\NewsWidget;
 
 use function DI\add;
+use function DI\autowire;
 use function DI\get;
 
 return [
@@ -10,4 +12,5 @@ return [
     'admin.widgets' => add([
         get(NewsWidget::class)
     ]),
+    NewsTwigExtension::class => autowire()->constructor(get('admin.widgets')),
 ];

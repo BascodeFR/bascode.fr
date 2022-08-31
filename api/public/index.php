@@ -5,31 +5,28 @@ use cavernos\bascode_api\API\API;
 use cavernos\bascode_api\API\Forum\ForumModule;
 use cavernos\bascode_api\API\Home\HomeModule;
 use cavernos\bascode_api\API\News\NewsModule;
-use \DI\ContainerBuilder;
+use cavernos\bascode_api\Framework\Middleware\DispatcherMiddleware;
+use cavernos\bascode_api\Framework\Middleware\MethodMiddleware;
+use cavernos\bascode_api\Framework\Middleware\NotFoundMiddleware;
+use cavernos\bascode_api\Framework\Middleware\RouterMiddleware;
+use cavernos\bascode_api\Framework\MiddleWare\TrailingSlashMidleware;
 use GuzzleHttp\Psr7\ServerRequest;
-
+use Middlewares\Whoops;
 use function Http\Response\send;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-$modules = [
-    HomeModule::class,
-    AdminModule::class,
-    ForumModule::class,
-    NewsModule::class
-];
-
-$builder = new ContainerBuilder();
-$builder->addDefinitions(dirname(__DIR__) . '/config/config.php');
-$builder->addDefinitions(dirname(__DIR__) . '/config.php');
-foreach ($modules as $module) {
-    if ($module::DEFINITIONS) {
-        $builder->addDefinitions($module::DEFINITIONS);
-    }
-}
-$container = $builder->build();
-
-$api = new API($container, $modules);
+$api = (new API(dirname(__DIR__) . '/config/config.php'))
+            ->addModule(HomeModule::class)
+            ->addModule(AdminModule::class)
+            ->addModule(ForumModule::class)
+            ->addModule(NewsModule::class)
+            ->pipe(Whoops::class)
+            ->pipe(TrailingSlashMidleware::class)
+            ->pipe(MethodMiddleware::class)
+            ->pipe(RouterMiddleware::class)
+            ->pipe(DispatcherMiddleware::class)
+            ->pipe(NotFoundMiddleware::class);
 
 
 if (php_sapi_name() !== 'cli') {

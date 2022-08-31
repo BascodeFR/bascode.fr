@@ -1,14 +1,15 @@
 <?php
 namespace cavernos\bascode_api\API;
 
-use cavernos\bascode_api\Framework\Router;
+use DI\ContainerBuilder;
 use Exception;
-use GuzzleHttp\Psr7\Response;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 
-class API
+class API implements RequestHandlerInterface
 {
 
     
@@ -26,6 +27,52 @@ class API
      * @var array
      */
     private $modules = [];
+
+    /**
+     * liste des middlewares
+     *
+     * @var array
+     */
+    private $middlewares = [];
+    
+    /**
+     * index
+     *
+     * @var int
+     */
+    private $index = 0;
+    
+    /**
+     * definition
+     *
+     * @var array
+     */
+    private $definition;
+
+    public function addModule(string $module): self
+    {
+        $this->modules[] = $module;
+        return $this;
+    }
+
+    public function pipe(string $middleware): self
+    {
+        $this->middlewares[] = $middleware;
+        return $this;
+    }
+
+    public function handle(ServerRequestInterface $request): ResponseInterface
+    {
+        $middleware = $this->getMiddleware();
+        if (is_callable($middleware)) {
+            return call_user_func_array($middleware, [$request, [$this, 'handle']]);
+        } elseif ($middleware instanceof MiddlewareInterface) {
+            return $middleware->process($request, $this);
+        }
+        if (is_null($middleware)) {
+            throw new Exception("Aucun middleware n'a intercepté cette requête");
+        }
+    }
         
     /**
      * __construct
@@ -34,12 +81,9 @@ class API
      * @param  array $modules
      * @return void
      */
-    public function __construct(ContainerInterface $container, array $modules = [])
+    public function __construct(string $definition)
     {
-        $this->container = $container;
-        foreach ($modules as $module) {
-            $this->modules[] = $container->get($module);
-        }
+        $this->definition = $definition;
     }
     
     /**
@@ -50,39 +94,10 @@ class API
      */
     public function run(ServerRequestInterface $request): ResponseInterface
     {
-        $uri = $request->getUri()->getPath();
-        $parsedBody = $request->getParsedBody();
-        if (array_key_exists('_METHOD', $parsedBody) && in_array($parsedBody["_METHOD"], ['DELETE', 'PUT'])) {
-            $request = $request->withMethod($parsedBody["_METHOD"]);
+        foreach ($this->modules as $module) {
+            $this->getContainer()->get($module);
         }
-        if (!empty($uri) && $uri[-1] === '/' && $uri !== '/') {
-            return (new Response())
-                    ->withStatus(301)
-                    ->withHeader('Location', substr($uri, 0, -1));
-        }
-        $route = $this->container->get(Router::class)->match($request);
-        if (is_null($route)) {
-            $response = new Response(404, [], '<h1>Erreur 404</h1>');
-            return $response;
-        }
-
-        $params = $route->getParams();
-        $request = array_reduce(array_keys($params), function ($request, $key) use ($params) {
-            return $request->withAttribute($key, $params[$key]);
-        }, $request);
-        $callback = $route->getCallback();
-        if (is_string($callback)) {
-            $callback = $this->container->get($callback);
-        }
-        $response = call_user_func_array($callback, [$request]);
-        if (is_string($response)) {
-            #return new Response(200, ['Content-Type' => 'application/json'], $response);
-            return new Response(200, [], $response);
-        } elseif ($response instanceof ResponseInterface) {
-            return $response;
-        } else {
-            throw new Exception("La réponse est ni une string ni une instance de la ResponseInterface");
-        }
+        return $this->handle($request);
     }
     
     /**
@@ -92,6 +107,27 @@ class API
      */
     public function getContainer(): ContainerInterface
     {
+        if ($this->container === null) {
+            $builder = new ContainerBuilder();
+            $builder->addDefinitions($this->definition);
+            foreach ($this->modules as $module) {
+                if ($module::DEFINITIONS) {
+                    $builder->addDefinitions($module::DEFINITIONS);
+                }
+            }
+            $this->container = $builder->build();
+        }
+        
         return $this->container;
+    }
+
+    private function getMiddleware()
+    {
+        if (array_key_exists($this->index, $this->middlewares)) {
+            $middleware = $this->container->get($this->middlewares[$this->index]);
+            $this->index++;
+            return $middleware;
+        }
+        return null;
     }
 }
