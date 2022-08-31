@@ -1,6 +1,7 @@
 <?php
 
 use cavernos\bascode_api\API\News\NewsTwigExtension;
+use cavernos\bascode_api\API\News\NewsUpload;
 use cavernos\bascode_api\API\News\NewsWidget;
 
 use function DI\add;

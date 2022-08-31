@@ -13,7 +13,7 @@
         <div class="actus">
                 {% for new in news %}
                 <div class="actu-items">
-                    <img src="https://via.placeholder.com/106x106" alt="" />
+                    <img src="{{new.thumb}}" alt="" />
                     <a href="{{path('news.show', {slug: new.slug, id: new.id})}}" class="actu-name active">{{new.name}}</a>
                     <p>Par Cavernos</p>
                     <p>{{new.created_at | ago}}</p>

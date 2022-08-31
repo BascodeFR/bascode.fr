@@ -30,12 +30,15 @@ class TimeExtension extends AbstractExtension
     /**
      * ago
      *
-     * @param  mixed $DateTime
+     * @param   $DateTime
      * @param  string $format
      * @return string
      */
-    public function ago(DateTime $date, string $format = 'd/m/Y H:i'): string
+    public function ago($date, string $format = 'd/m/Y H:i'): string
     {
+        if (is_string($date)) {
+            return $date;
+        }
 
         return '<span class="timeago" datetime="'. $date->format(DateTime::ISO8601). '">'
                     . $date->format($format) .

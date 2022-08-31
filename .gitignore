@@ -1,12 +1,6 @@
 # PHP dep
 api/vendor
+api/public/upload
 api/composer.lock
-virtual server/Vagrantfile
-virtual server/.vagrant/machines/default/virtualbox/action_set_name
-virtual server/.vagrant/machines/default/virtualbox/creator_uid
-virtual server/.vagrant/machines/default/virtualbox/id
-virtual server/.vagrant/machines/default/virtualbox/index_uuid
-virtual server/.vagrant/machines/default/virtualbox/vagrant_cwd
-virtual server/.vagrant/rgloader/loader.rb
 front/
 api/tmp

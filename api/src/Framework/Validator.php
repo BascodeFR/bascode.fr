@@ -6,9 +6,15 @@ use cavernos\bascode_api\Framework\Database\Table;
 use cavernos\bascode_api\Framework\Validator\ValidationError;
 use DateTime;
 use PDO;
+use Psr\Http\Message\UploadedFileInterface;
 
 class Validator
 {
+
+    private const MIME_TYPES = [
+        'jpg' => 'image/jpeg',
+        'png' => 'image/png'
+    ];
     
     /**
      * params
@@ -147,6 +153,40 @@ class Validator
     public function isValid(): bool
     {
         return empty($this->errors);
+    }
+
+    public function uploaded(string $key): self
+    {
+        $file = $this->getValue($key);
+        if ($file === null || $file->getError() !== UPLOAD_ERR_OK) {
+            $this->addError($key, 'uploaded');
+        }
+        return $this;
+    }
+    
+    
+    /**
+     * extension
+     *
+     * @param  string $key
+     * @param  array $extensions
+     * @return self
+     */
+    public function extension(string $key, array $extensions): self
+    {
+        
+        /** @var UploadedFileInterface $file */
+        $file = $this->getValue($key);
+        if ($file !== null && $file->getError() === UPLOAD_ERR_OK) {
+            $type = $file->getClientMediaType();
+            $extension = mb_strtolower(pathinfo($file->getClientFilename(), PATHINFO_EXTENSION));
+            $expectedType = self::MIME_TYPES[$extension] ?? null;
+            if (!in_array($extension, $extensions) || $expectedType !== $type) {
+                $this->addError($key, 'filetype', [join(',', $extensions)]);
+            }
+        }
+
+        return $this;
     }
     
     /**

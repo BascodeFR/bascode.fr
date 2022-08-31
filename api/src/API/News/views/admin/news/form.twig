@@ -2,6 +2,10 @@
 
 {{ field('name', item.name, "Nom de l'Actualité")}}
 {{ field('slug', item.slug, "Slug de l'Actualité")}}
+{% if item.avatar %}
+    <img style="margin: auto; display: block" src="{{item.thumb}}" alt=""/>
+{% endif %}
+{{ field('avatar', item.name,"Image", {type: 'file'})}}
 {{ field('created_at', item.created_at, "Date de création", {class: 'datepicker'})}}
 {{ field('content', item.content, "Contenu", {type: 'textarea'})}}
    

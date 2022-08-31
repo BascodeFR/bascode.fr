@@ -12,7 +12,7 @@
         <header class="cards-head">
             Ajout d'un Topic
         </header>
-        <form class="topic-edit" action="{{ path(routePrefix ~ '.create') }}" method="post">
+        <form class="topic-edit" action="{{ path(routePrefix ~ '.create') }}" method="post" enctype="multipart/form-data">
             {% include viewPath ~ "/form.twig" %}
             <button class="btn"> Ajouter</button>
         </form>

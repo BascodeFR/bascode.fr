@@ -19,18 +19,7 @@ class News
     public $createdAt;
     
     public $updatedAt;
-
-    public function __construct()
-    {
-        if ($this->created_at) {
-            $this->created_at = new DateTime($this->created_at);
-        }
-
-        if ($this->updated_at) {
-            $this->updated_at = new DateTime($this->updated_at);
-        }
-    }
-
+    
     /**
      * Set the value of createdAt
      *
@@ -55,5 +44,13 @@ class News
             $this->updatedAt = new DateTime($updatedAt);
         }
         return $this;
+    }
+
+    /**
+     * Get the value of avatar
+     */
+    public function getThumb()
+    {
+        return '/upload/news/'. $this->avatar;
     }
 }

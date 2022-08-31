@@ -1441,10 +1441,15 @@ body {
 }
 
 .logo {
+  display: inline-flex;
   margin-left: 17px;
 }
 .logo img {
   width: 200px;
+}
+.logo h1 {
+  margin: 0;
+  padding: 50px 0;
 }
 
 .connection {
@@ -1651,7 +1656,7 @@ body {
   display: flex;
   flex-direction: column;
   border-right: solid 1px black;
-  width: auto;
+  width: min-content;
   height: auto;
   justify-content: center;
   padding: 16.5px;
@@ -1676,6 +1681,11 @@ body {
   color: rgba(255, 255, 255, 0.75);
   font-size: 10px;
   margin: 0;
+}
+.container .last-actu .actus .actu-items img {
+  margin: auto;
+  width: 106px;
+  aspect-ratio: 1;
 }
 .container .last-actu .actus .prev {
   position: absolute;

@@ -9,7 +9,7 @@
      <a class="container-link" href="{{ path(routePrefix ~ '.index')}}">Administration</a>
     <div class="cards forum"> 
         <header class="cards-head">
-            Administration des Acutalités
+            Administration des Actualités
         </header>
         {% set token_input = csrf_input() %}
     {% for item in items %}
@@ -17,7 +17,7 @@
             <div class="topics-create-info">
                 <a href={{path('news.show', {slug: item.slug, id: item.id})}} class="topics-name">{{ item.name }}</a>
                 <p>Crée par Cavernos</p>
-                <p>Commencé le {{ item.created_at.format('d/m/Y')}} à {{ item.created_at.format('H:i')}}</p>
+                <p>Commencé le {{ item.created_at | ago}}</p>
             </div>
             <div class="topics-last-info">
                 <a href="{{ path(routePrefix ~ '.edit', {id: item.id})}}" class="btn">Editer l'Actualité</a>

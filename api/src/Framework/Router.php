@@ -41,7 +41,7 @@ class Router
    * @param  ?string $name
    * @return void
    */
-    public function get(string $path, callable|string $callable, ?string $name = null)
+    public function get(string $path, mixed $callable, ?string $name = null)
     {
         $this->router->addRoute(new ZendRoute($path, $callable, ['GET'], $name));
     }
@@ -54,7 +54,7 @@ class Router
    * @param  ?string $name
    * @return void
    */
-    public function post(string $path, callable|string $callable, ?string $name = null)
+    public function post(string $path, mixed $callable, ?string $name = null)
     {
         $this->router->addRoute(new ZendRoute($path, $callable, ['POST'], $name));
     }
@@ -67,7 +67,7 @@ class Router
    * @param  ?string $name
    * @return void
    */
-    public function delete(string $path, callable|string $callable, ?string $name = null)
+    public function delete(string $path, mixed $callable, ?string $name = null)
     {
         $this->router->addRoute(new ZendRoute($path, $callable, ['DELETE'], $name));
     }

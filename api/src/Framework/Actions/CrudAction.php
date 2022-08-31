@@ -119,19 +119,16 @@ class CrudAction
         $item = $this->table->find($request->getAttribute('id'));
         $errors = null;
         if ($request->getMethod() === 'POST') {
-            $params = $this->getParams($request);
-            $params['updated_at'] = date('Y-m-d H:i:s');
-           
             $validator = $this->getValidator($request);
             if (!empty($validator->isValid())) {
-                $this->table->update($item->id, $params);
+                $this->table->update($item->id, $this->getParams($request, $item));
                 $this->flash->success($this->flashMessages['edit']);
                 return $this->redirect($this->routePrefix . '.index');
             }
-            $item->slug = $params['slug'];
-            $item->name = $params['name'];
-            $item->created_by = $params['created_by'];
             $errors = $validator->getErrors();
+            $params = $request->getParsedBody();
+            $params['id'] = $item->id;
+            $item = $params;
         }
         $params = $this->formParams(compact('item', 'errors'));
 
@@ -149,14 +146,13 @@ class CrudAction
         $errors = null;
         $item = $this->getNewEntity();
         if ($request->getMethod() === 'POST') {
-            $params = $this->getParams($request);
             $validator = $this->getValidator($request);
             if (!empty($validator->isValid())) {
-                $this->table->insert($params);
+                $this->table->insert($this->getParams($request, $item));
                 $this->flash->success($this->flashMessages['create']);
                 return $this->redirect($this->routePrefix . '.index');
             }
-            $item = $params;
+            $item = $request->getParsedBody();
             $errors = $validator->getErrors();
         }
         $params = $this->formParams(compact('item', 'errors'));
@@ -179,10 +175,11 @@ class CrudAction
     /**
      * getParams
      *
-     * @param  mixed $request
+     * @param  ServerRequestInterface $request
+     * @param  mixed $item
      * @return array
      */
-    protected function getParams(ServerRequestInterface $request): array
+    protected function getParams(ServerRequestInterface $request, $item): array
     {
         return array_filter($request->getParsedBody(), function ($key) {
             return in_array($key, []);
@@ -191,7 +188,7 @@ class CrudAction
 
     protected function getValidator(ServerRequestInterface $request): Validator
     {
-        return new Validator($request->getParsedBody());
+        return new Validator(array_merge($request->getParsedBody(), $request->getUploadedFiles()));
     }
 
     protected function getNewEntity()
