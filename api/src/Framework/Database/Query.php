@@ -1,6 +1,9 @@
 <?php
 namespace cavernos\bascode_api\Framework\Database;
 
+use ArrayAccess;
+use Exception;
+use Iterator;
 use PDO;
 use PhpParser\Node\Expr\Cast\Int_;
 
@@ -17,6 +20,8 @@ class Query
      * @var array
      */
     private $where = [];
+
+    private $entity;
 
     private $group;
 
@@ -69,6 +74,20 @@ class Query
     {
         $this->params = $params;
         return $this;
+    }
+
+    public function into(string $entity):self
+    {
+        $this->entity = $entity;
+        return $this;
+    }
+
+    public function all(): QueryResult
+    {
+           return new QueryResult(
+               $this->execute()->fetchAll(PDO::FETCH_ASSOC),
+               $this->entity
+           );
     }
 
     public function __toString()

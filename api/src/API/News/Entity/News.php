@@ -16,9 +16,9 @@ class News
 
     public $content;
 
-    public $created_at;
+    public $createdAt;
     
-    public $updated_at;
+    public $updatedAt;
 
     public function __construct()
     {
@@ -29,5 +29,31 @@ class News
         if ($this->updated_at) {
             $this->updated_at = new DateTime($this->updated_at);
         }
+    }
+
+    /**
+     * Set the value of createdAt
+     *
+     * @return  self
+     */
+    public function setCreatedAt(string $createdAt)
+    {
+        if (is_string($createdAt)) {
+            $this->createdAt = new DateTime($createdAt);
+        }
+        return $this;
+    }
+
+    /**
+     * Set the value of updatedAt
+     *
+     * @return  self
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        if (is_string($updatedAt)) {
+            $this->updatedAt = new DateTime($updatedAt);
+        }
+        return $this;
     }
 }
