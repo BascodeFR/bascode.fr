@@ -56,7 +56,7 @@ class ForumAction
     public function index(ServerRequestInterface $request): string
     {
         $params = $request->getQueryParams();
-        $posts = $this->postTable->findPaginated(10, $params['p'] ?? 1);
+        $posts = $this->postTable->findPublic()->paginate(10, $params['p'] ?? 1);
 
         return $this->renderer->render('@forum/index', compact('posts'));
     }
@@ -72,7 +72,7 @@ class ForumAction
         $slug = $request->getAttribute('slug');
 
         $post = $this->postTable->find($request->getAttribute('id'));
-        $messages = $this->postTable->findPaginatedPublic(10, $params['p'] ?? 1);
+        $messages = $this->postTable->findPublic()->paginate(10, $params['p'] ?? 1);
         if ($post->slug !== $slug) {
         }
         return $this->renderer->render('@forum/show', compact('post', 'messages'));

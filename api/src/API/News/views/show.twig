@@ -11,9 +11,12 @@
     <div class="cards forums">
        <header class="cards-head">
             {{new.name}}<br/>
-             Publié {{ new.created_at | ago}}
+             Publié {{ new.createdAt | ago}}
         </header>
         <div class="news content">
+            {% if new.thumb %}
+                    <img style="margin: auto; display: block" src="{{new.imageURL}}" alt="{{new.name}}" />
+            {% endif %}
        
             {{markdown(new.content)  | nl2br}}
         </div>

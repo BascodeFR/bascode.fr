@@ -2,6 +2,7 @@
 
 namespace cavernos\bascode_api\Framework\Actions;
 
+use cavernos\bascode_api\Framework\Database\Hydrator;
 use cavernos\bascode_api\Framework\Database\Table;
 use cavernos\bascode_api\Framework\Renderer\RendererInterface;
 use cavernos\bascode_api\Framework\Router;
@@ -105,7 +106,7 @@ class CrudAction
     public function index(ServerRequestInterface $request): string
     {
         $params = $request->getQueryParams();
-        $items = $this->table->findPaginated(10, $params['p'] ?? 1);
+        $items = $this->table->makeQuery()->order('created_at DESC')->paginate(10, $params['p'] ?? 1);
         return $this->renderer->render("$this->viewPath/index", compact('items'));
     }
     
@@ -127,9 +128,7 @@ class CrudAction
                 return $this->redirect($this->routePrefix . '.index');
             }
             $errors = $validator->getErrors();
-            $params = $request->getParsedBody();
-            $params['id'] = $item->id;
-            $item = $params;
+            Hydrator::hydrate($request->getParsedBody(), $item);
         }
         $params = $this->formParams(compact('item', 'errors'));
 
@@ -153,8 +152,8 @@ class CrudAction
                 $this->flash->success($this->flashMessages['create']);
                 return $this->redirect($this->routePrefix . '.index');
             }
-            $item = $request->getParsedBody();
             $errors = $validator->getErrors();
+            Hydrator::hydrate($request->getParsedBody(), $item);
         }
         $params = $this->formParams(compact('item', 'errors'));
 

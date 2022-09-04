@@ -2,6 +2,7 @@
 namespace cavernos\bascode_api\API\News\Table;
 
 use cavernos\bascode_api\API\News\Entity\News;
+use cavernos\bascode_api\Framework\Database\Query;
 use cavernos\bascode_api\Framework\Database\Table;
 
 class NewsTable extends Table
@@ -11,8 +12,12 @@ class NewsTable extends Table
 
     protected $entity = News::class;
     
-    protected function paginationQuery()
+    public function findPublic(): Query
     {
-        return  parent::paginationQuery(). " ORDER BY created_at DESC";
+        return $this->makeQuery()
+        ->select('n.*')
+        ->where('n.created_at < NOW()')
+        ->where('n.public = 1')
+        ->order('n.created_at DESC');
     }
 }

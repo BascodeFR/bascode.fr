@@ -8,50 +8,24 @@ use PDO;
 class PaginatedQuery implements AdapterInterface
 {
     
-        
-    /**
-     * pdo
-     *
-     * @var PDO
-     */
-    private $pdo;
     
     /**
      * query
      *
-     * @var string
+     * @var Query
      */
     private $query;
-    
-    /**
-     * countQuery
-     *
-     * @var string
-     */
-    private $countQuery;
-    
-    /**
-     * entity
-     *
-     * @var string|null
-     */
-    private $entity;
+
     
     /**
      * __construct
      *
-     * @param  PDO $pdo
-     * @param  string $query Requête qui récupère x résultat
-     * @param  string $countQuery requête qui comtpe le nombre de résultat total
-     * @param  string|null $entity
+     * @param  Query $query
      * @return void
      */
-    public function __construct(PDO $pdo, string $query, string $countQuery, ?string $entity)
+    public function __construct(Query $query)
     {
-        $this->pdo = $pdo;
         $this->query = $query;
-        $this->countQuery = $countQuery;
-        $this->entity = $entity;
     }
     
     /**
@@ -61,18 +35,12 @@ class PaginatedQuery implements AdapterInterface
      */
     public function getNbResults(): int
     {
-        return $this->pdo->query($this->countQuery)->fetchColumn();
+        return $this->query->count();
     }
 
-    public function getSlice(int $offset, int $length): iterable
+    public function getSlice(int $offset, int $length): QueryResult
     {
-        $statement =  $this->pdo->prepare($this->query . ' LIMIT :offset, :length');
-        $statement->bindParam('offset', $offset, PDO::PARAM_INT);
-        $statement->bindParam('length', $length, PDO::PARAM_INT);
-        $statement->execute();
-        if ($this->entity) {
-            $statement->setFetchMode(PDO::FETCH_CLASS, $this->entity);
-        }
-        return $statement->fetchAll();
+        $query = clone $this->query;
+        return $query->limit($length, $offset)->fetchAll();
     }
 }

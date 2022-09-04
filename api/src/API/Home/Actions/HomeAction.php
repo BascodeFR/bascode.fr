@@ -49,8 +49,8 @@ class HomeAction
      */
     public function index(): string
     {
-        $posts = $this->postTable->findPaginated(5, 1);
-        $news = $this->newsTable->findPaginated(10, 1);
+        $posts = $this->postTable->findPublic()->paginate(5, 1);
+        $news = $this->newsTable->findPublic()->paginate(10, 1);
         return $this->renderer->render('@home/index', compact('posts', 'news'));
     }
 }

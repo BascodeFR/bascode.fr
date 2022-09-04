@@ -1,7 +1,7 @@
 {{ csrf_input() }}
 
-{{ field('created_by', item.created_by, "Autheur du Messages")}}
-{{ field('created_at', item.created_at, "Date de création", {class: 'datepicker'})}}
-{{ field('post_id', item.post_id, "Topic", {options: posts})}}
+{{ field('created_by', item.createdBy, "Autheur du Messages")}}
+{{ field('created_at', item.createdAt, "Date de création", {class: 'datepicker'})}}
+{{ field('post_id', item.postId, "Topic", {options: posts})}}
 {{ field('content', item.content, "Messages", {type: 'textarea'})}}
    

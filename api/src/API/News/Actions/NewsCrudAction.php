@@ -61,9 +61,15 @@ class NewsCrudAction extends CrudAction
     {
         $params = array_merge($request->getParsedBody(), $request->getUploadedFiles());
         // Uploader le Fichier
-        $params['avatar'] = $this->newsUpload->upload($params['avatar'], $news->avatar);
+        $image = $this->newsUpload->upload($params['avatar'], $news->avatar);
+        if ($image !== null) {
+            $params['avatar'] = $image;
+        } else {
+            unset($params['avatar']);
+        }
+       
         $params = array_filter($params, function ($key) {
-            return in_array($key, ['name', 'slug', 'created_at', 'content', 'avatar']);
+            return in_array($key, ['name', 'slug', 'created_at', 'content', 'avatar', 'public']);
         }, ARRAY_FILTER_USE_KEY);
         return array_merge($params, ['updated_at' =>date('Y-m-d H:i:s')]);
     }
@@ -87,8 +93,8 @@ class NewsCrudAction extends CrudAction
     protected function getNewEntity()
     {
         $news = new News();
-        $news->created_at = new DateTime();
-        $news->updated_at = new DateTime();
+        $news->createdAt = new DateTime();
+        $news->updatedAt = new DateTime();
         return $news;
     }
 }

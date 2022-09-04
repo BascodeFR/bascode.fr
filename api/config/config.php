@@ -28,6 +28,7 @@ return[
     "database.username" => 'bascode',
     "database.password" => 'ELECKBOINMAK',
     "database.name" => 'Bascode',
+    "version" => "1.0",
 
 
     'view.path' => dirname(__DIR__) . '/views',

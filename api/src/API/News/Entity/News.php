@@ -16,6 +16,8 @@ class News
 
     public $content;
 
+    public $public;
+
     public $createdAt;
     
     public $updatedAt;
@@ -53,5 +55,10 @@ class News
     {
         ['filename' => $filename, 'extension' => $extension] =pathinfo($this->avatar);
         return '/upload/news/'. $filename .'_thumb.' . $extension;
+    }
+
+    public function getImageURL()
+    {
+        return '/upload/news/'. $this->avatar;
     }
 }

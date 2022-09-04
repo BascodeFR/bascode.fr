@@ -14,12 +14,12 @@
         </header>
         {% for message in messages %}
         <div class="messages-content">
-            <h2>{{message.created_by}}</h2>
+            <h2>{{message.createdBy}}</h2>
             <div class="user-info">
                 <img src="https://via.placeholder.com/55x55" alt="" />
                 <p>Admin</p>
             </div>
-            <div class="msg-head"><p>Posté {{message.created_at | ago}}</p><div class="author"><p>Auteur</p></div></div>
+            <div class="msg-head"><p>Posté {{message.createdAt | ago}}</p><div class="author"><p>Auteur</p></div></div>
             <div class="content">{{message.content | nl2br }}</div>
         </div>
         {% endfor %}

@@ -1558,14 +1558,14 @@ body {
   color: #333333;
 }
 .container .last-topics {
-  height: auto;
+  min-height: 340px;
 }
 .container .forum {
   height: auto;
   padding-bottom: 8px;
 }
 .container .topic-message {
-  height: auto;
+  min-height: 255px;
   padding-bottom: 6px;
 }
 .container .topics {
@@ -1646,7 +1646,7 @@ body {
   padding: 8px 20px;
 }
 .container .last-actu {
-  height: auto;
+  min-height: 255px;
 }
 .container .last-actu .actus {
   position: relative;
@@ -1657,7 +1657,7 @@ body {
   flex-direction: column;
   border-right: solid 1px black;
   width: min-content;
-  height: auto;
+  min-height: 215px;
   justify-content: center;
   padding: 16.5px;
   background-color: #6C6C6C;
@@ -1673,7 +1673,7 @@ body {
   text-decoration: none;
   transition: text-shadow 0.3s;
 }
-.container .last-actu .actus .actu-items .actu-name:hover {
+.container .last-actu .actus .actu-items a.actu-name:hover {
   text-shadow: -2px -2px 0 black, 0 -2px 0 black, 2px -2px 0 black, 2px 0 0 black, 2px 2px 0 black, 0 2px 0 black, -2px 2px 0 black, -2px 0 0 black;
 }
 .container .last-actu .actus .actu-items p {
@@ -1722,18 +1722,18 @@ body {
 }
 
 .footer {
-  position: relative;
   height: 137px;
   width: 100%;
   background-color: #6C6C6C;
   font-size: 12px;
   font-weight: bold;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 .footer .copyright {
-  position: absolute;
-  bottom: 6px;
+  margin-left: 6px;
+  margin-top: auto;
+  margin-bottom: 12px;
 }
 .footer .copyright::before {
   vertical-align: middle;
@@ -1744,37 +1744,56 @@ body {
   height: 20px;
   background: url("../svg/copyright.svg") center center/contain no-repeat;
 }
-.footer .discord {
+.footer .socials {
+  justify-content: space-between;
+  grid-column: 2;
+  margin-top: auto;
+  margin: auto;
+  margin-bottom: 6px;
+  display: flex;
+}
+.footer .socials .discord {
+  margin: 0 10px;
   transition: opacity 0.3s;
-  position: absolute;
-  bottom: 6px;
-  left: 50%;
   content: "";
   display: inline-block;
   width: 24px;
   height: 24px;
-  vertical-align: middle;
-  margin-top: -1px;
-  background: url(../svg/discord.svg) center center/contain no-repeat;
+  background: url("../svg/discord.svg") center center/contain no-repeat;
 }
-.footer .discord:hover {
+.footer .socials .discord:hover {
   opacity: 50%;
 }
-.footer .github {
+.footer .socials .bascan {
+  margin: 0 10px;
   transition: opacity 0.3s;
-  position: absolute;
-  bottom: 6px;
-  left: calc(50% - 34px);
   content: "";
   display: inline-block;
   width: 24px;
   height: 24px;
-  vertical-align: middle;
-  margin-top: -1px;
-  background: url(../svg/github.svg) center center/contain no-repeat;
+  background: url("../svg/bascan.svg") center center/contain no-repeat;
 }
-.footer .github:hover {
+.footer .socials .bascan:hover {
   opacity: 50%;
+}
+.footer .socials .github {
+  margin: 0 10px;
+  transition: opacity 0.3s;
+  content: "";
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background: url("../svg/github.svg") center center/contain no-repeat;
+}
+.footer .socials .github:hover {
+  opacity: 50%;
+}
+.footer .version {
+  grid-column: 3;
+  margin-top: auto;
+  margin-left: auto;
+  margin-right: 6px;
+  margin-bottom: 12px;
 }
 
 .loading {

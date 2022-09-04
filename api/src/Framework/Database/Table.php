@@ -4,6 +4,7 @@ namespace cavernos\bascode_api\Framework\Database;
 use Exception;
 use Pagerfanta\Pagerfanta;
 use PDO;
+use stdClass;
 
 class Table
 {
@@ -11,7 +12,7 @@ class Table
     /**
      * pdo
      *
-     * @var PDO
+     * @var null|PDO
      */
     private $pdo;
     
@@ -27,36 +28,14 @@ class Table
      *
      * @var string
      */
-    protected $entity;
+    protected $entity = stdClass::class;
 
-    public function __construct(PDO $pdo)
+    public function __construct(?PDO $pdo = null)
     {
         $this->pdo = $pdo;
     }
        
-    /**
-     * findPaginated Pagine les éléments
-     *
-     * @param  int $perPage
-     * @return Pagerfanta
-     */
-    public function findPaginated(int $perPage, int $currentPage): Pagerfanta
-    {
-        $query = new PaginatedQuery(
-            $this->pdo,
-            $this->paginationQuery(),
-            "SELECT COUNT(id) FROM $this->table",
-            $this->entity
-        );
-        return (new Pagerfanta($query))
-        ->setMaxPerPage($perPage)
-        ->setCurrentPage($currentPage);
-    }
 
-    protected function paginationQuery()
-    {
-        return "SELECT * FROM $this->table";
-    }
     
     /**
      * find Récupère un élément à partir de son id
@@ -66,12 +45,14 @@ class Table
      */
     public function find(int $id)
     {
-        $query = $this->pdo->prepare("SELECT * FROM $this->table WHERE id = :id");
-        $query->execute(['id' => $id]);
-        if ($this->entity) {
-            $query->setFetchMode(PDO::FETCH_CLASS, $this->entity);
-        }
-        return $query->fetch() ?: null;
+        return $this->makeQuery()->where("id = $id")->fetchOrFail();
+    }
+
+    public function makeQuery(): Query
+    {
+        return (new Query($this->pdo))
+        ->from($this->table, $this->table[0])
+        ->into($this->entity);
     }
     
     /**
@@ -89,6 +70,16 @@ class Table
         }
         return $list;
     }
+
+    public function findAll(): QueryResult
+    {
+        return $this->makeQuery()->fetchAll();
+    }
+
+    public function findBy(string $field, string $value): array
+    {
+        return $this->makeQuery()->where("$field = :field")->params(['field' => $value])->fetchOrFail();
+    }
     
     /**
      * count
@@ -97,7 +88,7 @@ class Table
      */
     public function count(): int
     {
-        return $this->fetchColumn("SELECT COUNT(id) FROM $this->table");
+        return $this->makeQuery()->count();
     }
     
     /**
@@ -187,43 +178,5 @@ class Table
     public function getPdo()
     {
         return $this->pdo;
-    }
-    
-    /**
-     * fetchOrFail
-     *
-     * @param  string $query
-     * @param  mixed $params
-     * @return array
-     */
-    private function fetchOrFail(string $query, array $params = []): array
-    {
-        $query = $this->pdo->prepare($query);
-        $query->execute($params);
-        if ($this->entity) {
-            $query->setFetchMode(PDO::FETCH_CLASS, $this->entity);
-        }
-        $record = $query->fetch();
-        if ($record === false) {
-            throw new NoRecordException();
-        }
-        return $record;
-    }
-    
-    /**
-     * fetchColumn
-     *
-     * @param  string $query
-     * @param  array $params
-     * @return mixed
-     */
-    private function fetchColumn(string $query, array $params = [])
-    {
-        $query = $this->pdo->prepare($query);
-        $query->execute($params);
-        if ($this->entity) {
-            $query->setFetchMode(PDO::FETCH_CLASS, $this->entity);
-        }
-        return $query->fetchColumn();
     }
 }

@@ -57,7 +57,7 @@ class NewsAction
     public function index(ServerRequestInterface $request): string
     {
         $params = $request->getQueryParams();
-        $news = $this->newsTable->findPaginated(10, $params['p'] ?? 1);
+        $news = $this->newsTable->findPublic()->paginate(10, $params['p'] ?? 1);
 
         return $this->renderer->render('@news/index', compact('news'));
     }

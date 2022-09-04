@@ -25,7 +25,8 @@ class NewsSeeder extends AbstractSeed
             'content' => $faker->paragraph(3, true),
             'avatar' => 'default_thumb.png',
             'created_at' => date('Y-m-d H:i:s', $date),
-            'updated_at' => date('Y-m-d H:i:s', $date)
+            'updated_at' => date('Y-m-d H:i:s', $date),
+            'public' => 1
             ];
         }
         $this->table('news')

@@ -35,7 +35,8 @@ class TextExtension extends AbstractExtension
     public function getFunctions()
     {
         return [
-            new TwigFunction('markdown', [$this, 'markdown'], ['is_safe' => ['html']])
+            new TwigFunction('markdown', [$this, 'markdown'], ['is_safe' => ['html']]),
+            new TwigFunction('version', [$this, 'version'])
         ];
     }
     
@@ -66,5 +67,10 @@ class TextExtension extends AbstractExtension
         }
         $content = Markdown::defaultTransform($content);
         return $content;
+    }
+
+    public function version()
+    {
+        return '1.0';
     }
 }

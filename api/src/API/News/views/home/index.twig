@@ -10,7 +10,7 @@
                 <img src="{{new.thumb}}" alt="" />
                 <a href="{{path('news.show', {slug: new.slug, id: new.id})}}" class="actu-name active">{{new.name}}</a>
                 <p>Par Cavernos</p>
-                <p>{{new.created_at | ago}}</p>
+                <p>{{new.createdAt | ago}}</p>
             </div>
              {% endfor %}
             <div class="next"><a href='#'class="next-button"></a></div>

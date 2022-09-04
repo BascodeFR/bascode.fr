@@ -14,12 +14,12 @@
          {% set token_input = csrf_input() %}
     {% for item in items %}
        <div class="messages-content">
-            <h2>{{item.created_by}}</h2>
+            <h2>{{item.createdBy}}</h2>
             <div class="user-info">
                 <img src="https://via.placeholder.com/55x55" alt="" />
                 <p>Admin</p>
             </div>
-            <div class="msg-head"><p>Posté {{item.created_at | ago}}</p><div class="admin-message"><a  href="{{ path(routePrefix ~ '.edit', {id: item.id}) }}" class="btn">Editer</a> 
+            <div class="msg-head"><p>Posté {{item.createdAt | ago}}</p><div class="admin-message"><a  href="{{ path(routePrefix ~ '.edit', {id: item.id}) }}" class="btn">Editer</a> 
                  <form action="{{path(routePrefix ~ '.delete', {id: item.id })}}" method="POST">                 
                     <input type="hidden" name="_METHOD" value="DELETE"/>
                     <button class="btn btn-danger">Supprimer</button>
