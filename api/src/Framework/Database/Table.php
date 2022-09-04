@@ -12,7 +12,7 @@ class Table
     /**
      * pdo
      *
-     * @var null|PDO
+     * @var PDO
      */
     private $pdo;
     
@@ -30,7 +30,7 @@ class Table
      */
     protected $entity = stdClass::class;
 
-    public function __construct(?PDO $pdo = null)
+    public function __construct(PDO $pdo)
     {
         $this->pdo = $pdo;
     }

@@ -5,28 +5,6 @@
 ![](Bdd.png)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-str_replace([' ' ,  'á' ,  'à', 'é', 'í', 'ó', 'ú'],
-        ['-', 'a', 'a', 'e', 'i', 'o', 'u'],
-        strtolower($params['name'])
-
-
 ## API
 
 ` cd api/`
