@@ -49,6 +49,8 @@ class FormExtension extends AbstractExtension
             $input = $this->file($attributes);
         } elseif ($type === 'checkbox') {
             $input = $this->checkbox($value, $attributes);
+        } elseif ($type === 'password') {
+            $input = $this->password($value, $attributes);
         } elseif (array_key_exists('options', $options)) {
             $input = $this->select($value, $options['options'], $attributes);
         } else {
@@ -87,6 +89,18 @@ class FormExtension extends AbstractExtension
     private function input(?string $value, array $attributes): string
     {
         return "<input type=\"text\" ".$this->getHtmlFromArray($attributes)." value=\"$value\" />";
+    }
+
+    /**
+     * input représente un input
+     *
+     * @param  ?string $value
+     * @param  array $attributes
+     * @return string
+     */
+    private function password(?string $value, array $attributes): string
+    {
+        return "<input type=\"password\" ".$this->getHtmlFromArray($attributes)." value=\"$value\" />";
     }
 
     private function file(array $attributes): string

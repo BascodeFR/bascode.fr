@@ -1,0 +1,25 @@
+
+
+{% extends 'layout.twig' %}
+
+{% block title "Connexion" %}
+
+{% block body %}
+<main class="container">
+    <a class="container-link" href="/">Accueil ></a>
+     <a class="container-link" href="{{ path('auth.login')}}">Login</a>
+    <div class="cards forum"> 
+        <header class="cards-head">
+            Connexion
+        </header>
+        <form class="topic-edit" action="{{ path('auth.login') }}" method="post" enctype="multipart/form-data">
+            {{ csrf_input() }}
+
+            {{ field('username', null, "Nom d'Utilisateur")}}
+            {{ field('password', null, "Mot de passe", {type: 'password'})}}
+            <button class="btn"> Se Connecter</button>
+        </form>
+        
+
+</main>
+{% endblock %}

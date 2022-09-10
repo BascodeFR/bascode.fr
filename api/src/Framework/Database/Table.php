@@ -75,8 +75,15 @@ class Table
     {
         return $this->makeQuery()->fetchAll();
     }
-
-    public function findBy(string $field, string $value): array
+    
+    /**
+     * findBy
+     *
+     * @param  string $field
+     * @param  string $value
+     * @return mixed
+     */
+    public function findBy(string $field, string $value): mixed
     {
         return $this->makeQuery()->where("$field = :field")->params(['field' => $value])->fetchOrFail();
     }

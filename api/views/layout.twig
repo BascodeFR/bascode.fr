@@ -14,10 +14,18 @@
             <a href="/"><img src="/assets/img/bascode.png" alt=""/></a>
             <h1>BasCode</h1>
         </div>
-        <div class="connection">
-            <a class="connect">Utilisateur existant ? Se connecter</a>
-            <a class="btn">S'inscrire</a>
-        </div>          
+        {% if current_user() %}
+            <div class="account">
+                <a href="/msg" class="msg"></a>
+                <img src="https://via.placeholder.com/40x40" alt="" />
+                <a href="{{ path('auth.index', {id: current_user().id}) }}" class="username">{{ current_user().username }}</a>
+            </div>
+        {% else %}
+            <div class="connection">
+                <a href="{{path('auth.login')}}" class="connect">Utilisateur existant ? Se connecter</a>
+                <a class="btn">S'inscrire</a>
+            </div>  
+        {% endif %}        
 </header>
 <nav class="topbar-nav">
 <div class="nav-content">
@@ -28,6 +36,13 @@
 </div>
 <div class="research"></div>
 </nav>
+ {% if flash('success') %}
+        <div class="alert alert-success">{{flash('success')}}</div>
+    {% endif %}
+
+    {% if flash('error') %}
+        <div class="alert alert-danger">{{flash('error')}}</div>
+    {% endif %}
     {% block body %}{% endblock %}
 </body>
 <footer class="footer">

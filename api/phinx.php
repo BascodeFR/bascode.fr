@@ -4,13 +4,13 @@ include 'public/index.php';
 $migrations = [];
 $seeds = [];
 
-foreach ($modules as $module) {
+foreach ($api->getModules() as $module) {
     if($module::MIGRATIONS){
         $migrations[] = $module::MIGRATIONS;
     }
 }
 
-foreach ($modules as $module) {
+foreach ($api->getModules() as $module) {
     if($module::SEEDS){
         $seeds[] = $module::SEEDS;
     }

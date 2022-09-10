@@ -22,11 +22,7 @@ export function Header(){
                     <div className="logo">
                         <a href="/"><img src="/src/assets/img/bascode.png" alt=""/></a>
                     </div>
-                    {window.sessionStorage.getItem("connecte") === "true"  ? <div className="account">
-                            <Link to="/msg" className="msg"></Link>
-                                <img src="https://via.placeholder.com/40x40" alt="" />
-                            <div className="username">{user.username}</div>
-                        </div> : 
+                    {window.sessionStorage.getItem("connecte") === "true"  ?  : 
                 
                     <div className="connection">
                         <a onClick={toggleLogin} className="connect">Utilisateur existant ? Se connecter</a>

@@ -3,5 +3,5 @@ ansible
 api/vendor
 api/public/upload
 api/composer.lock
-front/
+front
 api/tmp

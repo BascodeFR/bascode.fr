@@ -1,0 +1,22 @@
+{% extends 'layout.twig' %}
+
+{% block title "Profil de #{ current_user().username }" %}
+
+{% block body %}
+<main class="container">
+    <a class="container-link" href="/">Accueil ></a>
+     <a class="container-link" href="{{ path('auth.index', { id:  current_user().username })}}">Profil de {{ current_user().username }}</a>
+    <div class="cards forum"> 
+        <header class="cards-head">
+            Profil de {{ current_user().username }}
+        </header>
+        <h1>{{ current_user().email }}</h1>
+        <form class="topic-edit" action="{{ path('auth.logout') }}" method="post">
+            {{ csrf_input() }}
+            <button class="btn"> Se Déconnecter</button>
+        </form>
+         <!-- <button class="btn"> Edition </button> -->
+        
+
+</main>
+{% endblock %}

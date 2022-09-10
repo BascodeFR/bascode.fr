@@ -1,6 +1,7 @@
 <?php
 namespace cavernos\bascode_api\API;
 
+use cavernos\bascode_api\Framework\Middleware\RoutePrefixedMiddleware;
 use DI\ContainerBuilder;
 use Doctrine\Common\Cache\ApcuCache;
 use Doctrine\Common\Cache\FilesystemCache;
@@ -56,10 +57,22 @@ class API implements RequestHandlerInterface
         $this->modules[] = $module;
         return $this;
     }
-
-    public function pipe(string $middleware): self
+    
+    /**
+     * pipe
+     *
+     * @param  string $routePrefix
+     * @param  string $middleware
+     * @return self
+     */
+    public function pipe(string $routePrefix, ?string $middleware = null): self
     {
-        $this->middlewares[] = $middleware;
+        if ($middleware == null) {
+            $this->middlewares[] = $routePrefix;
+        } else {
+            $this->middlewares[] = new RoutePrefixedMiddleware($this->getContainer(), $routePrefix, $middleware);
+        }
+        
         return $this;
     }
 
@@ -131,10 +144,25 @@ class API implements RequestHandlerInterface
     private function getMiddleware()
     {
         if (array_key_exists($this->index, $this->middlewares)) {
-            $middleware = $this->container->get($this->middlewares[$this->index]);
+            if (is_string($this->middlewares[$this->index])) {
+                $middleware = $this->container->get($this->middlewares[$this->index]);
+            } else {
+                $middleware = $this->middlewares[$this->index];
+            }
+            
             $this->index++;
             return $middleware;
         }
         return null;
+    }
+
+    /**
+     * Get liste des modules
+     *
+     * @return  array
+     */
+    public function getModules()
+    {
+        return $this->modules;
     }
 }

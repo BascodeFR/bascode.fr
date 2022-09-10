@@ -1487,6 +1487,8 @@ body {
   display: inline-block;
   font-size: 12px;
   font-weight: bold;
+  text-decoration: none;
+  color: inherit;
 }
 .account .username::after {
   content: "";

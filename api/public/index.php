@@ -2,9 +2,12 @@
 
 use cavernos\bascode_api\API\Admin\AdminModule;
 use cavernos\bascode_api\API\API;
+use cavernos\bascode_api\API\Auth\AuthModule;
+use cavernos\bascode_api\API\Auth\ForbiddenMiddleware;
 use cavernos\bascode_api\API\Forum\ForumModule;
 use cavernos\bascode_api\API\Home\HomeModule;
 use cavernos\bascode_api\API\News\NewsModule;
+use cavernos\bascode_api\Framework\Auth\LoggedInMiddleware;
 use cavernos\bascode_api\Framework\Middleware\CsrfMiddleware;
 use cavernos\bascode_api\Framework\Middleware\DispatcherMiddleware;
 use cavernos\bascode_api\Framework\Middleware\MethodMiddleware;
@@ -19,20 +22,19 @@ chdir(dirname(__DIR__));
 
 require_once 'vendor/autoload.php';
 
-$modules = [
-    HomeModule::class,
-    AdminModule::class,
-    ForumModule::class,
-    NewsModule::class
-];
-
 $api = (new API(dirname(__DIR__) . '/config/config.php'))
             ->addModule(HomeModule::class)
             ->addModule(AdminModule::class)
             ->addModule(ForumModule::class)
             ->addModule(NewsModule::class)
-            ->pipe(Whoops::class)
+            ->addModule(AuthModule::class);
+
+$container = $api->getContainer();
+            
+        $api->pipe(Whoops::class)
             ->pipe(TrailingSlashMidleware::class)
+            ->pipe(ForbiddenMiddleware::class)
+            ->pipe($container->get('admin.prefix'), LoggedInMiddleware::class)
             ->pipe(MethodMiddleware::class)
             ->pipe(CsrfMiddleware::class)
             ->pipe(RouterMiddleware::class)

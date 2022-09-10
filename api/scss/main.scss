@@ -72,6 +72,8 @@ body{
         display: inline-block;
         font-size: 12px;
         font-weight: bold;
+        text-decoration: none;
+        color: inherit;
         &::after {
        @include icon-loader("../svg/arrow.svg", 24px, 24px);
         vertical-align: middle;
