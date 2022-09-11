@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 use Phinx\Migration\AbstractMigration;
 
-final class AddPostsIdToMessages extends AbstractMigration
+final class AddUserIdToNews extends AbstractMigration
 {
     /**
      * Change Method.
@@ -18,9 +18,9 @@ final class AddPostsIdToMessages extends AbstractMigration
      */
     public function change(): void
     {
-        $this->table('messages')
-            ->addColumn('post_id', 'integer', ['null' => true])
-            ->addForeignKey('post_id', 'posts', 'id')
-            ->update();
+        $this->table('news')
+        ->addColumn('user_id', 'integer', ['null' => true])
+        ->addForeignKey('user_id', 'users', 'id', ['delete' => 'CASCADE'])
+        ->update();
     }
 }

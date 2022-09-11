@@ -22,12 +22,12 @@ class MessageSeeder extends AbstractSeed
             $data[] =[
             'content' => $faker->catchPhrase,
             'created_at' => date('Y-m-d H:i:s', $date),
-            'created_by' => $faker->userName,
+            'user_id' => 2,
             'updated_at' => date('Y-m-d H:i:s', $date),
-            'post_id' => 1
+            'thread_id' => 2
             ];
         }
-        $this->table('messages')
+        $this->table('posts')
         ->insert($data)
         ->save();
     }

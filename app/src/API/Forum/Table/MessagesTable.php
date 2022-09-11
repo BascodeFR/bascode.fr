@@ -8,7 +8,7 @@ use cavernos\bascode_api\Framework\Database\Table;
 class MessagesTable extends Table
 {
     
-    protected $table = 'messages';
+    protected $table = 'posts';
 
     protected $entity = Messages::class;
 }

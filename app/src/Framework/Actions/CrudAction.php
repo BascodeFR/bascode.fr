@@ -2,6 +2,7 @@
 
 namespace cavernos\bascode_api\Framework\Actions;
 
+use cavernos\bascode_api\API\Auth\Table\UserTable;
 use cavernos\bascode_api\Framework\Database\Hydrator;
 use cavernos\bascode_api\Framework\Database\Table;
 use cavernos\bascode_api\Framework\Renderer\RendererInterface;
@@ -74,7 +75,7 @@ class CrudAction
         RendererInterface $renderer,
         Table $table,
         Router $router,
-        FlashService $flash
+        FlashService $flash,
     ) {
         $this->flash = $flash;
         $this->router = $router;
@@ -106,7 +107,13 @@ class CrudAction
     public function index(ServerRequestInterface $request): string
     {
         $params = $request->getQueryParams();
-        $items = $this->table->makeQuery()->order('created_at DESC')->paginate(10, $params['p'] ?? 1);
+        $table = $this->table->getTable();
+        $items = $this->table->makeQuery()
+            ->select("$table.*, u.username")
+            ->from($table)
+            ->order('created_at DESC')
+            ->join('users as u', "user_id = u.id")
+            ->paginate(10, $params['p'] ?? 1);
         return $this->renderer->render("$this->viewPath/index", compact('items'));
     }
     

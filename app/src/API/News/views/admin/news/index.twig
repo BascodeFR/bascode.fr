@@ -16,7 +16,7 @@
         <div class="topics">
             <div class="topics-create-info">
                 <a href={{path('news.show', {slug: item.slug, id: item.id})}} class="topics-name">{{ item.name }}</a>
-                <p>Crée par Cavernos</p>
+                <p>Crée par {{ item.username }}</p>
                 <p>Commencé le {{ item.createdAt.format('d/m/Y')}} à {{ item.createdAt.format('H:i')}}</p>
             </div>
             <div class="topics-last-info">

@@ -45,7 +45,7 @@ class PostTableTest extends DatabaseTestCase {
         $this->assertEquals('demo', $post->slug);
     }
     public function testInsert(){
-        $this->postTable->insert(['name' => 'Salut', 'slug' => 'demo', 'created_by' => 'afkgku', 'created_at' => "2015-06-05 10:20",'updated_at' => "2015-06-05 10:20"]);
+        $this->postTable->insert(['name' => 'Salut', 'slug' => 'demo', 'user_id' => 8, 'created_at' => "2015-06-05 10:20",'updated_at' => "2015-06-05 10:20"]);
         $post = $this->postTable->find(1);
         $this->assertInstanceOf(Post::class, $post);
         $this->assertEquals('Salut', $post->name);
@@ -53,12 +53,12 @@ class PostTableTest extends DatabaseTestCase {
     }
 
     public function testDelete(){
-        $this->postTable->insert(['name' => 'Salut', 'slug' => 'demo', 'created_by' => 'afkgku', 'created_at' => "2015-06-05 10:20",'updated_at' => "2015-06-05 10:20"]);
-        $this->postTable->insert(['name' => 'Salut', 'slug' => 'demo', 'created_by' => 'afkgku', 'created_at' => "2015-06-05 10:20",'updated_at' => "2015-06-05 10:20"]);
-        $count =  $this->postTable->getPdo()->query('SELECT COUNT(id) FROM posts')->fetchColumn();
+        $this->postTable->insert(['name' => 'Salut', 'slug' => 'demo', 'user_id' => 8, 'created_at' => "2015-06-05 10:20",'updated_at' => "2015-06-05 10:20"]);
+        $this->postTable->insert(['name' => 'Salut', 'slug' => 'demo', 'user_id' => 8, 'created_at' => "2015-06-05 10:20",'updated_at' => "2015-06-05 10:20"]);
+        $count =  $this->postTable->getPdo()->query('SELECT COUNT(id) FROM threads')->fetchColumn();
         $this->assertEquals(2, (int)$count);
         $this->postTable->delete($this->postTable->getPdo()->lastInsertId());
-        $count = $this->postTable->getPdo()->query('SELECT COUNT(id) FROM posts')->fetchColumn();
+        $count = $this->postTable->getPdo()->query('SELECT COUNT(id) FROM threads')->fetchColumn();
         $this->assertEquals(1, (int)$count);
 
     }

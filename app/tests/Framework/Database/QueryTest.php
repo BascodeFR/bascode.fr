@@ -45,7 +45,7 @@ class QueryTest extends DatabaseTestCase {
         $this->seedDb($pdo);
 
         $query = (new Query($pdo))
-        ->from('posts', 'p')
+        ->from('threads', 'p')
         ->into(Demo::class)
         ->fetchAll();
         $this->assertEquals('demo', substr($query[0]->getSlug(), -4));

@@ -18,7 +18,7 @@ class ValidationError
         'maxLength' => "Le champ %s doit contenir moins de %d caracères",
         'betweenLength' => "Le champ %s doit contenir entre %d et %d caracères",
         'datetime' => 'Le champ %s doit être une date valide (%s)',
-        'exist' => 'Le champ %s  n\'existe pas dans la table %s',
+        'exists' => 'Le champ %s  n\'existe pas dans la table %s',
         'filetype' => 'Le champ %s  n\'est pas au bon format (formats valides: %s)',
         'uploaded' => 'Vous devez Uploader un fichier',
     ];

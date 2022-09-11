@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use Phinx\Db\Action\AddColumn;
 use Phinx\Migration\AbstractMigration;
 
 final class AddMessagesTables extends AbstractMigration
@@ -18,11 +19,14 @@ final class AddMessagesTables extends AbstractMigration
      */
     public function change(): void
     {
-        $this->table('messages')
+        $this->table('posts')
             ->addColumn('content', 'string')
-            ->addColumn('created_by', 'string')
+            ->addColumn('user_id', 'integer')
+            ->AddColumn('thread_id', 'integer')
             ->addColumn('created_at', 'datetime')
             ->addColumn('updated_at', 'datetime')
+            ->addForeignKey('thread_id', 'threads', 'id', ['delete' => 'CASCADE'])
+            ->addForeignKey('user_id', 'users', 'id', ['delete' => 'CASCADE'])
             ->create();
     }
 }

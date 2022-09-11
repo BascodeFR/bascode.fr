@@ -36,7 +36,7 @@ class PostCrudAction extends CrudAction
         parent::__construct($renderer, $table, $router, $flash);
     }
 
-    protected function getParams(ServerRequestInterface $request): array
+    protected function getParams(ServerRequestInterface $request, $item): array
     {
         $params = array_filter($request->getParsedBody(), function ($key) {
             return in_array($key, ['name', 'slug', 'created_by', 'created_at']);
@@ -47,8 +47,7 @@ class PostCrudAction extends CrudAction
                 [' ' ,  'á' ,  'à', 'é', 'í', 'ó', 'ú'],
                 ['-', 'a', 'a', 'e', 'i', 'o', 'u'],
                 strtolower($params['name'])
-            ),
-            'total_messages' => 1
+            )
         ]);
     }
 

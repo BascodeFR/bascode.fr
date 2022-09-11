@@ -12,6 +12,7 @@
        <header class="cards-head">
             {{new.name}}<br/>
              Publié {{ new.createdAt | ago}}
+             Par {{ new.username }}
         </header>
         <div class="news content">
             {% if new.thumb %}

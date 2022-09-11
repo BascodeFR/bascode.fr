@@ -8,13 +8,13 @@ class Messages
 
     public $id;
     
-    public $created_by;
+    public $user_id;
     
     public $created_at;
     
     public $updated_at;
 
-    public $post_name;
+    public $thread_id;
 
     public function __construct()
     {

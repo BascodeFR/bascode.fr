@@ -7,9 +7,11 @@
             <div class="prev"><a href='#'class="prev-button"></a></div>
             {% for new in news %}
             <div class="actu-items">
+            {% if new.thumb != null %}
                 <img src="{{new.thumb}}" alt="" />
+            {% endif %}
                 <a href="{{path('news.show', {slug: new.slug, id: new.id})}}" class="actu-name active">{{new.name}}</a>
-                <p>Par Cavernos</p>
+                <p>Par {{ new.username }}</p>
                 <p>{{new.createdAt | ago}}</p>
             </div>
              {% endfor %}

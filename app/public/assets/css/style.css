@@ -1658,6 +1658,7 @@ body {
   display: flex;
   flex-direction: column;
   border-right: solid 1px black;
+  min-width: 140px;
   width: min-content;
   min-height: 215px;
   justify-content: center;

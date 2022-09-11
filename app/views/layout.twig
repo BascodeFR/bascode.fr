@@ -29,7 +29,7 @@
 </header>
 <nav class="topbar-nav">
 <div class="nav-content">
-    {% if current_user().roles %}<a href="{{ path('admin')}}" class="nav-items" >Administration</a>{% endif %}
+    {% if current_user().roles == 'admin' %}<a href="{{ path('admin')}}" class="nav-items" >Administration</a>{% endif %}
     <a href="{{path('forum.index')}}" class="nav-items {{is_subpath('forum.index') ? 'active'}}">Forum</a>
      {{ renderNewsLink() }}
     <a href="/tuto" class="nav-items">Tutoriels</a>

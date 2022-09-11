@@ -23,12 +23,12 @@ class PostSeeder extends AbstractSeed
             'name' => $faker->catchPhrase,
             'slug' => $faker->slug,
             'created_at' => date('Y-m-d H:i:s', $date),
-            'created_by' => 'admin',
+            'user_id' => 2,
             'updated_at' => date('Y-m-d H:i:s', $date),
-            'total_messages' => rand(0, 3000)
+            'number_of_posts' => rand(0, 3000)
             ];
         }
-        $this->table('posts')
+        $this->table('threads')
         ->insert($data)
         ->save();
     }

@@ -1,6 +1,7 @@
 <?php
 namespace cavernos\bascode_api\Framework\Twig;
 
+use cavernos\bascode_api\Framework\Database\QueryResult;
 use DateTime;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;

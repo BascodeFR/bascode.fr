@@ -15,7 +15,8 @@ class NewsTable extends Table
     public function findPublic(): Query
     {
         return $this->makeQuery()
-        ->select('n.*')
+        ->select('n.*', 'u.username', 'u.id')
+        ->join("users as u", "u.id = n.user_id")
         ->where('n.created_at < NOW()')
         ->where('n.public = 1')
         ->order('n.created_at DESC');

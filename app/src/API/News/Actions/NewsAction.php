@@ -71,10 +71,11 @@ class NewsAction
     public function show(ServerRequestInterface $request): string
     {
         $slug = $request->getAttribute('slug');
-
-        $new = $this->newsTable->find($request->getAttribute('id'));
-        if ($new->slug !== $slug) {
-        }
+        $new = $this->newsTable->makeQuery()->select('n.*, u.username')
+            ->join('users as u', 'user_id = u.id')
+            ->where("n.id = ?")
+            ->params([$request->getAttribute('id')])
+            ->fetchOrFail();
         return $this->renderer->render('@news/show', compact('new'));
     }
 }

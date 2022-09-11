@@ -5,6 +5,7 @@
 {% if item.avatar %}
     <img style="margin: auto; display: block" src="{{item.thumb}}" alt=""/>
 {% endif %}
+{{ field('user_id', null, "Autheur de l'Actualité", {options: users})}}
 {{ field('avatar', item.name,"Image", {type: 'file'})}}
 {{ field('created_at', item.createdAt, "Date de création", {class: 'datepicker'})}}
 {{ field('public', item.public, "En ligne ?", {type: 'checkbox'})}}

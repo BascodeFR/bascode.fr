@@ -10,15 +10,15 @@ use Pagerfanta\Pagerfanta;
 class PostTable extends Table
 {
     
-    protected $table = 'posts';
+    protected $table = 'threads';
 
     protected $entity = Post::class;
 
     public function findPublic(): Query
     {
         return $this->makeQuery()
-        ->select('p.*')
-        ->order('p.created_at DESC');
+        ->select('t.*')
+        ->order('t.created_at DESC');
     }
     /**public function findIn2Table(int $id, string $table2, string $joinCol)
     {

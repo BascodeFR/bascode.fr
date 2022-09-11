@@ -13,11 +13,11 @@
         <div class="topics">
             <div class="topics-create-info">
                 <a href={{path('forum.show', {slug: post.slug, id: post.id})}} class="topics-name">{{ post.name }}</a>
-                <p>Crée par {{ post.createdBy }}</p>
+                <p>Crée par {{ post.userId }}</p>
                 <p>Commencé {{ post.createdAt | ago }}</p>
             </div>
             <div class="topics-last-info">
-                <div class="total-posts">{{ post.totalMessages }} <br />Posts</div>
+                <div class="total-posts">{{ post.numberOfPosts }} <br />Posts</div>
                 <div class="last-post">
                     <div class="last-post-text">
                         Dernier Post :

@@ -62,7 +62,7 @@ class Table
      */
     public function findList(): array
     {
-        $results = $this->pdo->query("SELECT id, name FROM $this->table")
+        $results = $this->pdo->query("SELECT * FROM $this->table")
         ->fetchAll(PDO::FETCH_NUM);
         $list = [];
         foreach ($results as $result) {

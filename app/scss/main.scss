@@ -228,6 +228,7 @@ body{
                 display: flex;
                 flex-direction: column;
                 border-right: solid 1px black;
+                min-width: 140px;
                 width: min-content;
                 min-height: 215px;
                 justify-content: center;
@@ -296,6 +297,9 @@ body{
 }
 
 .footer{
+    //position:fixed;
+    //bottom: 0px;
+    //left:0;
     height: 137px;
     width: 100%;
     background-color: $header-color;

@@ -21,6 +21,8 @@ class News
     public $createdAt;
     
     public $updatedAt;
+
+    public $userId;
     
     /**
      * Set the value of createdAt
@@ -53,8 +55,11 @@ class News
      */
     public function getThumb()
     {
-        ['filename' => $filename, 'extension' => $extension] =pathinfo($this->avatar);
-        return '/upload/news/'. $filename .'_thumb.' . $extension;
+        if ($this->avatar) {
+            ['filename' => $filename, 'extension' => $extension] =pathinfo($this->avatar);
+            return '/upload/news/'. $filename .'_thumb.' . $extension;
+        }
+        return null;
     }
 
     public function getImageURL()

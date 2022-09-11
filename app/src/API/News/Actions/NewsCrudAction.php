@@ -2,6 +2,7 @@
 
 namespace cavernos\bascode_api\API\News\Actions;
 
+use cavernos\bascode_api\API\Auth\Table\UserTable;
 use cavernos\bascode_api\API\News\Entity\News;
 use cavernos\bascode_api\API\News\NewsUpload;
 use cavernos\bascode_api\API\News\Table\NewsTable;
@@ -33,16 +34,25 @@ class NewsCrudAction extends CrudAction
      * @var NewsUpload
      */
     private $newsUpload;
+    
+    /**
+     * userTable
+     *
+     * @var UserTable
+     */
+    private $userTable;
 
     public function __construct(
         RendererInterface $renderer,
         NewsTable $table,
         Router $router,
         FlashService $flash,
-        NewsUpload $newsUpload
+        NewsUpload $newsUpload,
+        UserTable $userTable
     ) {
         parent::__construct($renderer, $table, $router, $flash);
         $this->newsUpload = $newsUpload;
+        $this->userTable= $userTable;
     }
     public function delete(ServerRequestInterface $request): ResponseInterface
     {
@@ -69,7 +79,7 @@ class NewsCrudAction extends CrudAction
         }
        
         $params = array_filter($params, function ($key) {
-            return in_array($key, ['name', 'slug', 'created_at', 'content', 'avatar', 'public']);
+            return in_array($key, ['name', 'slug', 'created_at', 'content', 'avatar', 'public', 'user_id']);
         }, ARRAY_FILTER_USE_KEY);
         return array_merge($params, ['updated_at' =>date('Y-m-d H:i:s')]);
     }
@@ -77,10 +87,11 @@ class NewsCrudAction extends CrudAction
     protected function getValidator(ServerRequestInterface $request): Validator
     {
         $validator =  parent::getValidator($request)
-        ->required('name', 'slug', 'created_at', 'content')
+        ->required('name', 'slug', 'created_at', 'content', 'user_id')
         ->length('name', 3, 255)
         ->length('slug', 3, 50)
         ->length('content', 5, 6000)
+        ->exists('user_id', $this->userTable->getTable(), $this->userTable->getPdo())
         ->slug('slug')
         ->extension('image', ['jpg', 'png'])
         ->dateTime('created_at');
@@ -96,5 +107,11 @@ class NewsCrudAction extends CrudAction
         $news->createdAt = new DateTime();
         $news->updatedAt = new DateTime();
         return $news;
+    }
+
+    protected function formParams(array $params): array
+    {
+        $params['users'] = $this->userTable->findList();
+        return $params;
     }
 }
