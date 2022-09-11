@@ -1,7 +1,6 @@
 # PHP dep
 ansible
-api/vendor
-api/public/upload
-api/composer.lock
-front
-api/tmp
+app/vendor
+app/public/upload
+app/composer.lock
+app/tmp
