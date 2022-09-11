@@ -58,8 +58,42 @@ class DatabaseAuth implements Auth
         return null;
     }
 
+    public function register(array $params): ?User
+    {
+    
+        if (!array_key_exists('username', $params)
+        || !array_key_exists('email', $params)
+        || !array_key_exists('password', $params)
+        || !array_key_exists('password2', $params)) {
+            return null;
+        }
+        
+
+        if ($params['password'] === $params['password2']) {
+            $params = ['username' => $params['username'],
+            'email' => $params['email'],
+            'password' => password_hash($params['password'], PASSWORD_BCRYPT),
+            'roles' => 'membres',
+            'avatar' => ' '
+            ];
+            /** @var AuthUser $user */
+            $user = $this->userTable->insert($params, true);
+            if ($user) {
+                $this->session->set('auth.user', $user->id);
+                return $user;
+            }
+        }
+        return null;
+    }
+
     public function logout(): void
     {
         $this->session->delete('auth.user');
+    }
+
+    public function delete(int $id): void
+    {
+        $this->session->delete('auth.user');
+        $this->userTable->delete($id);
     }
 }

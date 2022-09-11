@@ -6,17 +6,38 @@
 <main class="container">
     <a class="container-link" href="/">Accueil ></a>
      <a class="container-link" href="{{ path('auth.index', { id:  current_user().username })}}">Profil de {{ current_user().username }}</a>
-    <div class="cards forum"> 
+    <div class="cards users"> 
         <header class="cards-head">
             Profil de {{ current_user().username }}
         </header>
-        <h1>{{ current_user().email }}</h1>
-        <form class="topic-edit" action="{{ path('auth.logout') }}" method="post">
-            {{ csrf_input() }}
-            <button class="btn"> Se Déconnecter</button>
-        </form>
-         <!-- <button class="btn"> Edition </button> -->
-        
-
+        <table class="profile">
+            <thead>
+                <td><h1>Avatar</h1></td>
+                <td><h1>Username</h1></td>
+                <td><h1>Email</h1></td>
+                <td><h1>Rôle</h1></td>
+            </thead>
+            <tr>
+                <td>{% if current_user().avatar %}<img src="{{ current_user().imageURL }}" alt="{{ current_user().username }}"/>{% endif %}
+                </td>
+                <td><h2>{{ current_user().username }}</h2></td>
+                <td><h2>{{ current_user().email }}</h2></td>
+                <td><h2>{{ current_user().roles }}</h2></td>
+            </tr>
+        </table>
+        <div class="user-action">
+             <form action="{{ path('auth.delete', {id: current_user().id}) }}" method="post">
+                    {{ csrf_input() }}
+                    <button class="btn btn-danger"> Supprimer le Compte</button>
+            </form>
+            <form  action="{{ path('auth.logout') }}" method="post">
+                    {{ csrf_input() }}
+                    <button class="btn"> Se Déconnecter</button>
+            </form>
+            <form action="{{ path('auth.logout') }}" method="post">
+                {{ csrf_input() }}
+                <button class="btn"> Editer le Profil</button>
+            </form>
+        </div>
 </main>
 {% endblock %}

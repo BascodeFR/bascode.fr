@@ -1,0 +1,22 @@
+.cards.users {
+    .profile {
+        margin: auto;
+        tr {
+            text-align: center;
+            td {
+                padding: 20px;
+            }
+        }
+        
+    }
+    .user-action {
+        .btn {
+            margin-bottom: 10px;
+           
+        }
+        display: flex;
+        justify-content: space-around;
+        height: max-content;
+        flex-direction: row-reverse;
+    }
+}

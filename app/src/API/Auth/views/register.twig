@@ -1,0 +1,27 @@
+
+
+{% extends 'layout.twig' %}
+
+{% block title "Inscription" %}
+
+{% block body %}
+<main class="container">
+    <a class="container-link" href="/">Accueil ></a>
+     <a class="container-link" href="{{ path('auth.login')}}">Inscription</a>
+    <div class="cards forum"> 
+        <header class="cards-head">
+            Inscription
+        </header>
+        <form class="topic-edit" action="{{ path('auth.register') }}" method="post" enctype="multipart/form-data">
+            {{ csrf_input() }}
+
+            {{ field('username', null, "Nom d'Utilisateur")}}
+            {{ field('email', null, "Email", {type: 'email'})}}
+            {{ field('password', null, "Mot de passe", {type: 'password'})}}
+            {{ field('password2', null, "Confirmation Mot de passe", {type: 'password'})}}
+            <button class="btn"> S'Inscrire</button>
+        </form>
+        
+
+</main>
+{% endblock %}

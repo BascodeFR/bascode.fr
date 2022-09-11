@@ -1404,6 +1404,7 @@ span.flatpickr-weekday {
 .news.content {
   padding: 10px 20px;
   font-weight: bold;
+  line-height: 1.6;
 }
 
 .cards.last-actu.index {
@@ -1417,6 +1418,25 @@ p code {
   font-size: 85%;
   background-color: rgba(158, 167, 178, 0.4);
   border-radius: 6px;
+}
+
+.cards.users .profile {
+  margin: auto;
+}
+.cards.users .profile tr {
+  text-align: center;
+}
+.cards.users .profile tr td {
+  padding: 20px;
+}
+.cards.users .user-action {
+  display: flex;
+  justify-content: space-around;
+  height: max-content;
+  flex-direction: row-reverse;
+}
+.cards.users .user-action .btn {
+  margin-bottom: 10px;
 }
 
 *, *::after, *::before {

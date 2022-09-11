@@ -25,4 +25,9 @@ class User implements AuthUser
     {
         return $this->roles;
     }
+
+    public function getImageURL()
+    {
+        return '/upload/avatar/'. $this->avatar;
+    }
 }

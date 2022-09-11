@@ -11,6 +11,7 @@ use function DI\get;
 
 return [
 
+    'auth.register' => '/register',
     'auth.login' => '/login',
     'auth.index' => '/users',
 

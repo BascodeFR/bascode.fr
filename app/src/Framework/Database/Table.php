@@ -116,11 +116,11 @@ class Table
     /**
      * update met à jour un enregistrement dans la db
      *
-     * @param  int $id
      * @param  array $params
+     * @param ?bool $result
      * @return bool
      */
-    public function insert(array $params): bool
+    public function insert(array $params, ?bool $result = null): bool
     {
         $fields = array_keys($params);
         $values =  join(', ', array_map(function ($field) {
@@ -128,6 +128,10 @@ class Table
         }, $fields));
         $fields = join(', ', $fields);
         $statement = $this->pdo->prepare("INSERT INTO $this->table ($fields) VALUES ($values)");
+        if ($result) {
+            $statement->execute($params);
+            return $statement->fetch();
+        }
         return $statement->execute($params);
     }
     
