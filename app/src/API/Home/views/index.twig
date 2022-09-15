@@ -28,8 +28,28 @@
             </div>
         </div>
         {% endfor %}
+        
     </div>
-    {{renderHome(news)}}
+    <div class="cards last-actu"> 
+        <header class="cards-head">
+            Dernières Actualités
+        </header>
+         
+        <div class="actus">
+            <div class="prev"><a href='#'class="prev-button"></a></div>
+            {% for new in news %}
+            <div class="actu-items">
+            {% if new.thumb != null %}
+                <img src="{{new.thumb}}" alt="" />
+            {% endif %}
+                <a href="{{path('news.show', {slug: new.slug, id: new.id})}}" class="actu-name active">{{new.name}}</a>
+                <p>Par {{ new.username }}</p>
+                <p>{{new.createdAt | ago}}</p>
+            </div>
+             {% endfor %}
+            <div class="next"><a href='#'class="next-button"></a></div>
+        </div>  
+    </div>     
     <div class="cards last-topics"> 
         <header class="cards-head">
             Derniers Tutoriels

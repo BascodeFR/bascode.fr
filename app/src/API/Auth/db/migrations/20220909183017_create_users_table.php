@@ -21,7 +21,7 @@ final class CreateUsersTable extends AbstractMigration
         $this->table('users')
             ->addColumn('username', 'string')
             ->addColumn('email', 'string')
-            ->addColumn('avatar', 'string')
+            ->addColumn('avatar', 'string', ['limit' => 255])
             ->addColumn('password', 'string')
             ->addColumn('roles', 'string')
             ->addIndex(['email', 'username'], ['unique' => true])

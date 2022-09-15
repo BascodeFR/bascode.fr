@@ -17,10 +17,13 @@ class DatabaseAuth implements Auth
 
     private $user;
 
-    public function __construct(UserTable $userTable, SessionInterface $session)
+    private $authUpload;
+
+    public function __construct(UserTable $userTable, SessionInterface $session, AuthUpload $authUpload)
     {
         $this->userTable = $userTable;
         $this->session = $session;
+        $this->authUpload = $authUpload;
     }
 
     public function getUser(): ?User
@@ -70,11 +73,17 @@ class DatabaseAuth implements Auth
         
 
         if ($params['password'] === $params['password2']) {
+            $image = $this->authUpload->upload($params['avatar']);
+            if ($image !== null) {
+                $params['avatar'] = $image;
+            } else {
+                unset($params['avatar']);
+            }
             $params = ['username' => $params['username'],
             'email' => $params['email'],
             'password' => password_hash($params['password'], PASSWORD_BCRYPT),
             'roles' => 'membres',
-            'avatar' => ' '
+            'avatar' => $params['avatar']
             ];
             /** @var AuthUser $user */
             $user = $this->userTable->insert($params, true);

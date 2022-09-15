@@ -30,15 +30,15 @@ class NewsTwigExtension extends AbstractExtension
 
     public function renderHome(Pagerfanta $news): string
     {
-        return array_reduce($this->widgets, function (string $html, NewsWidgetInterface $widget) use ($news) {
-            return $html . $widget->renderHome($news);
-        }, '');
+            return array_reduce($this->widgets, function (string $html, NewsWidgetInterface $widget) use ($news) {
+                return $html . $widget->renderHome($news);
+            }, '');
     }
 
     public function renderLink(): string
     {
-        return array_reduce($this->widgets, function (string $html, NewsWidgetInterface $widget) {
-            return $html . $widget->renderLink();
-        }, '');
+            return array_reduce($this->widgets, function (string $html, NewsWidgetInterface $widget) {
+                return $html . $widget->renderLink();
+            }, '');
     }
 }

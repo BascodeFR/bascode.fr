@@ -17,7 +17,10 @@
         {% if current_user() %}
             <div class="account">
                 <a href="/msg" class="msg"></a>
-                <img src="https://via.placeholder.com/40x40" alt="" />
+                {% if current_user().thumb != null %}
+                    <img src="{{current_user().thumb}}" alt="" />
+                {% endif %}
+                <!-- <img src="https://via.placeholder.com/40x40" alt="" /> -->
                 <a href="{{ path('auth.index', {id: current_user().id}) }}" class="username">{{ current_user().username }}</a>
             </div>
         {% else %}
@@ -31,7 +34,7 @@
 <div class="nav-content">
     {% if current_user().roles == 'admin' %}<a href="{{ path('admin')}}" class="nav-items" >Administration</a>{% endif %}
     <a href="{{path('forum.index')}}" class="nav-items {{is_subpath('forum.index') ? 'active'}}">Forum</a>
-     {{ renderNewsLink() }}
+    <a href="{{path('news.index')}}" class="nav-items {{is_subpath('news.index') ? 'active'}}">Actualités</a>
     <a href="/tuto" class="nav-items">Tutoriels</a>
     <a href="/minecraft" class="nav-items" >Minecraft</a>
 </div>

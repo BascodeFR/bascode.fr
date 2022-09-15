@@ -38,7 +38,7 @@ class RegisterAttemptAction
 
     public function __invoke(ServerRequestInterface $request)
     {
-        $params = $request->getParsedBody();
+        $params = array_merge($request->getParsedBody(), $request->getUploadedFiles());
         $user = $this->auth->register($params);
         if ($user) {
             $path = $this->session->get('auth.redirect') ?:

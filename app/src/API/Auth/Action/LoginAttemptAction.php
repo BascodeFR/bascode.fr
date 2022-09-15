@@ -3,6 +3,7 @@ namespace cavernos\bascode_api\API\Auth\Action;
 
 use cavernos\bascode_api\API\Auth\DatabaseAuth;
 use cavernos\bascode_api\Framework\Actions\RouterAwareAction;
+use cavernos\bascode_api\Framework\Database\NoRecordException;
 use cavernos\bascode_api\Framework\Renderer\RendererInterface;
 use cavernos\bascode_api\Framework\Response\RedirectResponse;
 use cavernos\bascode_api\Framework\Router;
@@ -39,7 +40,12 @@ class LoginAttemptAction
     public function __invoke(ServerRequestInterface $request)
     {
         $params = $request->getParsedBody();
-        $user = $this->auth->login($params['username'], $params['password']);
+        try {
+            $user = $this->auth->login($params['username'], $params['password']);
+        } catch (NoRecordException $e) {
+            (new FlashService($this->session))->error('Identifiants Invalides');
+            return $this->redirect('auth.login');
+        }
         if ($user) {
             $path = $this->session->get('auth.redirect') ?:
             $this->router->generateUri('auth.index', ['id' => $user->id]);

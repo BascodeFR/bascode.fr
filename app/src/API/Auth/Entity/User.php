@@ -16,6 +16,8 @@ class User implements AuthUser
 
     public $roles;
 
+    public $avatar;
+
     public function getUsername(): string
     {
         return $this->username;
@@ -24,6 +26,18 @@ class User implements AuthUser
     public function getRoles(): array
     {
         return $this->roles;
+    }
+
+        /**
+     * Get the value of avatar
+     */
+    public function getThumb()
+    {
+        if ($this->avatar) {
+            ['filename' => $filename, 'extension' => $extension] =pathinfo($this->avatar);
+            return '/upload/avatar/'. $filename .'_thumb.' . $extension;
+        }
+        return null;
     }
 
     public function getImageURL()
