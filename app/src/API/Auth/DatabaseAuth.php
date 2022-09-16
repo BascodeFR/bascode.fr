@@ -7,6 +7,8 @@ use cavernos\bascode_api\Framework\Auth;
 use cavernos\bascode_api\Framework\Auth\User;
 use cavernos\bascode_api\Framework\Database\NoRecordException;
 use cavernos\bascode_api\Framework\Session\SessionInterface;
+use ErrorException;
+use PDOStatement;
 
 class DatabaseAuth implements Auth
 {
@@ -86,7 +88,9 @@ class DatabaseAuth implements Auth
             'avatar' => $params['avatar']
             ];
             /** @var AuthUser $user */
-            $user = $this->userTable->insert($params, true);
+            $this->userTable->insert($params);
+            $id = $this->userTable->getPdo()->lastInsertId();
+            $user = $this->userTable->find($id);
             if ($user) {
                 $this->session->set('auth.user', $user->id);
                 return $user;
