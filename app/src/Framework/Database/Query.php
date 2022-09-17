@@ -30,6 +30,8 @@ class Query
 
     private $joins;
 
+    private $group = [];
+
     private $params = [];
     
     /**
@@ -81,6 +83,18 @@ class Query
     public function order(string $order): self
     {
         $this->order[] = $order;
+        return $this;
+    }
+    
+    /**
+     * groupBy
+     *
+     * @param  string $column
+     * @return self
+     */
+    public function groupBy(string $column): self
+    {
+        $this->group[] = $column;
         return $this;
     }
         
@@ -196,6 +210,11 @@ class Query
         if (!empty($this->where)) {
             $parts[] = 'WHERE';
             $parts[] = "(" . join(') AND (', $this->where) . ')';
+        }
+
+        if (!empty($this->group)) {
+            $parts[] = 'GROUP BY';
+            $parts[] = join(', ', $this->group);
         }
 
         if (!empty($this->order)) {

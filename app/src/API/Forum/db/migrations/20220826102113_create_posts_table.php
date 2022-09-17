@@ -12,7 +12,6 @@ final class CreatePostsTable extends AbstractMigration
             ->addColumn('slug', 'string')
             ->addColumn('created_at', 'datetime')
             ->addColumn('updated_at', 'datetime')
-            ->addColumn('number_of_posts', 'integer', ['default' => 0])
             ->create();
     }
 }

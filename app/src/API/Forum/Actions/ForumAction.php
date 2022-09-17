@@ -73,8 +73,6 @@ class ForumAction
 
         $post = $this->postTable->find($request->getAttribute('id'));
         $messages = $this->postTable->findPublic()->paginate(10, $params['p'] ?? 1);
-        if ($post->slug !== $slug) {
-        }
         return $this->renderer->render('@forum/show', compact('post', 'messages'));
     }
 }

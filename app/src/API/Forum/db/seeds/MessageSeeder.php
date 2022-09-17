@@ -24,7 +24,7 @@ class MessageSeeder extends AbstractSeed
             'created_at' => date('Y-m-d H:i:s', $date),
             'user_id' => 2,
             'updated_at' => date('Y-m-d H:i:s', $date),
-            'thread_id' => 2
+            'thread_id' => 1
             ];
         }
         $this->table('posts')

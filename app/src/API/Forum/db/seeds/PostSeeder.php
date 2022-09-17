@@ -24,8 +24,7 @@ class PostSeeder extends AbstractSeed
             'slug' => $faker->slug,
             'created_at' => date('Y-m-d H:i:s', $date),
             'user_id' => 2,
-            'updated_at' => date('Y-m-d H:i:s', $date),
-            'number_of_posts' => rand(0, 3000)
+            'updated_at' => date('Y-m-d H:i:s', $date)
             ];
         }
         $this->table('threads')

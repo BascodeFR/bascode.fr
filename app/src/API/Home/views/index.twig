@@ -9,15 +9,15 @@
         <header class="cards-head">
             Derniers Topics
         </header>
-         {% for post in posts %}
+         {% for thread in threads %}
         <div class="topics">
             <div class="topics-create-info">
-                <a href={{path('forum.show', {slug: post.slug, id: post.id})}} class="topics-name">{{ post.name }}</a>
-                <p>Crée par {{ post.userId }}</p>
-                <p>Commencé {{ post.createdAt | ago }}</p>
+                <a href={{path('forum.show', {slug: thread.slug, id: thread.id})}} class="topics-name">{{ thread.name }}</a>
+                <p>Crée par {{ thread.username }}</p>
+                <p>Commencé {{ thread.createdAt | ago }}</p>
             </div>
             <div class="topics-last-info">
-                <div class="total-posts">{{ post.numberOfPosts }} <br />Posts</div>
+                <div class="total-posts">{{ thread.count }} <br />Posts</div>
                 <div class="last-post">
                     <div class="last-post-text">
                         Dernier Post :

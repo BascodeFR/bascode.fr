@@ -17,8 +17,11 @@ class PostTable extends Table
     public function findPublic(): Query
     {
         return $this->makeQuery()
-        ->select('t.*')
-        ->order('t.created_at DESC');
+        ->select('t.*', 'u.username', 'COUNT(p.id) as count')
+        ->join("users as u", "u.id = t.user_id")
+        ->join("posts as p", "t.id = thread_id")
+        ->order('t.created_at DESC')
+        ->groupBy("t.id");
     }
     /**public function findIn2Table(int $id, string $table2, string $joinCol)
     {
