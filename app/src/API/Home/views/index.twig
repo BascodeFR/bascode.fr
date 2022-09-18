@@ -35,8 +35,7 @@
             Dernières Actualités
         </header>
          
-        <div class="actus">
-            <div class="prev"><a href='#'class="prev-button"></a></div>
+        <div class="actus" id="carousel">
             {% for new in news %}
             <div class="actu-items">
             {% if new.thumb != null %}
@@ -47,7 +46,6 @@
                 <p>{{new.createdAt | ago}}</p>
             </div>
              {% endfor %}
-            <div class="next"><a href='#'class="next-button"></a></div>
         </div>  
     </div>     
     <div class="cards last-topics"> 

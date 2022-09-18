@@ -1,19 +1,29 @@
-.news.content {
-    padding: 10px 20px;
-    font-weight: bold;
-    line-height: 1.6;
-}
+.news{
+    padding: 10px;
+    font-size: 16px;
+    .content {
+        padding: 10px 20px;
+        font-weight: bold;
+        figure {
+            margin: 0;
+        }
+        video {
+            width: 500px;
+            font-size: 25px;
+        }
+        p{
+            code {
+                color: white;
+                padding: 0.2em 0.4em;
+                margin: 10px;
+                font-size: 85%;
+                background-color: #9ea7b266;
+                border-radius: 6px;
+            }
+        }
+    }
+} 
 
 .cards.last-actu.index{
     padding-bottom: 10px;
-}
-p{
-    code {
-        color: white;
-    padding: 0.2em 0.4em;
-        margin: 10px;
-        font-size: 85%;
-        background-color: #9ea7b266;
-        border-radius: 6px;
-    }
 }

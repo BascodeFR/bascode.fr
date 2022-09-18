@@ -10,16 +10,17 @@
     <a  class="container-link" href={{path('forum.show', {slug: new.slug, id: new.id})}}>{{new.name}}</a>
     <div class="cards forums">
        <header class="cards-head">
-            {{new.name}}<br/>
-             Publié {{ new.createdAt | ago}}
-             Par {{ new.username }}
+            {{new.name}}
         </header>
-        <div class="news content">
+        <div class="news">
             {% if new.thumb %}
                     <img style="margin: auto; display: block" src="{{new.imageURL}}" alt="{{new.name}}" />
             {% endif %}
-       
-            {{markdown(new.content)  | nl2br}}
+            <div class="content">
+                {{markdown(new.content)  | nl2br}}
+            </div>
+            Publié {{ new.createdAt | ago}}
+            Par {{ new.username }}
         </div>
     </div>
 </main>

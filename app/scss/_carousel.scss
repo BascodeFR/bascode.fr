@@ -1,0 +1,92 @@
+.carousel {
+    position: relative;
+    overflow: hidden;
+    .carousel__container {
+        transition: transform .3s;
+        transform: translate3d(0, 0, 0);
+    }
+    .carousel__container::after {
+        clear: both;
+        content: '';
+        display: table;
+    }
+    .carousel__item {
+        float: left;
+        .actu-items {
+            margin: auto
+        }
+    }
+    
+}
+
+.carousel__prev, .carousel__next{
+    @include icon-loader("../svg/prev.svg", 15px, 15px);
+    left: 0;
+    top: 0;
+    position: absolute;
+    margin: 101.5px 0;
+    padding: 7.5px 0;
+    z-index: 2;
+    width: 15px;
+    height: 30px;
+    background-color: rgba(#A8A8A8, 50%) ;
+    cursor: pointer;
+    transition: opacity .3s;
+    transition: transform .3s;
+    
+} 
+.carousel__prev:hover, .carousel__next:hover{
+    transform: scale(1.2);
+}  
+.carousel__next{
+    @include icon-loader("../svg/next.svg", 15px, 15px);
+    right: 0;
+    left: auto;
+    background-color: rgba(#A8A8A8, 50%) ;
+    width: 15px;
+    height: 30px;
+    
+}
+
+.carousel__next--hidden, .carousel__prev--hidden{
+    opacity: 0;
+    pointer-events:none
+}
+
+.carousel__pagination {
+    position: absolute;
+    height: 20px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 5px 0;
+    display: none;
+}
+
+.carousel__pagination__button {
+    background-color: white;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 3px;
+    box-shadow: 0 2px 5px #3232321a;
+    transition: transform .3s;
+    cursor: pointer;
+}
+
+.carousel__pagination__button--active, .carousel__pagination__button:hover {
+    transform: scale(1.4);
+
+}
+
+@media screen and (min-width: 800px) {
+    .carousel {
+        height: 280px;
+    }
+    .carousel__pagination {
+        display: block;
+    }
+    
+}
