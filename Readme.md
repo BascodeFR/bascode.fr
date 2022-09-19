@@ -20,28 +20,29 @@
 Requirements: PHP8.1 + APCU Cache + Mysql WITH User bascode and DB Bascode
 
   
+```
+git clone https://github.com/BascodeFR/bascode.fr.git
 
-` git clone https://github.com/BascodeFR/bascode.fr.git `
+cd bascode.fr/app/ 
 
-` cd bascode.fr/app/ `
+composer install --ignore-platform-reqs 
 
-` composer install --ignore-platform-reqs `
+./vendor\bin\phinx migrate 
 
-` ./vendor\bin\phinx migrate `
-
-` php -S localhost:8000 -t public `
-
+php -S localhost:8000 -t public 
+```
   
 
 ## Avant de Commit
 
   
+```
+.\vendor\bin\phpcs
 
-` .\vendor\bin\phpcs`
+.\vendor\bin\phpcbf
 
-` .\vendor\bin\phpcbf`
-
-` .\vendor\bin\phpunit`
+.\vendor\bin\phpunit
+```
 
   
 
