@@ -100,7 +100,7 @@ Tips pour les logs git
 ```mermaid
 pie
     title Progress
-    "Javscript" : 0.5
+    "Javascript" : 0.5
     "Modules" : 0.6
 ```
 

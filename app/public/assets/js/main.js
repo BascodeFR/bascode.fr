@@ -1,4 +1,3 @@
-import Carousel from './carousel.js'
 //import Modal from './modal.js'
 /**timeago().register('fr_FR', fr)
 
@@ -10,7 +9,7 @@ flatpickr('.datepicker', {
   altFormat: 'j F Y, H:i',
   dateFormat: 'Y-m-d H:i:s',
   locale: French
-})*/
+})
 
 document.addEventListener('DOMContentLoaded', function() {
   new Carousel(document.querySelector("#carousel"), {
@@ -18,4 +17,4 @@ document.addEventListener('DOMContentLoaded', function() {
       slidesVisible: 10,
       pagination: true
   })
-})
+}) */

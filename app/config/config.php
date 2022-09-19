@@ -24,7 +24,8 @@ use function DI\get;
 return[
     #'env' => env('ENV', 'production'),
     'env' => env('ENV', 'dev'),
-    'database.host' => 'localhost',
+    #'database.host' => 'localhost',
+    'database.host' => '192.168.0.6',
     "database.username" => 'bascode',
     "database.password" => 'ELECKBOINMAK',
     "database.name" => 'Bascode',
