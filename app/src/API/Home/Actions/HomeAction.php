@@ -58,7 +58,7 @@ class HomeAction
     public function index(): string
     {
         $threads = $this->postTable->findPublic()->paginate(5, 1);
-        $news = $this->newsTable->findPublic()->paginate(100, 1);
+        $news = $this->newsTable->findPublic()->paginate(30, 1);
         return $this->renderer->render('@home/index', compact('threads', 'news'));
     }
 }

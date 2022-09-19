@@ -1,4 +1,5 @@
 import Carousel from './carousel.js'
+//import Modal from './modal.js'
 /**timeago().register('fr_FR', fr)
 
 timeago().render(document.querySelectorAll('.timeago'), 'fr_FR')

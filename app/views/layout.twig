@@ -28,6 +28,7 @@
             <div class="connection">
                 <a href="{{path('auth.login')}}" class="connect">Utilisateur existant ? Se connecter</a>
                 <a href="{{path('auth.register')}}" class="btn">S'inscrire</a>
+                <a href="#register" class="btn js-modal">S'inscrire</a>
             </div>  
         {% endif %}        
 </header>
@@ -49,6 +50,16 @@
         <div class="alert alert-danger">{{flash('error')}}</div>
     {% endif %}
     {% block body %}{% endblock %}
+    <aside id="register" class="modal register" aria-hidden="true" role="true" aria-labelledby="title-modal" style="display:none;">
+        <div class="modal-wrapper pane">
+            <h2 id="title-modal" class="modal-title"> S'inscrire </h2>
+            <hr/>
+            <input type="text" class="fields"/>
+            <a href="f">test</a>
+        </div>
+    
+    </aside>
+
 </body>
 <footer class="footer">
         <div class="copyright">
