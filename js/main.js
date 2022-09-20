@@ -1,5 +1,6 @@
 import Carousel from "carousel.js";
-import { openModal } from 'modalbox';
+import {openModal} from "modalbox"
+
 
 document.addEventListener('DOMContentLoaded', function() {
   new Carousel(document.querySelector("#carousel"), {

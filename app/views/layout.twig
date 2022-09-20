@@ -7,7 +7,7 @@
     <link rel="shortcut icon" href="/bascode.ico" type="image/x-icon">
     <link rel="stylesheet" href="/assets/css/style.css">
     <!--- <script type="module" src="/assets/js/main.js" defer></script> -->
-    <script type="module" crossorigin src="/assets/js/index.edf538fe.js" defer></script>
+    <script type="module" crossorigin src="/assets/js/index.e14ba6a6.js" defer></script>
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
@@ -52,11 +52,11 @@
     {% endif %}
     {% block body %}{% endblock %}
     <aside id="register" class="modal register" aria-hidden="true" role="true" aria-labelledby="title-modal" style="display:none;">
-        <div class="modal-wrapper pane">
+        <div class="modal-wrapper pane js-modal-stop">
             <h2 id="title-modal" class="modal-title"> S'inscrire </h2>
             <hr/>
             <input type="text" class="fields"/>
-            <a href="f">test</a>
+            <a href="f" class="js-modal-close">test</a>
         </div>
     
     </aside>
