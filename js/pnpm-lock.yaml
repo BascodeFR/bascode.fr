@@ -7,7 +7,7 @@ specifiers:
 
 dependencies:
   carousel.js: github.com/BascodeFR/carouseljs/39b51f988cb1affe24bb2173c450f7410119dfb5
-  modalbox: github.com/BascodeFR/modalbox/577d7d93c6a1a9ca6251b3e15fc317d67f16d7b5
+  modalbox: github.com/BascodeFR/modalbox/566b1a214c2c44da2bae420baf281a4f68658845
 
 devDependencies:
   vite: 3.1.3
@@ -362,8 +362,8 @@ packages:
     version: 1.0.0
     dev: false
 
-  github.com/BascodeFR/modalbox/577d7d93c6a1a9ca6251b3e15fc317d67f16d7b5:
-    resolution: {tarball: https://codeload.github.com/BascodeFR/modalbox/tar.gz/577d7d93c6a1a9ca6251b3e15fc317d67f16d7b5}
+  github.com/BascodeFR/modalbox/566b1a214c2c44da2bae420baf281a4f68658845:
+    resolution: {tarball: https://codeload.github.com/BascodeFR/modalbox/tar.gz/566b1a214c2c44da2bae420baf281a4f68658845}
     name: modalbox
-    version: 1.0.1
+    version: 1.0.3
     dev: false

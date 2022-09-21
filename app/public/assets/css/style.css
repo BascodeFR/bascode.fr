@@ -194,79 +194,6 @@
   color: white;
 }
 
-.login-pane {
-  position: relative;
-  z-index: 300;
-  margin: -25px 131px -257px auto;
-  width: 272px;
-  height: 282px;
-}
-.login-pane .pane {
-  background-color: #928F8F;
-  border-radius: 10px;
-  width: 272px;
-  height: 100%;
-}
-.login-pane .pane form {
-  height: calc(100% - 36px);
-}
-.login-pane .pane h2 {
-  margin: 0 14px;
-  padding-top: 12px;
-  font-weight: bolder;
-  font-size: 15px;
-  line-height: 24px;
-}
-.login-pane .pane .fields input {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.75);
-}
-.login-pane .pane .fields label {
-  font-size: 13px;
-  line-height: 20px;
-}
-.login-pane .pane .btn {
-  margin: 30px 70px;
-  border: 0;
-  cursor: pointer;
-}
-.login-pane .head {
-  position: absolute;
-  content: "";
-  display: inline-block;
-  width: 60px;
-  height: 60px;
-  background: url("../svg/triangle.svg") center center/contain no-repeat;
-  top: -35px;
-  left: 106px;
-}
-
-.hidden {
-  animation: fadeOut 0.5s;
-  display: none;
-}
-
-.visible {
-  animation: fadeIn 0.5s;
-  display: block;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
 .pagination {
   width: max-content;
   height: 30px;
@@ -1469,20 +1396,81 @@ span.flatpickr-weekday {
     display: block;
   }
 }
-.modal {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.modal.register {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.8);
+}
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
   animation: fadeIn 0.3s both;
 }
 
-.modal-wrapper.pane {
+.modal.login {
+  justify-content: flex-end;
+  align-items: flex-start;
+  position: absolute;
+  top: 75px;
+  left: -120px;
+}
+
+.modal-wrapper.login-pane {
+  background-color: #928F8F;
+  border-radius: 10px;
+  width: 272px;
+  animation: slideFromTop 0.3s both;
+}
+.modal-wrapper.login-pane h2 {
+  margin: 0 14px 35px;
+  padding-top: 12px;
+  font-weight: bolder;
+  font-size: 15px;
+  line-height: 24px;
+}
+.modal-wrapper.login-pane .fields.admin {
+  width: 258px;
+}
+.modal-wrapper.login-pane .fields.admin input {
+  width: 258px;
+  border-bottom-color: #d9d9d9;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.75);
+  margin-right: 12px;
+}
+.modal-wrapper.login-pane .fields.admin small {
+  width: max-content;
+}
+.modal-wrapper.login-pane .fields.admin label {
+  width: 258px;
+  font-size: 13px;
+  color: #d9d9d9;
+}
+.modal-wrapper.login-pane .btn {
+  margin: 30px 70px;
+  border: 0;
+  cursor: pointer;
+}
+
+.head {
+  position: absolute;
+  content: "";
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  background: url("../svg/triangle.svg") center center/contain no-repeat;
+  top: -35px;
+  left: 106px;
+}
+
+.modal-wrapper.register-pane {
   overflow: auto;
   width: 650px;
   height: 715px;
@@ -1492,8 +1480,42 @@ span.flatpickr-weekday {
   max-height: calc(100vh - 20px);
   animation: slideFromTop 0.3s both;
 }
-.modal-wrapper.pane hr {
+.modal-wrapper.register-pane hr {
   color: rgba(255, 255, 255, 0.75);
+}
+.modal-wrapper.register-pane .fields label {
+  color: white;
+}
+.modal-wrapper.register-pane .fields input {
+  border-color: white;
+}
+.modal-wrapper.register-pane .btn {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 18.5%;
+  margin: 25px auto;
+  width: 410px;
+  height: 50px;
+  border: 0;
+  cursor: pointer;
+}
+
+.header-modal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header-modal .cross {
+  content: "";
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: url("../svg/cross.svg") center center/contain no-repeat;
+  color: white;
+  margin-right: 26px;
+  cursor: pointer;
 }
 
 .modal-title {
@@ -1507,8 +1529,11 @@ span.flatpickr-weekday {
 .modal[aria-hidden=true] {
   animation-name: fadeOut;
 }
-.modal[aria-hidden=true] .modal-wrapper.pane {
+.modal[aria-hidden=true] .modal-wrapper.register-pane {
   animation-name: slideToBottom;
+}
+.modal[aria-hidden=true] .modal-wrapper.login-pane {
+  animation-name: slideToTop;
 }
 
 @keyframes fadeIn {
@@ -1541,6 +1566,14 @@ span.flatpickr-weekday {
   }
   to {
     transform: translateY(50px);
+  }
+}
+@keyframes slideToTop {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-50px);
   }
 }
 /** .register{

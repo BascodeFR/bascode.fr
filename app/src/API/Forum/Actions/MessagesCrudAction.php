@@ -16,9 +16,9 @@ use Psr\Http\Message\ServerRequestInterface;
 class MessagesCrudAction extends CrudAction
 {
     
-    protected $viewPath = "@forum/admin/messages";
+    protected string $viewPath = "@forum/admin/messages";
 
-    protected $routePrefix = "admin.forum.messages";
+    protected string $routePrefix = "admin.forum.messages";
 
     /**
      * messagesTable

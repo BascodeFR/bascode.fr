@@ -49,21 +49,21 @@ class CrudAction
      *
      * @var string
      */
-    protected $viewPath;
+    protected string $viewPath;
     
     /**
      * routePrefix
      *
      * @var string
      */
-    protected $routePrefix;
+    protected string $routePrefix;
     
     /**
      * flashMessages
      *
      * @var array
      */
-    protected $flashMessages = [
+    protected array $flashMessages = [
         'create' => "L'élément a bien été créé",
         'edit' => "L'élément a bien été modifé",
         'delete' => "L'élément a bien été supprimé"
@@ -83,14 +83,18 @@ class CrudAction
         $this->table = $table;
     }
 
-    public function __invoke(ServerRequestInterface $request)
+    /**
+     * @param ServerRequestInterface $request
+     * @return string|ResponseInterface
+     */
+    public function __invoke(ServerRequestInterface $request): string|ResponseInterface
     {
         $this->renderer->addGlobal('viewPath', $this->viewPath);
         $this->renderer->addGlobal('routePrefix', $this->routePrefix);
         if ($request->getMethod() === 'DELETE') {
             return $this->delete($request);
         }
-        if (substr((string)$request->getUri(), -3) === 'new') {
+        if (str_ends_with((string)$request->getUri(), 'new')) {
             return $this->create($request);
         }
         if ($request->getAttribute('id')) {
@@ -121,9 +125,9 @@ class CrudAction
      * edite un article
      *
      * @param  ServerRequestInterface $request
-     * @return ResponseInterface|string
+     * @return string|ResponseInterface
      */
-    public function edit(ServerRequestInterface $request): mixed
+    public function edit(ServerRequestInterface $request): string|ResponseInterface
     {
         $item = $this->table->find($request->getAttribute('id'));
         $errors = null;
@@ -146,9 +150,9 @@ class CrudAction
      * create Crée un nouvel article
      *
      * @param  ServerRequestInterface $request
-     * @return ResponseInterface|string
+     * @return string|ResponseInterface
      */
-    public function create(ServerRequestInterface $request): mixed
+    public function create(ServerRequestInterface $request): string|ResponseInterface
     {
         $errors = null;
         $item = $this->getNewEntity();

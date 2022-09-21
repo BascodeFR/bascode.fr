@@ -1,4 +1,5 @@
-<?php
+<?php /** @noinspection PhpInconsistentReturnPointsInspection */
+
 namespace cavernos\bascode_api\API;
 
 use cavernos\bascode_api\Framework\Middleware\RoutePrefixedMiddleware;
@@ -6,6 +7,7 @@ use DI\ContainerBuilder;
 use Doctrine\Common\Cache\ApcuCache;
 use Doctrine\Common\Cache\FilesystemCache;
 use Exception;
+use GuzzleHttp\Psr7\Response;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -84,9 +86,7 @@ class API implements RequestHandlerInterface
         } elseif ($middleware instanceof MiddlewareInterface) {
             return $middleware->process($request, $this);
         }
-        if (is_null($middleware)) {
-            throw new Exception("Aucun middleware n'a intercepté cette requête");
-        }
+        if (is_null($middleware)) throw new Exception("Aucun middleware n'a intercepté cette requête");
     }
         
     /**

@@ -238,6 +238,7 @@ class Query
             }
             return join(', ', $from);
         }
+        return '';
     }
 
     private function execute()

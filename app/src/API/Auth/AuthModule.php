@@ -11,7 +11,9 @@ use cavernos\bascode_api\API\Auth\Action\RegisterAttemptAction;
 use cavernos\bascode_api\Framework\Module;
 use cavernos\bascode_api\Framework\Renderer\RendererInterface;
 use cavernos\bascode_api\Framework\Router;
+use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 class AuthModule extends Module
 {
@@ -22,6 +24,13 @@ class AuthModule extends Module
 
     const SEEDS = __DIR__ . '/db/seeds';
 
+    /**
+     * @param ContainerInterface $container
+     * @param Router $router
+     * @param RendererInterface $renderer
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
     public function __construct(ContainerInterface $container, Router $router, RendererInterface $renderer)
     {
         $renderer->addPath('auth', __DIR__ . '/views');

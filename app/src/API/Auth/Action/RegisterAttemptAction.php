@@ -8,6 +8,7 @@ use cavernos\bascode_api\Framework\Response\RedirectResponse;
 use cavernos\bascode_api\Framework\Router;
 use cavernos\bascode_api\Framework\Session\FlashService;
 use cavernos\bascode_api\Framework\Session\SessionInterface;
+use cavernos\bascode_api\Framework\Validator;
 use Psr\Http\Message\ServerRequestInterface;
 
 class RegisterAttemptAction

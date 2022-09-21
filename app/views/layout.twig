@@ -7,7 +7,7 @@
     <link rel="shortcut icon" href="/bascode.ico" type="image/x-icon">
     <link rel="stylesheet" href="/assets/css/style.css">
     <!--- <script type="module" src="/assets/js/main.js" defer></script> -->
-    <script type="module" crossorigin src="/assets/js/index.e14ba6a6.js" defer></script>
+    <script type="module" crossorigin src="/assets/js/index.js" defer></script>
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
@@ -27,8 +27,7 @@
             </div>
         {% else %}
             <div class="connection">
-                <a href="{{path('auth.login')}}" class="connect">Utilisateur existant ? Se connecter</a>
-                <a href="{{path('auth.register')}}" class="btn">S'inscrire</a>
+                <a href="#login" class="connect js-modal">Utilisateur existant ? Se connecter</a>
                 <a href="#register" class="btn js-modal">S'inscrire</a>
             </div>  
         {% endif %}        
@@ -51,15 +50,46 @@
         <div class="alert alert-danger">{{flash('error')}}</div>
     {% endif %}
     {% block body %}{% endblock %}
-    <aside id="register" class="modal register" aria-hidden="true" role="true" aria-labelledby="title-modal" style="display:none;">
-        <div class="modal-wrapper pane js-modal-stop">
-            <h2 id="title-modal" class="modal-title"> S'inscrire </h2>
-            <hr/>
-            <input type="text" class="fields"/>
-            <a href="f" class="js-modal-close">test</a>
+
+
+
+
+
+
+     <aside id="register" class="modal register" aria-hidden="true" role="true" aria-labelledby="title-modal" style="display:none;">
+        <div class="modal-wrapper register-pane js-modal-stop">
+                <div class="header-modal">
+                    <h2 id="title-modal" class="modal-title">S'inscrire</h2>
+                    <div class="cross js-modal-close"></div>
+                </div>
+                <hr />
+                <form action="{{ path('auth.register') }}" method="post" enctype="multipart/form-data">
+                        {{ csrf_input() }}
+
+                        {{ field('username', null, "Nom d'Utilisateur")}}
+                        {{ field('email', null, "Email", {type: 'email'})}}
+                        {{ field('password', null, "Mot de passe", {type: 'password'})}}
+                        {{ field('password2', null, "Confirmation Mot de passe", {type: 'password'})}}
+                        {{ field('avatar', null, "Avatar", {type: 'file'})}}
+                    <button class="btn">Créer mon compte</button>
+                    <!-- <button class="btn js-modal-close">Fermer</button> -->
+                </form>
         </div>
-    
     </aside>
+
+<aside id="login" class="modal login" aria-hidden="true" role="true" aria-labelledby="title-modal" style="display:none;">
+    <div class="modal-wrapper login-pane js-modal-stop">
+        <div class="head js-modal-close"></div>
+        <h2 id="title-modal">Se Connecter</h2>
+        <form action="{{ path('auth.login') }}" method="post" enctype="multipart/form-data">
+            {{ csrf_input() }}
+
+            {{ field('username', null, "Nom d'Utilisateur")}}
+            {{ field('password', null, "Mot de passe", {type: 'password'})}}
+            <button class="btn">Se Connecter</button>
+        </form>
+    </div>
+</aside>
 
 </body>
 <footer class="footer">

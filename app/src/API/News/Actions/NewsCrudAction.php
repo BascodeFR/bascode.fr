@@ -18,29 +18,29 @@ use Psr\Http\Message\ServerRequestInterface;
 class NewsCrudAction extends CrudAction
 {
 
-    protected $flashMessages = [
+    protected array $flashMessages = [
         'create' => "L'actualité a bien été créé",
         'edit' => "L'actualité a bien été modifiée",
         'delete' => "L'actualité a bien été suprimée"
     ];
     
-    protected $viewPath = "@news/admin/news";
+    protected string $viewPath = "@news/admin/news";
 
-    protected $routePrefix = "admin.news";
+    protected string $routePrefix = "admin.news";
     
     /**
      * newsUpload
      *
      * @var NewsUpload
      */
-    private $newsUpload;
+    private NewsUpload $newsUpload;
     
     /**
      * userTable
      *
      * @var UserTable
      */
-    private $userTable;
+    private UserTable $userTable;
 
     public function __construct(
         RendererInterface $renderer,
@@ -101,7 +101,7 @@ class NewsCrudAction extends CrudAction
         return $validator;
     }
 
-    protected function getNewEntity()
+    protected function getNewEntity(): News
     {
         $news = new News();
         $news->createdAt = new DateTime();
