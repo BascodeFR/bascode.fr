@@ -32,6 +32,7 @@
         {% endif %}
         
     </div>
+    {% if path("news.index") %}
     <div class="cards last-actu"> 
         <header class="cards-head">
             Dernières Actualités
@@ -50,6 +51,7 @@
              {% endfor %}
         </div>  
     </div>
+    {% endif %}
     {% if path("tuto.index") != '' %}
     <div class="cards last-topics"> 
         <header class="cards-head">

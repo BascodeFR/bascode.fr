@@ -11,50 +11,46 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-<header class="topbar">
-        <div class="logo">
-            <a href="/"><img src="/assets/img/bascode.png" alt=""/></a>
-            <h1>BasCode</h1>
-        </div>
-        {% if current_user() %}
-            <div class="account">
-                <a href="/msg" class="msg"></a>
-                {% if current_user().thumb != null %}
-                    <img src="{{current_user().thumb}}" alt="" />
-                {% endif %}
-                <!-- <img src="https://via.placeholder.com/40x40" alt="" /> -->
-                <a href="{{ path('auth.index', {id: current_user().id}) }}" class="username">{{ current_user().username }}</a>
+    <header class="topbar">
+            <div class="logo">
+                <a href="/"><img src="/assets/img/bascode.png" alt=""/></a>
+                <h1>BasCode</h1>
             </div>
-        {% else %}
-            <div class="connection">
-                <a href="#login" class="connect js-modal">Utilisateur existant ? Se connecter</a>
-                <a href="#register" class="btn js-modal">S'inscrire</a>
-            </div>  
-        {% endif %}        
-</header>
-<nav class="topbar-nav">
-<div class="nav-content">
-    {% if current_user().roles == 'admin' %}<a href="{{ path('admin')}}" class="nav-items" >Administration</a>{% endif %}
-    {% if path("forum.index") != '' %}<a href="{{path('forum.index')}}" class="nav-items {{is_subpath('forum.index') ? 'active'}}">Forum</a>{% endif %}
-    {% if path("news.index") != '' %}<a href="{{path('news.index')}}" class="nav-items {{is_subpath('news.index') ? 'active'}}">Actualités</a>{% endif %}
-    {% if path("tuto.index") != '' %}<a href="{{path('tuto.index')}}" class="nav-items {{is_subpath('tuto.index') ? 'active'}}">Tutoriels</a>{% endif %}
-    {% if path("minecraft.index") != '' %}<a href="{{path('minecraft.index')}}" class="nav-items {{is_subpath('minecraft.index') ? 'active'}}">Minecraft</a>{% endif %}
-</div>
-<div class="research"></div>
-</nav>
- {% if flash('success') %}
+            {% if current_user() %}
+                <div class="account">
+                    <a href="/msg" class="msg"></a>
+                    {% if current_user().thumb != null %}
+                        <img src="{{current_user().thumb}}" alt="" />
+                    {% endif %}
+                    <!-- <img src="https://via.placeholder.com/40x40" alt="" /> -->
+                    <a href="{{ path('auth.index', {id: current_user().id}) }}" class="username">{{ current_user().username }}</a>
+                </div>
+            {% else %}
+                <div class="connection">
+                    <a href="#login" class="connect js-modal">Utilisateur existant ? Se connecter</a>
+                    <a href="#register" class="btn js-modal">S'inscrire</a>
+                </div>
+            {% endif %}
+    </header>
+    <nav class="topbar-nav">
+        <div class="nav-content">
+            {% if current_user().roles == 'admin' %}<a href="{{ path('admin')}}" class="nav-items" >Administration</a>{% endif %}
+            {% if path("forum.index") != '' %}<a href="{{path('forum.index')}}" class="nav-items {{is_subpath('forum.index') ? 'active'}}">Forum</a>{% endif %}
+            {% if path("news.index") != '' %}<a href="{{path('news.index')}}" class="nav-items {{is_subpath('news.index') ? 'active'}}">Actualités</a>{% endif %}
+            {% if path("tuto.index") != '' %}<a href="{{path('tuto.index')}}" class="nav-items {{is_subpath('tuto.index') ? 'active'}}">Tutoriels</a>{% endif %}
+            {% if path("minecraft.index") != '' %}<a href="{{path('minecraft.index')}}" class="nav-items {{is_subpath('minecraft.index') ? 'active'}}">Minecraft</a>{% endif %}
+        </div>
+        <div class="research"></div>
+    </nav>
+    {% if flash('success') %}
         <div class="alert alert-success">{{flash('success')}}</div>
     {% endif %}
 
     {% if flash('error') %}
         <div class="alert alert-danger">{{flash('error')}}</div>
     {% endif %}
+
     {% block body %}{% endblock %}
-
-
-
-
-
 
      <aside id="register" class="modal register" aria-hidden="true" role="true" aria-labelledby="title-modal" style="display:none;">
         <div class="modal-wrapper register-pane js-modal-stop">
@@ -77,20 +73,19 @@
         </div>
     </aside>
 
-<aside id="login" class="modal login" aria-hidden="true" role="true" aria-labelledby="title-modal" style="display:none;">
-    <div class="modal-wrapper login-pane js-modal-stop">
-        <div class="head js-modal-close"></div>
-        <h2 id="title-modal">Se Connecter</h2>
-        <form action="{{ path('auth.login') }}" method="post" enctype="multipart/form-data">
-            {{ csrf_input() }}
+    <aside id="login" class="modal login" aria-hidden="true" role="true" aria-labelledby="title-modal" style="display:none;">
+        <div class="modal-wrapper login-pane js-modal-stop">
+            <div class="head js-modal-close"></div>
+            <h2 id="title-modal">Se Connecter</h2>
+            <form action="{{ path('auth.login') }}" method="post" enctype="multipart/form-data">
+                {{ csrf_input() }}
 
-            {{ field('username', null, "Nom d'Utilisateur")}}
-            {{ field('password', null, "Mot de passe", {type: 'password'})}}
-            <button class="btn">Se Connecter</button>
-        </form>
-    </div>
-</aside>
-
+                {{ field('username', null, "Nom d'Utilisateur")}}
+                {{ field('password', null, "Mot de passe", {type: 'password'})}}
+                <button class="btn">Se Connecter</button>
+            </form>
+        </div>
+    </aside>
 </body>
 <footer class="footer">
         <div class="copyright">
@@ -98,7 +93,7 @@
         </div>
         <div class="socials">
             <a href="https://github.com/BascodeFR" target="_blank" class="github"></a>
-            <a href="#" class ="discord"></a>
+            <a href="https://discord.gg/qKAVgHMDV7" target="_blank" class ="discord"></a>
             <a href="https://lyc-bascan.fr/" class="bascan" target="_blank"></a> 
         </div>
         <div class="version">
