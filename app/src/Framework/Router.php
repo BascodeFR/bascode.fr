@@ -22,7 +22,7 @@ class Router
      *
      * @var FastRouteRouter
      */
-    private $router;
+    private FastRouteRouter $router;
 
     public function __construct(?string $cache = null)
     {
@@ -41,7 +41,7 @@ class Router
    * @param  ?string $name
    * @return void
    */
-    public function get(string $path, mixed $callable, ?string $name = null)
+    public function get(string $path, mixed $callable, ?string $name = null): void
     {
         $this->router->addRoute(new ZendRoute($path, $callable, ['GET'], $name));
     }
@@ -54,7 +54,7 @@ class Router
    * @param  ?string $name
    * @return void
    */
-    public function post(string $path, mixed $callable, ?string $name = null)
+    public function post(string $path, mixed $callable, ?string $name = null): void
     {
         $this->router->addRoute(new ZendRoute($path, $callable, ['POST'], $name));
     }
@@ -67,7 +67,7 @@ class Router
    * @param  ?string $name
    * @return void
    */
-    public function delete(string $path, mixed $callable, ?string $name = null)
+    public function delete(string $path, mixed $callable, ?string $name = null): void
     {
         $this->router->addRoute(new ZendRoute($path, $callable, ['DELETE'], $name));
     }
@@ -80,7 +80,7 @@ class Router
    * @param  string $prefixName
    * @return void
    */
-    public function crud(string $prefixPath, mixed $callable, string $prefixName)
+    public function crud(string $prefixPath, mixed $callable, string $prefixName): void
     {
         $this->get("$prefixPath", $callable, "$prefixName.index");
         $this->get("$prefixPath/new", $callable, "$prefixName.create");
@@ -89,13 +89,13 @@ class Router
         $this->post("$prefixPath/{id:\d+}", $callable);
         $this->delete("$prefixPath/{id:\d+}", $callable, "$prefixName.delete");
     }
-  
-  /**
-   * match renvoie une route si elle correspond a une route valide
-   *
-   * @param  ServerRequestInterface $request
-   * @return Route
-   */
+
+    /**
+     * match renvoie une route si elle correspond a une route valide
+     *
+     * @param ServerRequestInterface $request
+     * @return Route|null
+     */
     public function match(ServerRequestInterface $request): ?Route
     {
         $result = $this->router->match($request);
@@ -118,7 +118,7 @@ class Router
    * @param  array $queryParams
    * @return string
    */
-    public function generateUri(string $routeName, array $params = [], array $queryParams = []): ?string
+    public function generateUri(string $routeName, array $params = [], array $queryParams = []): string
     {
         $uri = $this->router->generateUri($routeName, $params);
         if (!empty($queryParams)) {

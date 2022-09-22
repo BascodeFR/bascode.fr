@@ -2,6 +2,7 @@
 namespace cavernos\bascode_api\Framework\Router;
 
 use cavernos\bascode_api\Framework\Router;
+use InvalidArgumentException;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -42,7 +43,11 @@ class RouterTwigExtension extends AbstractExtension
      */
     public function pathFor(string $path, array $params = []): string
     {
-        return $this->router->generateUri($path, $params);
+        try {
+            return $this->router->generateUri($path, $params);
+        } catch (InvalidArgumentException $e) {
+            return '';
+        }
     }
     
     /**
@@ -54,7 +59,12 @@ class RouterTwigExtension extends AbstractExtension
     public function isSubPath(string $path): bool
     {
         $uri = $_SERVER['REQUEST_URI'] ?? '/';
-        $expectedUri = $this->router->generateUri($path);
-        return strpos($uri, $expectedUri) !== false;
+        try {
+            $expectedUri = $this->router->generateUri($path);
+            return str_contains($uri, $expectedUri);
+        } catch (InvalidArgumentException $e) {
+            return false;
+        }
+
     }
 }

@@ -5,7 +5,8 @@
 {% block body %}
 <main class="container">
     <a class="container-link" href="/">Accueil</a>
-    <div class="cards last-topics"> 
+    {% if path("forum.index") %}
+    <div class="cards last-topics">
         <header class="cards-head">
             Derniers Topics
         </header>
@@ -28,6 +29,7 @@
             </div>
         </div>
         {% endfor %}
+        {% endif %}
         
     </div>
     <div class="cards last-actu"> 
@@ -47,11 +49,13 @@
             </div>
              {% endfor %}
         </div>  
-    </div>     
+    </div>
+    {% if path("tuto.index") != '' %}
     <div class="cards last-topics"> 
         <header class="cards-head">
             Derniers Tutoriels
         </header>
     </div>
+    {% endif %}
 </main>
 {% endblock %}

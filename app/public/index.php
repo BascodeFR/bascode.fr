@@ -25,7 +25,7 @@ require_once 'vendor/autoload.php';
 $api = (new API(dirname(__DIR__) . '/config/config.php'))
             ->addModule(HomeModule::class)
             ->addModule(AdminModule::class)
-            ->addModule(ForumModule::class)
+            //->addModule(ForumModule::class)
             ->addModule(NewsModule::class)
             ->addModule(AuthModule::class);
 
